@@ -80,16 +80,19 @@ button {
   letter-spacing: -0.02em;
 }
 
+.brand-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-logo {
+  height: 48px;
+  margin-bottom: 12px;
+}
+
 .brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: rgba(231, 76, 60, 0.16);
-  color: var(--accent);
-  font-size: 0.9rem;
+  display: none;
 }
 
 .brand-text {
