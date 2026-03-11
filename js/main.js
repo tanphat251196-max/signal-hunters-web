@@ -191,7 +191,6 @@ function createCompactArticle(post) {
     <div>
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h2>${post.title}</h2>
-      <p>${post.summary}</p>
       ${createMetaHTML(post)}
     </div>
   `;
