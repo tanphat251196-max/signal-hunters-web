@@ -8,7 +8,7 @@ const COINGECKO_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin
 const TRENDING_COINS_URL = 'https://api.coingecko.com/api/v3/search/trending';
 const RANKING_COINS_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h';
 const FEAR_GREED_URL = 'https://api.alternative.me/fng/?limit=1';
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 12;
 const coinConfig = [
   { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin', icon: '₿' },
   { id: 'ethereum', symbol: 'ETH', name: 'Ethereum', icon: 'Ξ' },
@@ -505,9 +505,10 @@ function renderArticlePage(posts) {
       <h1>${post.title}</h1>
       <div class="article-meta"><span>${formatDate(post.date)}</span><span>${categoryLabel(post.category)}</span></div>
       <div class="article-content" data-article-content>${post.content}</div>
-      <div class="article-cta-box">
-        💰 Tiết kiệm phí trade? Đăng ký BingX hoàn phí 45%:
-        <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">https://bingx.com/vi-vn/partner/X7EZVIWI</a>
+      <div class="ref-separator">
+        <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
+          🎁 BingX — Hoàn phí giao dịch <strong>45% VĨNH VIỄN</strong> | Mã: X7EZVIWI
+        </a>
       </div>
       <div class="telegram-comments">
         <h3>💬 Bình luận</h3>

@@ -113,27 +113,6 @@ body.light-mode .ref-separator {
   background: linear-gradient(90deg, #e74c3c, #c0392b);
 }
 
-.promo-banner {
-  background: linear-gradient(90deg, #e74c3c, #c0392b);
-  text-align: center;
-  padding: 8px 16px;
-  font-size: 0.85rem;
-}
-
-.promo-banner a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.promo-banner a:hover {
-  text-decoration: underline;
-}
-
-body.light-mode .promo-banner {
-  background: linear-gradient(90deg, #e74c3c, #c0392b);
-}
-
 .site-header {
   position: sticky;
   top: 0;
@@ -1299,6 +1278,7 @@ body.light-mode .promo-banner {
 }
 
 
+  @media (max-width: 768px) {
   .main-nav {
     display: none;
   }
