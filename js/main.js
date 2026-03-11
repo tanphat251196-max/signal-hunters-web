@@ -305,6 +305,20 @@ function updatePagination(totalItems) {
   updatePageParam(state.currentPage);
 }
 
+function createBingxCtaCard() {
+  const card = document.createElement('div');
+  card.className = 'bingx-cta-card article-panel';
+  card.innerHTML = `
+    <div class="cta-content">
+      <span class="cta-badge">💰 Ưu đãi độc quyền</span>
+      <h3>Hoàn phí giao dịch 45% vĩnh viễn!</h3>
+      <p>Trade trên BingX, tự động hoàn phí mỗi đêm lúc 12h. Volume 1 triệu → nhận tới 225 USDT.</p>
+      <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener" class="cta-button">Đăng ký ngay →</a>
+    </div>
+  `;
+  return card;
+}
+
 function renderNewsGrid(postsToRender) {
   const newsGrid = document.querySelector('[data-news-grid]');
   if (!newsGrid) return;
@@ -315,13 +329,17 @@ function renderNewsGrid(postsToRender) {
   }
 
   newsGrid.innerHTML = '';
-  postsToRender.forEach((post) => {
+  postsToRender.forEach((post, index) => {
     const article = document.createElement('article');
     article.className = 'news-card article-panel';
     article.dataset.category = post.category;
     article.innerHTML = createNewsCard(post);
     makeArticleClickable(article, post);
     newsGrid.appendChild(article);
+
+    if (index === 2 && postsToRender.length > 3) {
+      newsGrid.appendChild(createBingxCtaCard());
+    }
   });
 }
 
