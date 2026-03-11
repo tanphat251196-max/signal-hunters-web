@@ -133,6 +133,16 @@
             <div id="trending-list" class="trending-list">Đang tải...</div>
           </section>
 
+          <section class="sidebar-widget article-panel ranking-widget">
+            <h3>📊 Top Biến Động 24h</h3>
+            <div class="ranking-tabs">
+              <button class="rank-tab active" onclick="showRanking('gainers')">🟢 Tăng</button>
+              <button class="rank-tab" onclick="showRanking('losers')">🔴 Giảm</button>
+            </div>
+            <div id="gainers-list" class="ranking-list"></div>
+            <div id="losers-list" class="ranking-list" style="display:none"></div>
+          </section>
+
           <section class="sidebar-widget article-panel">
             <h3>Bài đọc nhiều</h3>
             <ol class="popular-list" data-popular-list>

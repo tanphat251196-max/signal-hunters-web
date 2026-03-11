@@ -6,6 +6,7 @@ const pageType = document.body.dataset.page || 'home';
 const POSTS_URL = 'data/posts.json';
 const COINGECKO_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true';
 const TRENDING_COINS_URL = 'https://api.coingecko.com/api/v3/search/trending';
+const RANKING_COINS_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h';
 const FEAR_GREED_URL = 'https://api.alternative.me/fng/?limit=1';
 const POSTS_PER_PAGE = 12;
 const coinConfig = [
@@ -60,6 +61,13 @@ function toggleTheme() {
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
   updateThemeIcon();
   updateLogos();
+
+  // Reload TradingView widgets with correct theme.
+  // TradingView widgets don't support dynamic theme change,
+  // so this remains a known limitation until a full re-render is triggered.
+  if (document.getElementById('tradingview_btc') || document.getElementById('tradingview_eth')) {
+    initTradingViewWidgets(true);
+  }
 }
 
 (function initTheme() {
@@ -607,6 +615,157 @@ async function loadTrendingCoins() {
   }
 }
 
+function getTradingViewTheme() {
+  return document.body.classList.contains('light-mode') ? 'light' : 'dark';
+}
+
+function loadTradingViewScript() {
+  if (window.TradingView) return Promise.resolve();
+  if (window.__tradingViewScriptPromise) return window.__tradingViewScriptPromise;
+
+  window.__tradingViewScriptPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://s3.tradingview.com/tv.js';
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  return window.__tradingViewScriptPromise;
+}
+
+async function initTradingViewWidgets(forceReload = false) {
+  const btcContainer = document.getElementById('tradingview_btc');
+  const ethContainer = document.getElementById('tradingview_eth');
+  if (!btcContainer && !ethContainer) return;
+
+  try {
+    await loadTradingViewScript();
+    const theme = getTradingViewTheme();
+
+    if (btcContainer && (forceReload || btcContainer.dataset.tvReady !== 'true')) {
+      btcContainer.innerHTML = '';
+      new TradingView.widget({
+        autosize: true,
+        symbol: 'BINANCE:BTCUSDT',
+        interval: '60',
+        timezone: 'Asia/Ho_Chi_Minh',
+        theme,
+        style: '1',
+        locale: 'vi_VN',
+        toolbar_bg: '#0f0f13',
+        enable_publishing: false,
+        hide_side_toolbar: false,
+        allow_symbol_change: true,
+        container_id: 'tradingview_btc',
+        hide_volume: false,
+        studies: ['RSI@tv-basicstudies']
+      });
+      btcContainer.dataset.tvReady = 'true';
+    }
+
+    if (ethContainer && (forceReload || ethContainer.dataset.tvReady !== 'true')) {
+      ethContainer.innerHTML = '';
+      new TradingView.widget({
+        autosize: true,
+        symbol: 'BINANCE:ETHUSDT',
+        interval: '60',
+        timezone: 'Asia/Ho_Chi_Minh',
+        theme,
+        style: '1',
+        locale: 'vi_VN',
+        toolbar_bg: '#0f0f13',
+        enable_publishing: false,
+        hide_side_toolbar: false,
+        allow_symbol_change: true,
+        container_id: 'tradingview_eth',
+        hide_volume: false,
+        studies: ['RSI@tv-basicstudies']
+      });
+      ethContainer.dataset.tvReady = 'true';
+    }
+  } catch (error) {
+    console.warn('TradingView widget error', error);
+  }
+}
+
+async function fetchRankingCoins() {
+  try {
+    const directResponse = await fetch(RANKING_COINS_URL, { cache: 'no-store' });
+    if (directResponse.ok) {
+      return await directResponse.json();
+    }
+    throw new Error(`HTTP ${directResponse.status}`);
+  } catch (directError) {
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(RANKING_COINS_URL)}`;
+    const proxyResponse = await fetch(proxyUrl, { cache: 'no-store' });
+    if (!proxyResponse.ok) {
+      throw directError;
+    }
+    return await proxyResponse.json();
+  }
+}
+
+async function loadRanking() {
+  const gainersContainer = document.getElementById('gainers-list');
+  const losersContainer = document.getElementById('losers-list');
+  if (!gainersContainer || !losersContainer) return;
+
+  try {
+    const coins = await fetchRankingCoins();
+    if (!Array.isArray(coins) || !coins.length) throw new Error('Missing ranking coins payload');
+
+    const validCoins = coins.filter((coin) => Number.isFinite(coin?.price_change_percentage_24h));
+    const gainers = [...validCoins]
+      .sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h)
+      .slice(0, 5);
+    const losers = [...validCoins]
+      .sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h)
+      .slice(0, 5);
+
+    function renderList(items, container) {
+      container.innerHTML = items.map((coin) => `
+        <div class="ranking-item">
+          <img src="${coin.image}" alt="${coin.name}" width="24" height="24">
+          <span class="coin-name">${String(coin.symbol || '').toUpperCase()}</span>
+          <span class="coin-price">$${Number(coin.current_price || 0).toLocaleString()}</span>
+          <span class="coin-change ${coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'}">
+            ${coin.price_change_percentage_24h >= 0 ? '+' : ''}${coin.price_change_percentage_24h.toFixed(2)}%
+          </span>
+        </div>
+      `).join('');
+    }
+
+    renderList(gainers, gainersContainer);
+    renderList(losers, losersContainer);
+  } catch (error) {
+    console.warn('Ranking error', error);
+    gainersContainer.innerHTML = '<div class="ranking-item">Chưa tải được dữ liệu.</div>';
+    losersContainer.innerHTML = '<div class="ranking-item">Chưa tải được dữ liệu.</div>';
+  }
+}
+
+function showRanking(type) {
+  const gainersList = document.getElementById('gainers-list');
+  const losersList = document.getElementById('losers-list');
+  if (!gainersList || !losersList) return;
+
+  gainersList.style.display = type === 'gainers' ? 'flex' : 'none';
+  losersList.style.display = type === 'losers' ? 'flex' : 'none';
+
+  document.querySelectorAll('.rank-tab').forEach((tab) => tab.classList.remove('active'));
+  const activeButton = window.event?.target;
+  if (activeButton?.classList?.contains('rank-tab')) {
+    activeButton.classList.add('active');
+  } else {
+    const fallbackButton = document.querySelector(`.rank-tab[onclick*="${type}"]`);
+    if (fallbackButton) fallbackButton.classList.add('active');
+  }
+}
+
+window.showRanking = showRanking;
+
 function searchPosts(keyword) {
   state.searchTerm = keyword || '';
   state.currentPage = 1;
@@ -635,6 +794,9 @@ loadPosts();
 loadCryptoPrices();
 loadFearGreed();
 loadTrendingCoins();
+loadRanking();
+initTradingViewWidgets();
 window.setInterval(loadCryptoPrices, 60000);
 window.setInterval(loadFearGreed, 3600000);
 window.setInterval(loadTrendingCoins, 3600000);
+window.setInterval(loadRanking, 300000);
