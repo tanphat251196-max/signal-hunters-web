@@ -511,21 +511,59 @@ button {
 
 .bingx-banner {
   display: block;
-  background: linear-gradient(145deg, var(--accent-dark), #a93226);
+  background: linear-gradient(145deg, #e74c3c, #c0392b, #a93226);
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  box-shadow: 0 4px 20px rgba(231, 76, 60, 0.25), 0 0 40px rgba(231, 76, 60, 0.08);
+  padding: 24px 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bingx-banner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(231, 76, 60, 0.35), 0 0 50px rgba(231, 76, 60, 0.12);
+}
+
+.bingx-banner .eyebrow {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 
 .bingx-banner h3 {
   margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .bingx-banner p:last-of-type {
   margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .banner-cta {
-  background: var(--accent);
-  color: #ffffff;
+  background: #ffffff;
+  color: #e74c3c;
   width: 100%;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.bingx-banner:hover .banner-cta {
+  background: #fff5f5;
+  transform: scale(1.02);
 }
 
 .community-links {
