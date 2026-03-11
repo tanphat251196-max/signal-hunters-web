@@ -164,7 +164,7 @@ function categoryClass(category) {
 }
 
 function articleUrl(post) {
-  return `article.html?id=${encodeURIComponent(post.id)}`;
+  return `/${post.slug || post.id}.html`;
 }
 
 function createMetaHTML(post) {
@@ -469,14 +469,23 @@ function renderArticlePage(posts) {
 
   const params = new URLSearchParams(window.location.search);
   const currentId = params.get('id');
-  const post = posts.find((item) => String(item.id) === currentId) || posts[0];
+  const currentSlug = params.get('slug');
+  const post = posts.find((item) => 
+    (currentSlug && item.slug === currentSlug) || 
+    (currentId && String(item.id) === currentId)
+  ) || posts[0];
+
+  // Update URL to slug format if loaded by ID
+  if (currentId && post.slug && !currentSlug) {
+    window.history.replaceState(null, '', `/${post.slug}.html`);
+  }
 
   document.title = `${post.title} | Signal Hunters`;
   updateMetaTag('meta[name="description"]', 'content', post.summary);
   updateMetaTag('meta[property="og:title"]', 'content', `${post.title} | Signal Hunters`);
   updateMetaTag('meta[property="og:description"]', 'content', post.summary);
   updateMetaTag('meta[property="og:image"]', 'content', post.image);
-  updateMetaTag('meta[property="og:url"]', 'content', `${window.location.origin}${window.location.pathname}?id=${post.id}`);
+  updateMetaTag('meta[property="og:url"]', 'content', `${window.location.origin}/${post.slug || post.id}.html`);
 
   articleDetail.innerHTML = `
     <img class="article-cover" src="${post.image}" alt="${post.title}">

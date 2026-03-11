@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# If the request is not an existing file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite /slug.html to article.html?slug=slug
+RewriteRule ^([a-z0-9-]+)\.html$ article.html?slug=$1 [L,QSA]
+
+# Also handle without .html extension
+RewriteRule ^([a-z0-9-]+)/?$ article.html?slug=$1 [L,QSA]
