@@ -3,264 +3,291 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signal Hunters | Tin tức crypto dark theme cyberpunk</title>
-  <meta name="description" content="Signal Hunters - Trang tin tức crypto phong cách cyberpunk với phân tích BTC, ETH, altcoin và hàng hóa.">
-  <meta name="theme-color" content="#080b14">
+  <title>Signal Hunters | Tin tức crypto & phân tích thị trường</title>
+  <meta name="description" content="Signal Hunters - Trang tin crypto chuyên nghiệp với tin tức, phân tích thị trường, altcoin và hàng hóa trong giao diện dark editorial, không neon.">
+  <meta name="theme-color" content="#0a0a0f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="page-glow glow-cyan"></div>
-  <div class="page-glow glow-magenta"></div>
-
   <header class="site-header" id="top">
-    <div class="container nav-wrap">
+    <div class="container header-inner">
       <a href="#top" class="brand" aria-label="Signal Hunters">
-        <span class="brand-icon">✨</span>
+        <span class="brand-mark">◢</span>
         <span class="brand-text">Signal Hunters</span>
       </a>
 
-      <button class="menu-toggle" aria-label="Mở menu" aria-expanded="false">☰</button>
+      <button class="menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-      <nav class="main-nav">
+      <nav class="main-nav" id="main-nav">
         <a href="#top">Trang chủ</a>
-        <a href="#analysis">Phân tích</a>
-        <a href="#news">Tin tức</a>
+        <a href="#market-analysis">Phân tích</a>
+        <a href="#latest-news">Tin tức</a>
         <a href="#commodities">Hàng hóa</a>
         <a href="#about">Về chúng tôi</a>
       </nav>
 
-      <a class="header-cta neon-button" href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">Tham gia Telegram</a>
+      <a class="header-cta" href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">Tham gia Telegram</a>
     </div>
   </header>
+
+  <section class="ticker-bar" aria-label="Crypto ticker">
+    <div class="ticker-track">
+      <div class="ticker-group">
+        <span class="ticker-item"><strong>BTC</strong><em>$80,432</em><b class="up">+2.41%</b></span>
+        <span class="ticker-item"><strong>ETH</strong><em>$4,285</em><b class="up">+1.76%</b></span>
+        <span class="ticker-item"><strong>BNB</strong><em>$612</em><b class="down">-0.48%</b></span>
+        <span class="ticker-item"><strong>SOL</strong><em>$178</em><b class="up">+3.92%</b></span>
+        <span class="ticker-item"><strong>XRP</strong><em>$1.28</em><b class="down">-1.14%</b></span>
+      </div>
+      <div class="ticker-group" aria-hidden="true">
+        <span class="ticker-item"><strong>BTC</strong><em>$80,432</em><b class="up">+2.41%</b></span>
+        <span class="ticker-item"><strong>ETH</strong><em>$4,285</em><b class="up">+1.76%</b></span>
+        <span class="ticker-item"><strong>BNB</strong><em>$612</em><b class="down">-0.48%</b></span>
+        <span class="ticker-item"><strong>SOL</strong><em>$178</em><b class="up">+3.92%</b></span>
+        <span class="ticker-item"><strong>XRP</strong><em>$1.28</em><b class="down">-1.14%</b></span>
+      </div>
+    </div>
+  </section>
 
   <main>
     <section class="hero-section">
       <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Bản tin crypto mỗi ngày</span>
-          <h1>Signal Hunters cập nhật thị trường theo phong cách <span>cyberpunk</span> sắc lạnh.</h1>
-          <p class="hero-summary">Theo dõi tin nóng, phân tích kỹ thuật, biến động altcoin và hàng hóa trong một giao diện tối hiện đại, dễ đọc, tối ưu cho mobile.</p>
-          <div class="hero-actions">
-            <a class="neon-button" href="#news">Xem tin mới nhất</a>
-            <a class="ghost-button" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">BingX hoàn phí 45%</a>
-          </div>
-          <ul class="hero-pills">
-            <li>BTC / ETH realtime</li>
-            <li>Altcoin đáng chú ý</li>
-            <li>CTA BingX tích hợp sẵn</li>
-          </ul>
-        </div>
-
-        <article class="featured-card glass-card">
-          <div class="featured-media">
-            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80" alt="Tin nổi bật Bitcoin">
-            <span class="article-tag featured-tag">Tin nổi bật</span>
-          </div>
-          <div class="featured-content">
-            <span class="meta-line">11/03/2026 • 07:15 • 📊 Phân tích</span>
-            <h2>BTC giữ mốc 86.000 USD: phe mua đang bảo vệ vùng hỗ trợ hay chỉ là nhịp hồi ngắn?</h2>
-            <p>Bitcoin đang dao động sát vùng hỗ trợ quan trọng sau khi dòng tiền ETF chậm lại. Nếu nến ngày giữ trên 86.000 USD, xác suất retest 89.500 - 91.000 USD sẽ tăng mạnh trong 24-48 giờ tới.</p>
-            <div class="featured-footer">
-              <a href="#news" class="read-more">Đọc toàn bộ bản tin</a>
-              <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer" class="mini-cta">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
+        <article class="hero-feature article-panel">
+          <img src="https://picsum.photos/1200/720?random=1" alt="Bitcoin vượt 80000 USD">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="category-tag">Phân tích</span>
+            <p class="eyebrow">Bài nổi bật</p>
+            <h1>Bitcoin vượt $80,000: Cơn sóng tổ chức đẩy giá</h1>
+            <p class="hero-summary">Dòng tiền từ các quỹ tổ chức tiếp tục đổ vào BTC, tạo động lực cho xu hướng tăng mới. Thị trường đang theo dõi liệu mốc $82,500 có trở thành bàn đạp cho pha bứt phá kế tiếp hay không.</p>
+            <div class="article-meta">
+              <span>11/03/2026</span>
+              <span>8 phút đọc</span>
             </div>
           </div>
         </article>
+
+        <div class="hero-side-list">
+          <article class="side-article article-panel compact-panel">
+            <img src="https://picsum.photos/800/450?random=2" alt="ETH 2.0 Staking đạt kỷ lục mới">
+            <div>
+              <span class="category-tag muted-gold">Tin tức</span>
+              <h2>ETH 2.0 Staking đạt kỷ lục mới</h2>
+              <p>Tổng lượng ETH staking tăng mạnh, phản ánh niềm tin dài hạn vào hệ sinh thái Ethereum.</p>
+              <div class="article-meta"><span>11/03/2026</span><span>5 phút đọc</span></div>
+            </div>
+          </article>
+
+          <article class="side-article article-panel compact-panel" id="commodities">
+            <img src="https://picsum.photos/800/450?random=3" alt="Giá vàng vượt 3000 đô lần đầu tiên">
+            <div>
+              <span class="category-tag muted-gold">Hàng hóa</span>
+              <h2>Giá vàng vượt $3,000/oz lần đầu tiên</h2>
+              <p>Nhu cầu trú ẩn tăng cao khi thị trường toàn cầu chờ tín hiệu mới từ chính sách tiền tệ Mỹ.</p>
+              <div class="article-meta"><span>11/03/2026</span><span>4 phút đọc</span></div>
+            </div>
+          </article>
+
+          <article class="side-article article-panel compact-panel">
+            <img src="https://picsum.photos/800/450?random=4" alt="Solana DeFi TVL tăng mạnh">
+            <div>
+              <span class="category-tag muted-gold">Altcoin</span>
+              <h2>Solana DeFi TVL tăng 300% trong Q1</h2>
+              <p>TVL bùng nổ trở lại đưa Solana thành một trong những hệ sinh thái đáng chú ý nhất quý này.</p>
+              <div class="article-meta"><span>10/03/2026</span><span>6 phút đọc</span></div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="content-section" id="news">
-      <div class="container content-layout">
-        <div class="main-column">
-          <div class="section-heading">
-            <span class="eyebrow">Dòng tin cập nhật</span>
-            <h2>Tin tức & phân tích mới nhất</h2>
-          </div>
+    <section class="main-section">
+      <div class="container main-layout">
+        <div class="content-column">
+          <section class="content-block" id="latest-news">
+            <div class="section-heading">
+              <p class="eyebrow">Tin mới nhất</p>
+              <h2>Tin tức nổi bật trong ngày</h2>
+            </div>
 
-          <div class="news-grid">
-            <article class="news-card glass-card" id="analysis">
-              <img src="https://images.unsplash.com/photo-1642104704074-907c0698cbd9?auto=format&fit=crop&w=900&q=80" alt="Phân tích ETH">
-              <div class="card-body">
-                <span class="article-tag cyan">📊 Phân tích</span>
-                <h3>ETH tích lũy dưới 4.900 USD, breakout cần thêm volume từ dòng tiền DeFi</h3>
-                <p>ETH vẫn giữ cấu trúc tăng trên khung 4H nhưng volume đang hụt hơi. Vùng 4.720 USD là hỗ trợ quan trọng trước khi xét kịch bản bứt phá lên 5.100 USD.</p>
-                <div class="card-meta"><span>11/03/2026</span><span>5 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+            <div class="news-grid">
+              <article class="news-card article-panel">
+                <img src="https://picsum.photos/800/450?random=5" alt="Fed giữ lãi suất và ảnh hưởng đến crypto">
+                <div class="card-content">
+                  <span class="category-tag">Phân tích</span>
+                  <h3>Fed giữ lãi suất: Thị trường crypto phản ứng thế nào?</h3>
+                  <p>BTC giữ nhịp ổn định trong khi altcoin phân hóa mạnh. Giới giao dịch đang định giá lại kỳ vọng nới lỏng tiền tệ.</p>
+                  <div class="article-meta"><span>10/03/2026</span><span>7 phút đọc</span></div>
+                </div>
+              </article>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Tin tức crypto">
-              <div class="card-body">
-                <span class="article-tag magenta">📰 Tin tức</span>
-                <h3>SEC Mỹ phát tín hiệu mềm hơn với ETF altcoin, thị trường phản ứng tích cực</h3>
-                <p>Tâm lý thị trường cải thiện sau khi xuất hiện kỳ vọng về khung pháp lý rõ ràng hơn cho các quỹ ETF liên quan đến SOL, XRP và một số tài sản top đầu.</p>
-                <div class="card-meta"><span>11/03/2026</span><span>4 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+              <article class="news-card article-panel">
+                <img src="https://picsum.photos/800/450?random=6" alt="XRP tăng tốc nhờ kỳ vọng pháp lý">
+                <div class="card-content">
+                  <span class="category-tag muted-gold">Tin tức</span>
+                  <h3>XRP tăng tốc nhờ kỳ vọng pháp lý rõ ràng hơn tại Mỹ</h3>
+                  <p>Tâm lý nhà đầu tư cải thiện sau hàng loạt tín hiệu tích cực liên quan đến khung pháp lý cho tài sản số.</p>
+                  <div class="article-meta"><span>10/03/2026</span><span>4 phút đọc</span></div>
+                </div>
+              </article>
 
-            <article class="news-card glass-card" id="commodities">
-              <img src="https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=900&q=80" alt="Vàng và hàng hóa">
-              <div class="card-body">
-                <span class="article-tag gold">💰 Hàng hóa</span>
-                <h3>Vàng bật tăng khi lợi suất Mỹ hạ nhiệt, dầu WTI vẫn chịu áp lực từ tồn kho</h3>
-                <p>Giá vàng tiếp tục được hỗ trợ bởi nhu cầu phòng thủ, trong khi dầu WTI chưa thể phục hồi bền vững do số liệu tồn kho Mỹ tăng vượt kỳ vọng.</p>
-                <div class="card-meta"><span>11/03/2026</span><span>6 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+              <article class="news-card article-panel">
+                <img src="https://picsum.photos/800/450?random=7" alt="Dữ liệu onchain của Bitcoin">
+                <div class="card-content">
+                  <span class="category-tag">On-chain</span>
+                  <h3>Dòng tiền on-chain cho thấy cá voi tiếp tục tích lũy Bitcoin</h3>
+                  <p>Lượng BTC rời sàn tăng đều trong ba phiên gần nhất, củng cố luận điểm tích lũy ở vùng giá cao.</p>
+                  <div class="article-meta"><span>09/03/2026</span><span>5 phút đọc</span></div>
+                </div>
+              </article>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1622790698141-94e30457ff4d?auto=format&fit=crop&w=900&q=80" alt="Altcoin market">
-              <div class="card-body">
-                <span class="article-tag purple">📈 Altcoin</span>
-                <h3>Nhóm AI coin hồi phục mạnh: FET, TAO và RNDR hút lại dòng tiền đầu cơ</h3>
-                <p>Sau giai đoạn điều chỉnh ngắn, nhiều token AI đang có tín hiệu tạo đáy trên khung ngày. Tuy nhiên, mức biến động cao khiến quản trị rủi ro vẫn là ưu tiên số một.</p>
-                <div class="card-meta"><span>10/03/2026</span><span>5 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+              <article class="news-card article-panel">
+                <img src="https://picsum.photos/800/450?random=8" alt="BNB Chain và làn sóng memecoin">
+                <div class="card-content">
+                  <span class="category-tag muted-gold">Altcoin</span>
+                  <h3>BNB Chain trở lại đường đua sau làn sóng memecoin mới</h3>
+                  <p>Thanh khoản và hoạt động ví tăng nhanh, giúp hệ BNB lấy lại sức nóng sau giai đoạn trầm lắng.</p>
+                  <div class="article-meta"><span>09/03/2026</span><span>5 phút đọc</span></div>
+                </div>
+              </article>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=900&q=80" alt="Phân tích BTC dominance">
-              <div class="card-body">
-                <span class="article-tag cyan">📊 Phân tích</span>
-                <h3>BTC Dominance tiến sát kháng cự: cơ hội cho altseason vẫn chưa bị dập tắt</h3>
-                <p>Dominance đang test lại vùng cản mạnh sau chuỗi tăng dài. Nếu bị từ chối, thị trường có thể chứng kiến một đợt xoay tua vốn sang mid-cap và low-cap đáng chú ý.</p>
-                <div class="card-meta"><span>10/03/2026</span><span>7 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+              <article class="news-card article-panel">
+                <img src="https://picsum.photos/800/450?random=9" alt="Dầu thô và thị trường hàng hóa">
+                <div class="card-content">
+                  <span class="category-tag muted-gold">Hàng hóa</span>
+                  <h3>Dầu WTI dao động mạnh khi thị trường đánh giá nhu cầu toàn cầu</h3>
+                  <p>Giá dầu chịu áp lực ngắn hạn nhưng vẫn giữ được nền hỗ trợ nhờ kỳ vọng phục hồi tiêu thụ tại châu Á.</p>
+                  <div class="article-meta"><span>08/03/2026</span><span>4 phút đọc</span></div>
+                </div>
+              </article>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&w=900&q=80" alt="On-chain data">
-              <div class="card-body">
-                <span class="article-tag magenta">📰 Tin tức</span>
-                <h3>Dữ liệu on-chain cho thấy cá voi đang gom lại ETH trên các ví lạnh</h3>
-                <p>Số dư ETH rút khỏi sàn tăng lên mức cao nhất ba tuần, trong bối cảnh funding rate cân bằng hơn. Đây là tín hiệu tích cực nhưng chưa đủ để xác nhận xu hướng tăng mới.</p>
-                <div class="card-meta"><span>09/03/2026</span><span>4 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+              <article class="news-card article-panel">
+                <img src="https://picsum.photos/800/450?random=10" alt="ETF Ethereum giao ngay">
+                <div class="card-content">
+                  <span class="category-tag">Phân tích</span>
+                  <h3>ETF Ethereum giao ngay có thể mở ra đợt tái định giá mới cho thị trường</h3>
+                  <p>Nếu dòng tiền tiếp tục cải thiện, ETH nhiều khả năng trở thành tâm điểm ở giai đoạn luân chuyển vốn tiếp theo.</p>
+                  <div class="article-meta"><span>08/03/2026</span><span>6 phút đọc</span></div>
+                </div>
+              </article>
+            </div>
+          </section>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Solana altcoin">
-              <div class="card-body">
-                <span class="article-tag purple">📈 Altcoin</span>
-                <h3>SOL lấy lại cấu trúc tăng ngắn hạn, memecoin hệ Sol bắt đầu nóng trở lại</h3>
-                <p>Khối lượng giao dịch on-chain hệ Solana tăng nhanh trong 2 phiên gần đây. Nếu SOL đóng nến ngày trên vùng 238 USD, nhiều token beta cao có thể tiếp tục bùng nổ.</p>
-                <div class="card-meta"><span>09/03/2026</span><span>5 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+          <section class="content-block" id="market-analysis">
+            <div class="section-heading">
+              <p class="eyebrow">Phân tích thị trường</p>
+              <h2>Góc nhìn nhanh từ Signal Hunters</h2>
+            </div>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=900&q=80" alt="Macro crypto">
-              <div class="card-body">
-                <span class="article-tag gold">💰 Hàng hóa</span>
-                <h3>DXY suy yếu nhẹ, bạc công nghiệp tăng tốc: tín hiệu hỗ trợ tâm lý risk-on</h3>
-                <p>Đồng USD hạ nhiệt giúp nhóm tài sản rủi ro dễ thở hơn. Trong khi đó, bạc và đồng tiếp tục được hưởng lợi từ câu chuyện phục hồi sản xuất và nhu cầu công nghiệp.</p>
-                <div class="card-meta"><span>08/03/2026</span><span>6 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
+            <div class="analysis-list">
+              <article class="analysis-item article-panel">
+                <img src="https://picsum.photos/800/450?random=1" alt="Bitcoin market structure">
+                <div>
+                  <span class="category-tag">BTC</span>
+                  <h3>Cấu trúc tăng của BTC vẫn còn nguyên nếu giữ vững vùng $78,000</h3>
+                  <p>Lực mua tổ chức đang đóng vai trò nâng đỡ thị trường. Tuy nhiên, biến động ngắn hạn vẫn có thể xuất hiện quanh các mốc kháng cự tâm lý.</p>
+                  <div class="article-meta"><span>11/03/2026</span><span>3 phút đọc</span></div>
+                </div>
+              </article>
 
-            <article class="news-card glass-card">
-              <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?auto=format&fit=crop&w=900&q=80" alt="Layer 2">
-              <div class="card-body">
-                <span class="article-tag magenta">📰 Tin tức</span>
-                <h3>Layer 2 Ethereum cạnh tranh phí giao dịch, Arbitrum và Base dẫn đầu hoạt động</h3>
-                <p>Số lượng người dùng hoạt động trên các mạng L2 tiếp tục lập đỉnh mới, cho thấy xu hướng mở rộng hệ sinh thái Ethereum vẫn rất bền dù market đang phân hóa.</p>
-                <div class="card-meta"><span>08/03/2026</span><span>4 phút đọc</span></div>
-                <a class="inline-cta" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">💰 Trade tiết kiệm? BingX hoàn phí 45%</a>
-              </div>
-            </article>
-          </div>
+              <article class="analysis-item article-panel">
+                <img src="https://picsum.photos/800/450?random=2" alt="Ethereum staking analysis">
+                <div>
+                  <span class="category-tag muted-gold">ETH</span>
+                  <h3>Staking tăng mạnh giúp ETH củng cố câu chuyện khan hiếm nguồn cung</h3>
+                  <p>Áp lực bán trên sàn suy giảm trong khi lượng khóa staking tăng, tạo nền tảng tốt cho xu hướng trung hạn.</p>
+                  <div class="article-meta"><span>11/03/2026</span><span>4 phút đọc</span></div>
+                </div>
+              </article>
+
+              <article class="analysis-item article-panel">
+                <img src="https://picsum.photos/800/450?random=4" alt="Solana ecosystem analysis">
+                <div>
+                  <span class="category-tag muted-gold">SOL</span>
+                  <h3>Solana tiếp tục dẫn đầu câu chuyện tăng trưởng hệ sinh thái trong Q1</h3>
+                  <p>TVL, người dùng hoạt động và volume DEX cùng tăng cho thấy đà hồi phục của Solana đang có chất lượng tốt hơn giai đoạn trước.</p>
+                  <div class="article-meta"><span>10/03/2026</span><span>4 phút đọc</span></div>
+                </div>
+              </article>
+            </div>
+          </section>
         </div>
 
         <aside class="sidebar-column">
-          <div class="widget glass-card market-widget">
-            <div class="widget-title-row">
-              <h3>Giá BTC / ETH</h3>
-              <span class="live-dot">LIVE</span>
+          <section class="sidebar-widget article-panel">
+            <div class="widget-heading">
+              <h3>Giá Crypto</h3>
+              <span class="status-dot">Live</span>
             </div>
-            <div class="market-placeholder">
-              <div class="market-item">
-                <strong>BTC</strong>
-                <span>$86,420</span>
-                <small>+2.14% / 24h</small>
-              </div>
-              <div class="market-item">
-                <strong>ETH</strong>
-                <span>$4,812</span>
-                <small>+1.37% / 24h</small>
-              </div>
+            <div class="price-list">
+              <div class="price-row"><strong>BTC</strong><span>$80,432</span><b class="up">+2.41%</b></div>
+              <div class="price-row"><strong>ETH</strong><span>$4,285</span><b class="up">+1.76%</b></div>
+              <div class="price-row"><strong>SOL</strong><span>$178</span><b class="up">+3.92%</b></div>
             </div>
-            <p class="widget-note">Có thể thay bằng CoinGecko widget hoặc API realtime ở bước tự động hóa tiếp theo.</p>
-          </div>
+          </section>
 
-          <div class="widget glass-card trending-widget">
-            <h3>Trending hôm nay</h3>
-            <ol>
-              <li>BTC giữ vùng 86k sau nhịp rung lắc</li>
-              <li>ETH on-chain tích cực trở lại</li>
-              <li>SOL hút dòng tiền đầu cơ ngắn hạn</li>
-              <li>ETF altcoin tạo tâm lý hưng phấn</li>
-              <li>Vàng tăng khi lợi suất hạ nhiệt</li>
+          <section class="sidebar-widget article-panel">
+            <h3>Bài đọc nhiều</h3>
+            <ol class="popular-list">
+              <li>Bitcoin vượt $80,000: Cơn sóng tổ chức đẩy giá</li>
+              <li>Fed giữ lãi suất: Thị trường crypto phản ứng thế nào?</li>
+              <li>ETH 2.0 Staking đạt kỷ lục mới</li>
+              <li>Solana DeFi TVL tăng 300% trong Q1</li>
+              <li>Giá vàng vượt $3,000/oz lần đầu tiên</li>
             </ol>
-          </div>
+          </section>
 
-          <a class="widget glass-card bingx-widget" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">
-            <span class="eyebrow">Ưu đãi đối tác</span>
+          <a class="sidebar-widget article-panel bingx-banner" href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">
+            <p class="eyebrow">Đối tác giao dịch</p>
             <h3>Hoàn phí 45% vĩnh viễn</h3>
-            <p>Mở tài khoản BingX qua Signal Hunters để tiết kiệm phí giao dịch lâu dài.</p>
-            <span class="widget-cta">Mở BingX ngay →</span>
+            <p>Đăng ký BingX qua Signal Hunters để tối ưu chi phí giao dịch trong dài hạn.</p>
+            <span class="banner-cta">Mở tài khoản BingX</span>
           </a>
 
-          <a class="widget glass-card telegram-widget" href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">
-            <span class="eyebrow">Cộng đồng</span>
-            <h3>Tham gia Telegram Signal Hunters</h3>
-            <p>Nhận cập nhật nhanh, thảo luận trực tiếp và theo dõi chiến lược cùng cộng đồng.</p>
-            <span class="widget-cta">Vào group Telegram →</span>
-          </a>
+          <section class="sidebar-widget article-panel community-widget">
+            <h3>Tham gia cộng đồng</h3>
+            <div class="community-links">
+              <a href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">Telegram Group</a>
+              <a href="https://t.me/SignalHuntersCrypto" target="_blank" rel="noreferrer">Telegram Channel</a>
+            </div>
+          </section>
         </aside>
-      </div>
-    </section>
-
-    <section class="about-section" id="about">
-      <div class="container about-grid glass-card">
-        <div>
-          <span class="eyebrow">Về Signal Hunters</span>
-          <h2>Giao diện mạnh, nội dung sắc, tối ưu cho cộng đồng crypto Việt.</h2>
-        </div>
-        <p>Website được xây dựng dạng static bằng HTML/CSS/JS thuần, tối ưu GitHub Pages, dễ mở rộng sang lấy dữ liệu tự động sau này. Bố cục card-based giúp đọc nhanh trên desktop lẫn mobile, còn hiệu ứng neon glow giữ chất cyberpunk đúng brief.</p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="about">
     <div class="container footer-grid">
       <div>
-        <a href="#top" class="brand footer-brand"><span class="brand-icon">✨</span><span class="brand-text">Signal Hunters</span></a>
-        <p>Trang tin tức crypto dành cho cộng đồng trader yêu thích tốc độ, độ rõ ràng và thẩm mỹ dark theme cyberpunk.</p>
+        <a href="#top" class="brand footer-brand">
+          <span class="brand-mark">◢</span>
+          <span class="brand-text">Signal Hunters</span>
+        </a>
+        <p>Signal Hunters mang đến tin tức crypto, góc nhìn thị trường và cập nhật hàng hóa theo phong cách gọn gàng, chuyên nghiệp, dễ đọc.</p>
       </div>
+
       <div>
         <h4>Liên kết</h4>
         <ul>
           <li><a href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">Telegram Group</a></li>
-          <li><a href="https://t.me/SignalHuntersCrypto" target="_blank" rel="noreferrer">Channel</a></li>
+          <li><a href="https://t.me/SignalHuntersCrypto" target="_blank" rel="noreferrer">Telegram Channel</a></li>
           <li><a href="https://x.com/ShinyYumeSH" target="_blank" rel="noreferrer">Twitter @ShinyYumeSH</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>BingX Referral</h4>
-        <p><a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">Đăng ký BingX hoàn phí 45% vĩnh viễn: https://bingx.com/vi-vn/partner/X7EZVIWI</a></p>
+        <h4>Cộng đồng</h4>
+        <p><a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">BingX referral link</a></p>
       </div>
     </div>
+
     <div class="container footer-bottom">
       <span>© 2026 Signal Hunters. Powered by Shiny Yume ✨</span>
     </div>
