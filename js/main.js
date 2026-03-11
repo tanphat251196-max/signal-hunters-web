@@ -47,11 +47,19 @@ function updateThemeIcon() {
   themeIcon.textContent = isLight ? '☀️' : '🌙';
 }
 
+function updateLogos() {
+  const isLight = document.body.classList.contains('light-mode');
+  document.querySelectorAll('.brand-logo').forEach(img => {
+    img.src = isLight ? 'images/logo-combo-black.png' : 'images/logo-combo.png';
+  });
+}
+
 function toggleTheme() {
   document.body.classList.toggle('light-mode');
   const isLight = document.body.classList.contains('light-mode');
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
   updateThemeIcon();
+  updateLogos();
 }
 
 (function initTheme() {
@@ -60,6 +68,7 @@ function toggleTheme() {
     document.body.classList.add('light-mode');
   }
   updateThemeIcon();
+  updateLogos();
 })();
 
 window.toggleTheme = toggleTheme;

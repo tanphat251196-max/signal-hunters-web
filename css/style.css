@@ -1222,3 +1222,12 @@ button {
     font-size: 1.4rem;
   }
 }
+
+/* Logo swap for light mode */
+body.light-mode .brand-logo {
+  content: url('images/logo-combo-black.png');
+}
+
+body.light-mode .footer-logo {
+  content: url('images/logo-combo-black.png');
+}
