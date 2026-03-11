@@ -487,7 +487,18 @@ function renderArticlePage(posts) {
 
   const params = new URLSearchParams(window.location.search);
   const currentId = params.get('id');
-  const currentSlug = params.get('slug');
+  const currentSlug = params.get('slug') || extractSlugFromPath();
+  
+  function extractSlugFromPath() {
+    // Parse slug from clean URL: /slug-name.html or /slug-name
+    const path = window.location.pathname;
+    const match = path.match(/\/([a-z0-9-]+?)(?:\.html)?$/);
+    if (match && match[1] !== 'article' && match[1] !== 'index') {
+      return match[1];
+    }
+    return null;
+  }
+  
   const post = posts.find((item) => 
     (currentSlug && item.slug === currentSlug) || 
     (currentId && String(item.id) === currentId)
