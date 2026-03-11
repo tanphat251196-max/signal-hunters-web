@@ -507,7 +507,7 @@ function renderArticlePage(posts) {
       <div class="article-content" data-article-content>${post.content}</div>
       <div class="ref-separator">
         <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
-          🎁 BingX — Hoàn phí giao dịch <strong>45% VĨNH VIỄN</strong> | Mã: X7EZVIWI
+          🎁 BingX — Hoàn phí <strong>45%</strong> vĩnh viễn
         </a>
       </div>
       <div class="telegram-comments">
