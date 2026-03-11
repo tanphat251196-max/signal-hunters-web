@@ -1,19 +1,19 @@
 :root {
-  --bg: #0a0a0f;
-  --bg-soft: #0d0d15;
-  --panel: #12121a;
-  --panel-alt: #1a1a2e;
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #0f0f13;
+  --bg-soft: #0a0a0e;
+  --panel: #1a1a24;
+  --panel-alt: #1a1a24;
+  --border: #252530;
   --text: #ffffff;
-  --body: #b0b0b0;
-  --meta: #808080;
-  --accent: #e8630a;
-  --accent-hover: #ff7b1c;
-  --accent-warm: #cc5500;
-  --accent-dark: #c45200;
-  --link: #4a9eff;
-  --green: #29c46d;
-  --red: #e05a5a;
+  --body: #a0a0b0;
+  --meta: #6a6a7a;
+  --accent: #e74c3c;
+  --accent-hover: #ff5544;
+  --accent-warm: #c0392b;
+  --accent-dark: #c0392b;
+  --link: #e74c3c;
+  --green: #00d68f;
+  --red: #ff4444;
   --shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
   --shadow-hover: 0 20px 38px rgba(0, 0, 0, 0.34);
   --radius: 12px;
@@ -59,9 +59,9 @@ button {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 10, 15, 0.82);
+  background: rgba(15, 15, 19, 0.95);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-inner {
@@ -87,7 +87,7 @@ button {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: rgba(232, 99, 10, 0.16);
+  background: rgba(231, 76, 60, 0.16);
   color: var(--accent);
   font-size: 0.9rem;
 }
@@ -130,7 +130,7 @@ button {
 .header-cta {
   background: var(--accent);
   color: #ffffff;
-  box-shadow: 0 10px 24px rgba(232, 99, 10, 0.24);
+  box-shadow: 0 10px 24px rgba(231, 76, 60, 0.24);
 }
 
 .header-cta:hover,
@@ -163,7 +163,7 @@ button {
 .ticker-bar {
   overflow: hidden;
   background: var(--bg-soft);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border);
 }
 
 .ticker-wrapper {
@@ -229,7 +229,7 @@ button {
 }
 
 .article-panel {
-  background: linear-gradient(180deg, var(--panel), rgba(18, 18, 26, 0.96));
+  background: linear-gradient(180deg, var(--panel), rgba(26, 26, 36, 0.96));
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -313,14 +313,14 @@ button {
   margin-bottom: 14px;
   padding: 7px 12px;
   border-radius: 999px;
-  background: rgba(232, 99, 10, 0.16);
+  background: rgba(231, 76, 60, 0.16);
   color: var(--accent);
   font-size: 0.78rem;
   font-weight: 700;
 }
 
 .muted-accent {
-  background: rgba(196, 82, 0, 0.18);
+  background: rgba(192, 57, 43, 0.18);
   color: #ffffff;
 }
 
@@ -404,7 +404,7 @@ button {
 .side-article:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(232, 99, 10, 0.2);
+  border-color: rgba(231, 76, 60, 0.2);
 }
 
 .news-card img {
@@ -492,8 +492,8 @@ button {
   align-items: center;
   gap: 12px;
   padding: 13px 14px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0f0f13;
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
@@ -511,7 +511,7 @@ button {
 
 .bingx-banner {
   display: block;
-  background: linear-gradient(145deg, var(--accent-dark), #7a2f00);
+  background: linear-gradient(145deg, var(--accent-dark), #a93226);
 }
 
 .bingx-banner h3 {
@@ -540,8 +540,8 @@ button {
 }
 
 .site-footer {
-  background: #060608;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #08080c;
+  border-top: 1px solid var(--border);
   padding: 34px 0 24px;
 }
 
@@ -572,7 +572,7 @@ button {
 .footer-bottom {
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border);
   font-size: 0.9rem;
 }
 
@@ -614,7 +614,7 @@ button {
     gap: 14px;
     padding: 18px;
     border-radius: 12px;
-    background: #12121a;
+    background: #1a1a24;
     border: 1px solid var(--border);
     box-shadow: var(--shadow-hover);
   }
