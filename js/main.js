@@ -691,20 +691,22 @@ async function initTradingViewWidgets(forceReload = false) {
 }
 
 async function fetchRankingCoins() {
+  // Try direct first
   try {
-    const directResponse = await fetch(RANKING_COINS_URL, { cache: 'no-store' });
-    if (directResponse.ok) {
-      return await directResponse.json();
-    }
-    throw new Error(`HTTP ${directResponse.status}`);
-  } catch (directError) {
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(RANKING_COINS_URL)}`;
-    const proxyResponse = await fetch(proxyUrl, { cache: 'no-store' });
-    if (!proxyResponse.ok) {
-      throw directError;
-    }
-    return await proxyResponse.json();
-  }
+    const r = await fetch(RANKING_COINS_URL, { cache: 'no-store' });
+    if (r.ok) return await r.json();
+  } catch (e) {}
+  // Try allorigins proxy
+  try {
+    const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(RANKING_COINS_URL)}`, { cache: 'no-store' });
+    if (r.ok) return await r.json();
+  } catch (e) {}
+  // Try corsproxy.io
+  try {
+    const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(RANKING_COINS_URL)}`, { cache: 'no-store' });
+    if (r.ok) return await r.json();
+  } catch (e) {}
+  throw new Error('All ranking sources failed');
 }
 
 async function loadRanking() {

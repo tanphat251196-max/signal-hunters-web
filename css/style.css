@@ -668,10 +668,21 @@ button {
 }
 
 .tradingview-widget-container {
-  height: 400px;
+  height: 500px;
   border-radius: 8px;
   overflow: hidden;
   background: var(--bg-soft);
+  position: relative;
+}
+
+.tradingview-widget-container > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.tradingview-widget-container iframe {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .ranking-tabs {
