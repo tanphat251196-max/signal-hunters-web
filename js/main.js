@@ -1,8 +1,13 @@
 const menuToggle = document.querySelector('.menu-toggle');
+const hamburger = document.querySelector('.hamburger');
 const mainNav = document.querySelector('.main-nav');
+const mobileNav = document.querySelector('.mobile-nav');
 const pageType = document.body.dataset.page || 'home';
 const POSTS_URL = 'data/posts.json';
 const COINGECKO_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true';
+const TRENDING_COINS_URL = 'https://api.coingecko.com/api/v3/search/trending';
+const FEAR_GREED_URL = 'https://api.alternative.me/fng/?limit=1';
+const POSTS_PER_PAGE = 12;
 const coinConfig = [
   { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin', icon: '₿' },
   { id: 'ethereum', symbol: 'ETH', name: 'Ethereum', icon: 'Ξ' },
@@ -13,8 +18,51 @@ const coinConfig = [
 
 const state = {
   posts: null,
-  currentFilter: 'all'
+  currentFilter: 'all',
+  currentPage: 1,
+  searchTerm: ''
 };
+
+function closeMobileMenu() {
+  if (mobileNav) {
+    mobileNav.classList.remove('open');
+  }
+  if (hamburger) {
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+}
+
+function toggleMobileMenu() {
+  if (!mobileNav || !hamburger) return;
+  const isOpen = mobileNav.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+}
+
+window.toggleMobileMenu = toggleMobileMenu;
+
+function updateThemeIcon() {
+  const themeIcon = document.querySelector('.theme-icon');
+  if (!themeIcon) return;
+  const isLight = document.body.classList.contains('light-mode');
+  themeIcon.textContent = isLight ? '☀️' : '🌙';
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  const isLight = document.body.classList.contains('light-mode');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  updateThemeIcon();
+}
+
+(function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+  }
+  updateThemeIcon();
+})();
+
+window.toggleTheme = toggleTheme;
 
 if (menuToggle && mainNav) {
   menuToggle.addEventListener('click', () => {
@@ -36,6 +84,20 @@ if (menuToggle && mainNav) {
     }
   });
 }
+
+if (mobileNav) {
+  mobileNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  });
+}
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    closeMobileMenu();
+  }
+});
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -172,12 +234,161 @@ function renderPopularPosts(posts) {
   });
 }
 
+function getHomeNewsSource() {
+  if (!Array.isArray(state.posts)) return [];
+  return state.posts.slice(1);
+}
+
+function normalizeText(value) {
+  return String(value || '').toLowerCase().trim();
+}
+
+function getFilteredPosts() {
+  const searchTerm = normalizeText(state.searchTerm);
+  return getHomeNewsSource().filter((post) => {
+    const matchesFilter = state.currentFilter === 'all'
+      ? true
+      : state.currentFilter === 'news'
+        ? ['news', 'altcoin', 'onchain'].includes(post.category)
+        : post.category === state.currentFilter;
+
+    if (!matchesFilter) return false;
+    if (!searchTerm) return true;
+
+    const haystack = `${post.title} ${post.summary}`.toLowerCase();
+    return haystack.includes(searchTerm);
+  });
+}
+
+function updatePageParam(page) {
+  const url = new URL(window.location.href);
+  if (page > 1) {
+    url.searchParams.set('page', String(page));
+  } else {
+    url.searchParams.delete('page');
+  }
+  window.history.replaceState({}, '', url);
+}
+
+function updatePagination(totalItems) {
+  const currentPageEl = document.getElementById('current-page');
+  const totalPagesEl = document.getElementById('total-pages');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  const pagination = document.querySelector('.pagination');
+  const totalPages = Math.max(1, Math.ceil(totalItems / POSTS_PER_PAGE));
+
+  state.currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+
+  if (currentPageEl) currentPageEl.textContent = String(state.currentPage);
+  if (totalPagesEl) totalPagesEl.textContent = String(totalPages);
+  if (prevBtn) prevBtn.disabled = state.currentPage <= 1;
+  if (nextBtn) nextBtn.disabled = state.currentPage >= totalPages;
+  if (pagination) pagination.hidden = totalItems <= POSTS_PER_PAGE;
+
+  updatePageParam(state.currentPage);
+}
+
+function renderNewsGrid(postsToRender) {
+  const newsGrid = document.querySelector('[data-news-grid]');
+  if (!newsGrid) return;
+
+  if (!Array.isArray(postsToRender) || !postsToRender.length) {
+    newsGrid.innerHTML = '<div class="empty-state article-panel">Không tìm thấy bài viết phù hợp.</div>';
+    return;
+  }
+
+  newsGrid.innerHTML = '';
+  postsToRender.forEach((post) => {
+    const article = document.createElement('article');
+    article.className = 'news-card article-panel';
+    article.dataset.category = post.category;
+    article.innerHTML = createNewsCard(post);
+    makeArticleClickable(article, post);
+    newsGrid.appendChild(article);
+  });
+}
+
+function renderPagedNews() {
+  if (pageType !== 'home') return;
+
+  const posts = getFilteredPosts();
+  const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
+  if (state.currentPage > totalPages) {
+    state.currentPage = totalPages;
+  }
+
+  const startIndex = (state.currentPage - 1) * POSTS_PER_PAGE;
+  const visiblePosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+  renderNewsGrid(visiblePosts);
+  updatePagination(posts.length);
+}
+
+function updateFilterNotice() {
+  const filterNotice = document.querySelector('[data-filter-notice]');
+  if (!filterNotice) return;
+
+  const parts = [];
+  if (state.currentFilter === 'analysis') {
+    parts.push('Đang lọc các bài phân tích thị trường.');
+  } else if (state.currentFilter === 'news') {
+    parts.push('Đang lọc các bài tin tức và dòng tiền thị trường.');
+  } else if (state.currentFilter === 'commodity') {
+    parts.push('Đang lọc các bài liên quan hàng hóa.');
+  }
+
+  if (state.searchTerm.trim()) {
+    parts.push(`Từ khóa: “${state.searchTerm.trim()}”.`);
+  }
+
+  filterNotice.hidden = parts.length === 0;
+  filterNotice.textContent = parts.join(' ');
+}
+
+function applyFilter(filter, options = {}) {
+  if (pageType !== 'home' || !Array.isArray(state.posts)) return;
+
+  state.currentFilter = filter;
+  state.currentPage = 1;
+  updateFilterNotice();
+  renderPagedNews();
+
+  document.querySelectorAll('.main-nav a[data-filter], .mobile-nav a[data-filter]').forEach((link) => {
+    link.classList.toggle('is-active', link.dataset.filter === filter);
+  });
+
+  const shouldScroll = options.scroll !== false;
+  const targetId = filter === 'analysis' ? 'market-analysis' : 'latest-news';
+  const target = document.getElementById(targetId);
+  if (shouldScroll && target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function bindHomeNavigation() {
+  if (pageType !== 'home') return;
+
+  document.querySelectorAll('.main-nav a[data-filter], .mobile-nav a[data-filter]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      applyFilter(link.dataset.filter || 'all');
+    });
+  });
+}
+
+function hydrateInitialPageFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const page = Number.parseInt(params.get('page') || '1', 10);
+  if (Number.isFinite(page) && page > 0) {
+    state.currentPage = page;
+  }
+}
+
 function renderHomePage(posts) {
   const heroArticle = document.querySelector('[data-hero-article]');
   const heroSideList = document.querySelector('[data-hero-side-list]');
-  const newsGrid = document.querySelector('[data-news-grid]');
   const analysisList = document.querySelector('[data-analysis-list]');
-  if (!heroArticle || !heroSideList || !newsGrid || !analysisList || !posts.length) return;
+  if (!heroArticle || !heroSideList || !analysisList || !posts.length) return;
 
   const latestPost = posts[0];
   heroArticle.innerHTML = createHeroArticle(latestPost);
@@ -202,79 +413,8 @@ function renderHomePage(posts) {
     analysisList.appendChild(article);
   });
 
-  renderNewsGrid(posts.slice(1, 7));
-}
-
-function renderNewsGrid(postsToRender) {
-  const newsGrid = document.querySelector('[data-news-grid]');
-  if (!newsGrid || !Array.isArray(postsToRender) || !postsToRender.length) return;
-
-  newsGrid.innerHTML = '';
-  postsToRender.forEach((post) => {
-    const article = document.createElement('article');
-    article.className = 'news-card article-panel';
-    article.dataset.category = post.category;
-    article.innerHTML = createNewsCard(post);
-    makeArticleClickable(article, post);
-    newsGrid.appendChild(article);
-  });
-}
-
-function applyFilter(filter) {
-  if (pageType !== 'home' || !Array.isArray(state.posts)) return;
-  state.currentFilter = filter;
-
-  const filterNotice = document.querySelector('[data-filter-notice]');
-  const newsSource = state.posts.slice(1, 7);
-  let filteredPosts = newsSource;
-  let targetId = 'latest-news';
-  let noticeText = '';
-
-  if (filter === 'analysis') {
-    targetId = 'market-analysis';
-    noticeText = 'Đang xem nhóm bài phân tích thị trường.';
-  } else if (filter === 'news') {
-    filteredPosts = newsSource.filter((post) => post.category === 'news' || post.category === 'altcoin' || post.category === 'onchain');
-    noticeText = 'Đang lọc các bài tin tức và dòng tiền thị trường.';
-  } else if (filter === 'commodity') {
-    filteredPosts = newsSource.filter((post) => post.category === 'commodity');
-    noticeText = 'Đang lọc các bài liên quan hàng hóa.';
-  }
-
-  if (filter === 'all') {
-    renderNewsGrid(newsSource);
-    if (filterNotice) filterNotice.hidden = true;
-  } else if (filter === 'analysis') {
-    if (filterNotice) {
-      filterNotice.hidden = false;
-      filterNotice.textContent = noticeText;
-    }
-  } else {
-    renderNewsGrid(filteredPosts.length ? filteredPosts : newsSource);
-    if (filterNotice) {
-      filterNotice.hidden = false;
-      filterNotice.textContent = noticeText;
-    }
-  }
-
-  document.querySelectorAll('.main-nav a[data-filter]').forEach((link) => {
-    link.classList.toggle('is-active', link.dataset.filter === filter);
-  });
-
-  const target = document.getElementById(targetId);
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-function bindHomeNavigation() {
-  if (pageType !== 'home' || !mainNav) return;
-  mainNav.querySelectorAll('a[data-filter]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      applyFilter(link.dataset.filter || 'all');
-    });
-  });
+  updateFilterNotice();
+  renderPagedNews();
 }
 
 async function loadPosts() {
@@ -287,8 +427,9 @@ async function loadPosts() {
     renderPopularPosts(state.posts);
 
     if (pageType === 'home') {
+      hydrateInitialPageFromUrl();
       renderHomePage(state.posts);
-      applyFilter('all');
+      applyFilter('all', { scroll: false });
     }
 
     if (pageType === 'article') {
@@ -331,6 +472,17 @@ function renderArticlePage(posts) {
       <div class="article-cta-box">
         💰 Tiết kiệm phí trade? Đăng ký BingX hoàn phí 45%:
         <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noreferrer">https://bingx.com/vi-vn/partner/X7EZVIWI</a>
+      </div>
+      <div class="telegram-comments">
+        <h3>💬 Bình luận</h3>
+        <script async src="https://telegram.org/js/telegram-widget.js?22"
+          data-telegram-discussion="SignalHuntersCrypto"
+          data-comments-limit="10"
+          data-colorful="1"
+          data-color="E74C3C"
+          data-dark="1"
+          data-dark-color="E74C3C">
+        </script>
       </div>
       <a class="back-home-link" href="index.html">← Quay lại trang chủ</a>
     </div>
@@ -389,7 +541,91 @@ async function loadCryptoPrices() {
   }
 }
 
+async function loadFearGreed() {
+  const valueEl = document.getElementById('fng-value');
+  const labelEl = document.getElementById('fng-label');
+  const fillEl = document.getElementById('fng-fill');
+  if (!valueEl || !labelEl || !fillEl) return;
+
+  try {
+    const response = await fetch(FEAR_GREED_URL, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    const fng = data?.data?.[0];
+    if (!fng) throw new Error('Missing FNG payload');
+
+    valueEl.textContent = fng.value;
+    labelEl.textContent = fng.value_classification;
+    fillEl.style.width = `${fng.value}%`;
+
+    const v = Number.parseInt(fng.value, 10);
+    if (v <= 25) fillEl.style.background = '#e74c3c';
+    else if (v <= 50) fillEl.style.background = '#f39c12';
+    else if (v <= 75) fillEl.style.background = '#2ecc71';
+    else fillEl.style.background = '#27ae60';
+  } catch (error) {
+    console.warn('FNG error', error);
+    valueEl.textContent = '--';
+    labelEl.textContent = 'Chưa tải được dữ liệu';
+    fillEl.style.width = '0%';
+  }
+}
+
+async function loadTrendingCoins() {
+  const trendingList = document.getElementById('trending-list');
+  if (!trendingList) return;
+
+  try {
+    const response = await fetch(TRENDING_COINS_URL, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    const coins = (data?.coins || []).slice(0, 5);
+    if (!coins.length) throw new Error('Missing trending coins payload');
+
+    trendingList.innerHTML = coins.map(({ item }) => `
+      <div class="trending-item">
+        <img src="${item.small}" alt="${item.name}">
+        <div class="trending-meta">
+          <span class="coin-name">${item.name}</span>
+          <span class="coin-symbol">${String(item.symbol || '').toUpperCase()}</span>
+        </div>
+        <span class="coin-rank">#${item.market_cap_rank || '--'}</span>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.warn('Trending coins error', error);
+    trendingList.textContent = 'Chưa tải được danh sách trending.';
+  }
+}
+
+function searchPosts(keyword) {
+  state.searchTerm = keyword || '';
+  state.currentPage = 1;
+  updateFilterNotice();
+  renderPagedNews();
+}
+
+function changePage(direction) {
+  const posts = getFilteredPosts();
+  const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
+  const nextPage = state.currentPage + direction;
+  if (nextPage < 1 || nextPage > totalPages) return;
+  state.currentPage = nextPage;
+  renderPagedNews();
+  const latestNews = document.getElementById('latest-news');
+  if (latestNews) {
+    latestNews.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+window.searchPosts = searchPosts;
+window.changePage = changePage;
+
 bindHomeNavigation();
 loadPosts();
 loadCryptoPrices();
+loadFearGreed();
+loadTrendingCoins();
 window.setInterval(loadCryptoPrices, 60000);
+window.setInterval(loadFearGreed, 3600000);
+window.setInterval(loadTrendingCoins, 3600000);

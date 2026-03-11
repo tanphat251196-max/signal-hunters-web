@@ -30,6 +30,10 @@
         <span></span>
       </button>
 
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+
       <nav class="main-nav" id="main-nav">
         <a href="/">Trang chủ</a>
         <a href="/#market-analysis">Phân tích</a>
@@ -38,8 +42,21 @@
         <a href="#about">Về chúng tôi</a>
       </nav>
 
-      <a class="header-cta" href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">Tham gia Telegram</a>
+      <div class="header-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <a class="header-cta" href="https://t.me/SignalHuntersChat" target="_blank" rel="noreferrer">Tham gia Telegram</a>
+      </div>
     </div>
+
+    <nav class="mobile-nav" aria-label="Mobile menu">
+      <a href="/" data-filter="all">Trang chủ</a>
+      <a href="/#market-analysis" data-filter="analysis">Phân tích</a>
+      <a href="/#latest-news" data-filter="news">Tin tức</a>
+      <a href="/#latest-news" data-filter="commodity">Hàng hóa</a>
+      <a href="/#about">Về chúng tôi</a>
+    </nav>
   </header>
 
   <section class="ticker-bar" aria-label="Crypto ticker">
@@ -94,6 +111,22 @@
             <div class="price-list" data-price-list>
               <div class="price-row"><strong>Đang tải...</strong><span></span><b></b></div>
             </div>
+          </section>
+
+          <section class="sidebar-widget article-panel fng-widget">
+            <h3>Fear &amp; Greed Index</h3>
+            <div class="fng-display">
+              <div class="fng-value" id="fng-value">--</div>
+              <div class="fng-label" id="fng-label">Đang tải...</div>
+              <div class="fng-bar">
+                <div class="fng-fill" id="fng-fill"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="sidebar-widget article-panel trending-widget">
+            <h3>🔥 Trending Coins</h3>
+            <div id="trending-list" class="trending-list">Đang tải...</div>
           </section>
 
           <section class="sidebar-widget article-panel">
