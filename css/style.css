@@ -1231,3 +1231,22 @@ body.light-mode .brand-logo {
 body.light-mode .footer-logo {
   content: url('images/logo-combo-black.png');
 }
+
+/* Light mode: hero text always white (over dark overlay) */
+body.light-mode .hero-content h1,
+body.light-mode .hero-content .eyebrow,
+body.light-mode .hero-summary,
+body.light-mode .hero-content .category-tag,
+body.light-mode .hero-content .hero-meta,
+body.light-mode .hero-content p,
+body.light-mode .hero-content a {
+  color: #ffffff;
+}
+
+body.light-mode .hero-side-list h2,
+body.light-mode .hero-side-list a,
+body.light-mode .side-article h2,
+body.light-mode .side-article p,
+body.light-mode .side-article .category-tag {
+  color: var(--text);
+}
