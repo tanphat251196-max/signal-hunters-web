@@ -654,6 +654,111 @@ button {
   }
 }
 
+.clickable-card {
+  cursor: pointer;
+}
+
+.main-nav a.is-active {
+  color: var(--text);
+}
+
+.filter-notice {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  border-radius: 10px;
+  background: rgba(231, 76, 60, 0.08);
+  color: var(--body);
+}
+
+.coin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  margin-right: 8px;
+  color: var(--accent);
+}
+
+.popular-list a {
+  color: inherit;
+}
+
+.popular-list a:hover {
+  color: var(--text);
+}
+
+.article-page {
+  padding-top: 8px;
+}
+
+.article-layout {
+  grid-template-columns: minmax(0, 0.7fr) minmax(300px, 0.3fr);
+}
+
+.article-main-section {
+  padding-top: 24px;
+}
+
+.article-detail {
+  overflow: hidden;
+}
+
+.article-cover {
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+}
+
+.article-detail-body {
+  padding: 28px;
+}
+
+.article-detail-body h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.article-content {
+  color: var(--body);
+  font-size: 1.02rem;
+}
+
+.article-content p {
+  margin: 0 0 18px;
+}
+
+.article-content h2,
+.article-content h3 {
+  color: var(--text);
+  margin: 28px 0 14px;
+}
+
+.article-content a {
+  color: var(--link);
+}
+
+.article-cta-box {
+  margin-top: 28px;
+  padding: 18px;
+  border-radius: 12px;
+  background: rgba(231, 76, 60, 0.08);
+  border: 1px solid rgba(231, 76, 60, 0.16);
+  color: var(--text);
+}
+
+.article-cta-box a,
+.back-home-link {
+  color: var(--link);
+}
+
+.back-home-link {
+  display: inline-flex;
+  margin-top: 24px;
+  font-weight: 700;
+}
+
 @media (max-width: 520px) {
   .hero-content {
     padding: 18px;
@@ -667,7 +772,8 @@ button {
   .sidebar-widget,
   .card-content,
   .compact-panel,
-  .analysis-item {
+  .analysis-item,
+  .article-detail-body {
     padding: 16px;
   }
 

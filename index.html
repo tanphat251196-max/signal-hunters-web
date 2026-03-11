@@ -4,17 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signal Hunters | Tin tức crypto & phân tích thị trường</title>
-  <meta name="description" content="Signal Hunters - Trang tin crypto chuyên nghiệp với tin tức, phân tích thị trường, altcoin và hàng hóa trong giao diện dark editorial, không neon.">
+  <meta name="description" content="Signal Hunters - Cập nhật tin tức crypto, phân tích thị trường BTC ETH, giá vàng bạc dầu realtime">
+  <meta property="og:title" content="Signal Hunters - Crypto News & Analysis">
+  <meta property="og:description" content="Cập nhật tin tức crypto 24/7, phân tích kỹ thuật BTC ETH, giá hàng hóa realtime">
+  <meta property="og:image" content="images/og-banner.jpg">
+  <meta property="og:url" content="https://tanphat251196-max.github.io/signal-hunters-web/">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0f0f13">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="home">
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="Signal Hunters">
+      <a href="index.html#top" class="brand" aria-label="Signal Hunters">
         <span class="brand-mark">◢</span>
         <span class="brand-text">Signal Hunters</span>
       </a>
@@ -26,10 +31,10 @@
       </button>
 
       <nav class="main-nav" id="main-nav">
-        <a href="#top">Trang chủ</a>
-        <a href="#market-analysis">Phân tích</a>
-        <a href="#latest-news">Tin tức</a>
-        <a href="#commodities">Hàng hóa</a>
+        <a href="#top" data-filter="all">Trang chủ</a>
+        <a href="#market-analysis" data-filter="analysis">Phân tích</a>
+        <a href="#latest-news" data-filter="news">Tin tức</a>
+        <a href="#latest-news" data-filter="commodity">Hàng hóa</a>
         <a href="#about">Về chúng tôi</a>
       </nav>
 
@@ -39,15 +44,15 @@
 
   <section class="ticker-bar" aria-label="Crypto ticker">
     <div class="ticker-wrapper">
-      <div class="ticker-content">
-        <div class="ticker-group">
+      <div class="ticker-content" data-ticker-content>
+        <div class="ticker-group" data-ticker-group>
           <span class="ticker-item"><strong>BTC</strong><em>$80,432</em><b class="up">+2.41%</b></span>
           <span class="ticker-item"><strong>ETH</strong><em>$4,285</em><b class="up">+1.76%</b></span>
           <span class="ticker-item"><strong>BNB</strong><em>$612</em><b class="down">-0.48%</b></span>
           <span class="ticker-item"><strong>SOL</strong><em>$178</em><b class="up">+3.92%</b></span>
           <span class="ticker-item"><strong>XRP</strong><em>$1.28</em><b class="down">-1.14%</b></span>
         </div>
-        <div class="ticker-group" aria-hidden="true">
+        <div class="ticker-group" aria-hidden="true" data-ticker-clone>
           <span class="ticker-item"><strong>BTC</strong><em>$80,432</em><b class="up">+2.41%</b></span>
           <span class="ticker-item"><strong>ETH</strong><em>$4,285</em><b class="up">+1.76%</b></span>
           <span class="ticker-item"><strong>BNB</strong><em>$612</em><b class="down">-0.48%</b></span>
@@ -61,7 +66,7 @@
   <main>
     <section class="hero-section">
       <div class="container hero-grid">
-        <article class="hero-feature article-panel">
+        <article class="hero-feature article-panel" data-hero-article>
           <img src="https://picsum.photos/1200/720?random=1" alt="Bitcoin vượt 80000 USD">
           <div class="hero-overlay"></div>
           <div class="hero-content">
@@ -76,7 +81,7 @@
           </div>
         </article>
 
-        <div class="hero-side-list">
+        <div class="hero-side-list" data-hero-side-list>
           <article class="side-article article-panel compact-panel">
             <img src="https://picsum.photos/800/450?random=2" alt="ETH 2.0 Staking đạt kỷ lục mới">
             <div>
@@ -119,7 +124,8 @@
               <h2>Tin tức nổi bật trong ngày</h2>
             </div>
 
-            <div class="news-grid">
+            <div class="filter-notice" data-filter-notice hidden></div>
+            <div class="news-grid" data-news-grid>
               <article class="news-card article-panel">
                 <img src="https://picsum.photos/800/450?random=5" alt="Fed giữ lãi suất và ảnh hưởng đến crypto">
                 <div class="card-content">
@@ -127,56 +133,6 @@
                   <h3>Fed giữ lãi suất: Thị trường crypto phản ứng thế nào?</h3>
                   <p>BTC giữ nhịp ổn định trong khi altcoin phân hóa mạnh. Giới giao dịch đang định giá lại kỳ vọng nới lỏng tiền tệ.</p>
                   <div class="article-meta"><span>10/03/2026</span><span>7 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="news-card article-panel">
-                <img src="https://picsum.photos/800/450?random=6" alt="XRP tăng tốc nhờ kỳ vọng pháp lý">
-                <div class="card-content">
-                  <span class="category-tag muted-accent">Tin tức</span>
-                  <h3>XRP tăng tốc nhờ kỳ vọng pháp lý rõ ràng hơn tại Mỹ</h3>
-                  <p>Tâm lý nhà đầu tư cải thiện sau hàng loạt tín hiệu tích cực liên quan đến khung pháp lý cho tài sản số.</p>
-                  <div class="article-meta"><span>10/03/2026</span><span>4 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="news-card article-panel">
-                <img src="https://picsum.photos/800/450?random=7" alt="Dữ liệu onchain của Bitcoin">
-                <div class="card-content">
-                  <span class="category-tag">On-chain</span>
-                  <h3>Dòng tiền on-chain cho thấy cá voi tiếp tục tích lũy Bitcoin</h3>
-                  <p>Lượng BTC rời sàn tăng đều trong ba phiên gần nhất, củng cố luận điểm tích lũy ở vùng giá cao.</p>
-                  <div class="article-meta"><span>09/03/2026</span><span>5 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="news-card article-panel">
-                <img src="https://picsum.photos/800/450?random=8" alt="BNB Chain và làn sóng memecoin">
-                <div class="card-content">
-                  <span class="category-tag muted-accent">Altcoin</span>
-                  <h3>BNB Chain trở lại đường đua sau làn sóng memecoin mới</h3>
-                  <p>Thanh khoản và hoạt động ví tăng nhanh, giúp hệ BNB lấy lại sức nóng sau giai đoạn trầm lắng.</p>
-                  <div class="article-meta"><span>09/03/2026</span><span>5 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="news-card article-panel">
-                <img src="https://picsum.photos/800/450?random=9" alt="Dầu thô và thị trường hàng hóa">
-                <div class="card-content">
-                  <span class="category-tag muted-accent">Hàng hóa</span>
-                  <h3>Dầu WTI dao động mạnh khi thị trường đánh giá nhu cầu toàn cầu</h3>
-                  <p>Giá dầu chịu áp lực ngắn hạn nhưng vẫn giữ được nền hỗ trợ nhờ kỳ vọng phục hồi tiêu thụ tại châu Á.</p>
-                  <div class="article-meta"><span>08/03/2026</span><span>4 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="news-card article-panel">
-                <img src="https://picsum.photos/800/450?random=10" alt="ETF Ethereum giao ngay">
-                <div class="card-content">
-                  <span class="category-tag">Phân tích</span>
-                  <h3>ETF Ethereum giao ngay có thể mở ra đợt tái định giá mới cho thị trường</h3>
-                  <p>Nếu dòng tiền tiếp tục cải thiện, ETH nhiều khả năng trở thành tâm điểm ở giai đoạn luân chuyển vốn tiếp theo.</p>
-                  <div class="article-meta"><span>08/03/2026</span><span>6 phút đọc</span></div>
                 </div>
               </article>
             </div>
@@ -188,7 +144,7 @@
               <h2>Góc nhìn nhanh từ Signal Hunters</h2>
             </div>
 
-            <div class="analysis-list">
+            <div class="analysis-list" data-analysis-list>
               <article class="analysis-item article-panel">
                 <img src="https://picsum.photos/800/450?random=1" alt="Bitcoin market structure">
                 <div>
@@ -196,26 +152,6 @@
                   <h3>Cấu trúc tăng của BTC vẫn còn nguyên nếu giữ vững vùng $78,000</h3>
                   <p>Lực mua tổ chức đang đóng vai trò nâng đỡ thị trường. Tuy nhiên, biến động ngắn hạn vẫn có thể xuất hiện quanh các mốc kháng cự tâm lý.</p>
                   <div class="article-meta"><span>11/03/2026</span><span>3 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="analysis-item article-panel">
-                <img src="https://picsum.photos/800/450?random=2" alt="Ethereum staking analysis">
-                <div>
-                  <span class="category-tag muted-accent">ETH</span>
-                  <h3>Staking tăng mạnh giúp ETH củng cố câu chuyện khan hiếm nguồn cung</h3>
-                  <p>Áp lực bán trên sàn suy giảm trong khi lượng khóa staking tăng, tạo nền tảng tốt cho xu hướng trung hạn.</p>
-                  <div class="article-meta"><span>11/03/2026</span><span>4 phút đọc</span></div>
-                </div>
-              </article>
-
-              <article class="analysis-item article-panel">
-                <img src="https://picsum.photos/800/450?random=4" alt="Solana ecosystem analysis">
-                <div>
-                  <span class="category-tag muted-accent">SOL</span>
-                  <h3>Solana tiếp tục dẫn đầu câu chuyện tăng trưởng hệ sinh thái trong Q1</h3>
-                  <p>TVL, người dùng hoạt động và volume DEX cùng tăng cho thấy đà hồi phục của Solana đang có chất lượng tốt hơn giai đoạn trước.</p>
-                  <div class="article-meta"><span>10/03/2026</span><span>4 phút đọc</span></div>
                 </div>
               </article>
             </div>
@@ -228,16 +164,14 @@
               <h3>Giá Crypto</h3>
               <span class="status-dot">Live</span>
             </div>
-            <div class="price-list">
-              <div class="price-row"><strong>BTC</strong><span>$80,432</span><b class="up">+2.41%</b></div>
-              <div class="price-row"><strong>ETH</strong><span>$4,285</span><b class="up">+1.76%</b></div>
-              <div class="price-row"><strong>SOL</strong><span>$178</span><b class="up">+3.92%</b></div>
+            <div class="price-list" data-price-list>
+              <div class="price-row"><strong>Đang tải...</strong><span></span><b></b></div>
             </div>
           </section>
 
           <section class="sidebar-widget article-panel">
             <h3>Bài đọc nhiều</h3>
-            <ol class="popular-list">
+            <ol class="popular-list" data-popular-list>
               <li>Bitcoin vượt $80,000: Cơn sóng tổ chức đẩy giá</li>
               <li>Fed giữ lãi suất: Thị trường crypto phản ứng thế nào?</li>
               <li>ETH 2.0 Staking đạt kỷ lục mới</li>
