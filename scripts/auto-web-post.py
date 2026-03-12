@@ -325,13 +325,8 @@ def git_push(count: int):
 def main():
     today = datetime.now().strftime("%Y-%m-%d")
     
-    # Dedup check
+    # No daily dedup — chạy nhiều lần/ngày, dedup theo title bài
     DEDUP_FILE.parent.mkdir(parents=True, exist_ok=True)
-    if DEDUP_FILE.exists():
-        last_date = DEDUP_FILE.read_text().strip()
-        if last_date == today:
-            print(f"DEDUP: Đã chạy hôm nay ({today}), skip.")
-            return
     
     print(f"=== Auto Web Post — {today} ===")
     
@@ -412,9 +407,6 @@ def main():
     # Git
     print("\n📦 Git push...")
     git_push(published)
-    
-    # Mark done
-    DEDUP_FILE.write_text(today)
     
     print(f"\n✅ DONE: Published {published} bài mới lên daututhongminh24h.com")
 
