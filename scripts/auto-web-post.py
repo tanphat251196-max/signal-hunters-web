@@ -24,9 +24,10 @@ POSTS_FILE = REPO_DIR / "data" / "posts.json"
 IMAGES_DIR = REPO_DIR / "images"
 DEPLOY_SCRIPT = REPO_DIR / "scripts" / "deploy.sh"
 DEDUP_FILE = Path("/tmp/openclaw/web-post-last-date.txt")
-MAX_ARTICLES = 5
+MAX_ARTICLES = 5  # Chỉ 5 tin quan trọng nhất mỗi ngày
 MIN_TITLE_LEN = 15
 SIMILARITY_THRESHOLD = 0.7
+CONFIG_FILE = Path("/home/shinyyume/.openclaw/openclaw.json")
 
 # === FILTER: Chỉ đăng tin quan trọng ===
 # Tin liên quan BTC/ETH/vàng/bạc/dầu/macro/pháp lý/chính trị ảnh hưởng giá
@@ -266,7 +267,7 @@ def rewrite_article(title: str, content: str, source_name: str, source_url: str)
     # Clean and structure content
     if not content or len(content) < 100:
         # Short article - create summary style
-        summary = f"Theo nguồn tin từ {source_name}, {title.lower()}."
+        summary = f"{title}."
         body = f"""## {title}
 
 {summary}
@@ -280,7 +281,6 @@ Thông tin này có thể ảnh hưởng đến tâm lý thị trường trong n
 - Cập nhật thêm thông tin từ các nguồn uy tín
 - Quản lý rủi ro chặt chẽ trong giai đoạn biến động
 
-*Nguồn: [{source_name}]({source_url})*
 {BINGX_CTA}"""
     else:
         # Has content - rewrite
@@ -301,7 +301,6 @@ Thông tin này có thể ảnh hưởng đến tâm lý thị trường trong n
 
 Thông tin trên cho thấy thị trường crypto đang có nhiều biến động. Nhà đầu tư cần cân nhắc kỹ trước khi đưa ra quyết định giao dịch.
 
-*Nguồn: [{source_name}]({source_url})*
 {BINGX_CTA}"""
     
     return {
@@ -309,6 +308,44 @@ Thông tin trên cho thấy thị trường crypto đang có nhiều biến đ�
         "summary": summary if 'summary' in dir() else title,
         "content": body,
     }
+
+
+def generate_ai_thumbnail(title: str, slug: str) -> str:
+    """Generate AI thumbnail using Gemini Nano Banana."""
+    try:
+        import base64
+        cfg = json.load(open(CONFIG_FILE))
+        api_key = cfg['models']['providers']['google']['apiKey']
+        
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/nano-banana-pro-preview:generateContent?key={api_key}"
+        
+        # Tạo prompt dựa trên title
+        prompt = f"Generate a news thumbnail image: {title}. Style: dark futuristic crypto digital art, neon blue and purple accents, professional financial news illustration, 16:9 ratio"
+        
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"responseModalities": ["TEXT", "IMAGE"]}
+        }
+        
+        resp = requests.post(url, json=payload, timeout=60)
+        if resp.status_code == 200:
+            data = resp.json()
+            for c in data.get("candidates", []):
+                for part in c.get("content", {}).get("parts", []):
+                    if "inlineData" in part:
+                        img_bytes = base64.b64decode(part["inlineData"]["data"])
+                        filename = f"post-{slug[:40]}.png"
+                        filepath = IMAGES_DIR / filename
+                        with open(filepath, "wb") as f:
+                            f.write(img_bytes)
+                        print(f"    🎨 AI thumbnail: {filename} ({len(img_bytes)//1024}KB)")
+                        return f"images/{filename}"
+        
+        print(f"    ⚠️ AI thumbnail failed: HTTP {resp.status_code}")
+    except Exception as e:
+        print(f"    ⚠️ AI thumbnail error: {e}")
+    
+    return "images/og-banner.jpg"
 
 
 def download_image(url: str, slug: str) -> str:
@@ -377,8 +414,13 @@ def git_push(count: int):
 def main():
     today = datetime.now().strftime("%Y-%m-%d")
     
-    # No daily dedup — chạy nhiều lần/ngày, dedup theo title bài
+    # Daily dedup — chỉ chạy 1 lần/ngày
     DEDUP_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if DEDUP_FILE.exists():
+        last_date = DEDUP_FILE.read_text().strip()
+        if last_date == today:
+            print(f"Already posted today ({today}). Skip.")
+            return
     
     print(f"=== Auto Web Post — {today} ===")
     
@@ -420,8 +462,8 @@ def main():
     published = 0
     next_id = max([p.get("id", 0) for p in posts], default=0) + 1 if posts else 1
     
-    for art in new_articles:
-        print(f"\n📝 Processing: {art['title'][:60]}...")
+    for i, art in enumerate(new_articles):
+        print(f"\n📝 [{i+1}/{len(new_articles)}] {art['title'][:60]}...")
         
         # Fetch full content
         content_data = fetch_article_content(art["url"])
@@ -429,9 +471,16 @@ def main():
         # Rewrite
         rewritten = rewrite_article(art["title"], content_data["text"], art["source"], art["url"])
         
-        # Download image
+        # AI thumbnail (chờ 3s giữa mỗi request tránh rate limit)
         slug = slugify(art["title"])
-        image_path = download_image(content_data["image"], slug)
+        image_path = generate_ai_thumbnail(art["title"], slug)
+        if image_path == "images/og-banner.jpg" and content_data.get("image"):
+            # Fallback: download ảnh từ nguồn nếu AI fail
+            image_path = download_image(content_data["image"], slug)
+        
+        if i < len(new_articles) - 1:
+            import time
+            time.sleep(5)  # Rate limit Gemini
         
         # Create post entry
         post = {
@@ -455,6 +504,9 @@ def main():
     # Save
     save_posts(posts)
     print(f"\n💾 Saved {published} new posts (total: {len(posts)})")
+    
+    # Mark done for today
+    DEDUP_FILE.write_text(today)
     
     # Deploy
     print("\n🚀 Deploying...")

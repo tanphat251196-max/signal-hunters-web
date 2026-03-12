@@ -556,17 +556,6 @@ function renderArticlePage(posts) {
           🎁 BingX — Hoàn phí <strong>45%</strong> vĩnh viễn
         </a>
       </div>
-      <div class="telegram-comments">
-        <h3>💬 Bình luận</h3>
-        <script async src="https://telegram.org/js/telegram-widget.js?22"
-          data-telegram-discussion="SignalHuntersCrypto"
-          data-comments-limit="10"
-          data-colorful="1"
-          data-color="E74C3C"
-          data-dark="1"
-          data-dark-color="E74C3C">
-        </script>
-      </div>
       <a class="back-home-link" href="index.html">← Quay lại trang chủ</a>
     </div>
   `;
