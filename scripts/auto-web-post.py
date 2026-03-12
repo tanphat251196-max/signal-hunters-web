@@ -28,6 +28,41 @@ MAX_ARTICLES = 5
 MIN_TITLE_LEN = 15
 SIMILARITY_THRESHOLD = 0.7
 
+# === FILTER: Chỉ đăng tin quan trọng ===
+# Tin liên quan BTC/ETH/vàng/bạc/dầu/macro/pháp lý/chính trị ảnh hưởng giá
+IMPORTANT_KEYWORDS = [
+    # Crypto chính
+    "bitcoin", "btc", "ethereum", "eth", "crypto", "tiền điện tử", "tiền mã hóa",
+    # Hàng hóa
+    "vàng", "gold", "bạc", "silver", "dầu", "oil", "wti", "brent",
+    # Macro/Kinh tế
+    "fed", "lãi suất", "interest rate", "cpi", "lạm phát", "inflation",
+    "gdp", "việc làm", "unemployment", "recession", "suy thoái",
+    "etf", "spot etf", "quỹ", "fund", "institutional",
+    "dxy", "dollar", "usd", "đô la",
+    # Pháp lý
+    "sec", "quy định", "regulation", "luật", "cấm", "ban", "kiện", "lawsuit",
+    "giấy phép", "license", "tornado cash", "binance", "coinbase",
+    "bộ tư pháp", "doj", "pháp lý",
+    # Chính trị
+    "trump", "biden", "tổng thống", "president", "quốc hội", "congress",
+    "chiến tranh", "war", "iran", "nga", "russia", "trung quốc", "china",
+    "trừng phạt", "sanction", "thuế", "tariff",
+    # Biến động giá lớn
+    "pump", "dump", "crash", "rally", "ath", "all-time", "kỷ lục",
+    "thanh lý", "liquidat", "phá sản", "bankrupt",
+    "whale", "cá voi", "tỷ đô", "billion",
+]
+
+# Tin KHÔNG quan trọng → loại bỏ
+SPAM_KEYWORDS = [
+    "airdrop", "testnet", "faucet", "giveaway", "bounty",
+    "meme coin", "shitcoin", "nft collection", "game nft",
+    "hướng dẫn đăng ký", "cách tạo ví", "tutorial",
+    "review sàn", "so sánh sàn", "top 10 coin",
+    "dự đoán giá.*2027", "dự đoán giá.*2028",
+]
+
 SOURCES = [
     {
         "name": "Coin68",
@@ -104,6 +139,23 @@ def is_duplicate(title: str, existing_titles: list) -> bool:
         ratio = SequenceMatcher(None, title_lower, existing.lower().strip()).ratio()
         if ratio > SIMILARITY_THRESHOLD:
             return True
+    return False
+
+
+def is_important(title: str) -> bool:
+    """Chỉ giữ tin quan trọng: BTC/ETH/vàng/dầu/macro/pháp lý/chính trị."""
+    title_lower = title.lower()
+    
+    # Loại spam trước
+    for kw in SPAM_KEYWORDS:
+        if re.search(kw, title_lower):
+            return False
+    
+    # Phải chứa ít nhất 1 keyword quan trọng
+    for kw in IMPORTANT_KEYWORDS:
+        if kw in title_lower:
+            return True
+    
     return False
 
 
@@ -344,16 +396,20 @@ def main():
     
     print(f"\nTotal crawled: {len(all_articles)}")
     
-    # Filter: dedup + quality
+    # Filter: dedup + quality + importance
     new_articles = []
+    skipped_unimportant = 0
     for art in all_articles:
         if is_duplicate(art["title"], existing_titles + [a["title"] for a in new_articles]):
+            continue
+        if not is_important(art["title"]):
+            skipped_unimportant += 1
             continue
         new_articles.append(art)
         if len(new_articles) >= MAX_ARTICLES:
             break
     
-    print(f"After dedup: {new_articles.__len__()} new articles")
+    print(f"After filter: {len(new_articles)} important (skipped {skipped_unimportant} unimportant)")
     
     if not new_articles:
         print("Không có bài mới. Done.")

@@ -3,6 +3,52 @@ const hamburger = document.querySelector('.hamburger');
 const mainNav = document.querySelector('.main-nav');
 const mobileNav = document.querySelector('.mobile-nav');
 const pageType = document.body.dataset.page || 'home';
+
+// Simple Markdown → HTML converter
+function markdownToHtml(md) {
+  if (!md) return '';
+  let html = md
+    // Escape HTML entities first
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    // Headers
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    // Bold + Italic
+    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    // Horizontal rules
+    .replace(/^---+$/gm, '<hr>')
+    // Unordered lists
+    .replace(/^[-•] (.+)$/gm, '<li>$1</li>')
+    // Paragraphs (double newline)
+    .replace(/\n\n+/g, '</p><p>')
+    // Single newlines within paragraphs
+    .replace(/\n/g, '<br>');
+  
+  // Wrap list items
+  html = html.replace(/(<li>.*?<\/li>)(?:\s*<br>)*/gs, (match) => {
+    return '<ul>' + match.replace(/<br>/g, '') + '</ul>';
+  });
+  
+  // Wrap in paragraph tags
+  html = '<p>' + html + '</p>';
+  
+  // Clean up empty paragraphs and broken tags
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  html = html.replace(/<p>\s*(<h[1-3]>)/g, '$1');
+  html = html.replace(/(<\/h[1-3]>)\s*<\/p>/g, '$1');
+  html = html.replace(/<p>\s*(<hr>)\s*<\/p>/g, '$1');
+  html = html.replace(/<p>\s*(<ul>)/g, '$1');
+  html = html.replace(/(<\/ul>)\s*<\/p>/g, '$1');
+  
+  return html;
+}
 const POSTS_URL = 'data/posts.json';
 const COINGECKO_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true';
 const TRENDING_COINS_URL = 'https://api.coingecko.com/api/v3/search/trending';
@@ -504,7 +550,7 @@ function renderArticlePage(posts) {
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h1>${post.title}</h1>
       <div class="article-meta"><span>${formatDate(post.date)}</span><span>${categoryLabel(post.category)}</span></div>
-      <div class="article-content" data-article-content>${post.content}</div>
+      <div class="article-content" data-article-content>${markdownToHtml(post.content)}</div>
       <div class="ref-separator">
         <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
           🎁 BingX — Hoàn phí <strong>45%</strong> vĩnh viễn

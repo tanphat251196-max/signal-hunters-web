@@ -867,6 +867,7 @@ body.light-mode .ref-separator {
 @media (max-width: 1100px) {
   .hero-grid,
   .main-layout,
+  .article-layout,
   .footer-grid {
     grid-template-columns: 1fr;
   }
