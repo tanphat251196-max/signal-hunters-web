@@ -7,8 +7,14 @@ const pageType = document.body.dataset.page || 'home';
 // Simple Markdown → HTML converter
 function markdownToHtml(md) {
   if (!md) return '';
+  
+  // Nếu content đã là HTML (có thẻ <p> hoặc <h2>) → trả về nguyên, không convert
+  if (/<(?:p|h[1-6]|div|ul|ol|table|blockquote)\b/i.test(md)) {
+    return md;
+  }
+  
   let html = md
-    // Escape HTML entities first
+    // Escape HTML entities first (chỉ cho markdown content)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
