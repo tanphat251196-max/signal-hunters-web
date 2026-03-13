@@ -24,7 +24,7 @@ POSTS_FILE = REPO_DIR / "data" / "posts.json"
 IMAGES_DIR = REPO_DIR / "images"
 DEPLOY_SCRIPT = REPO_DIR / "scripts" / "deploy.sh"
 DEDUP_FILE = Path("/tmp/openclaw/web-post-last-date.txt")
-MAX_ARTICLES = 8  # 5-8 bài/ngày, đủ 4 loại
+MAX_ARTICLES = 5  # Chỉ 5 tin quan trọng nhất mỗi ngày
 MIN_TITLE_LEN = 15
 SIMILARITY_THRESHOLD = 0.7
 CONFIG_FILE = Path("/home/shinyyume/.openclaw/openclaw.json")
@@ -36,21 +36,11 @@ IMPORTANT_KEYWORDS = [
     "bitcoin", "btc", "ethereum", "eth", "crypto", "tiền điện tử", "tiền mã hóa",
     # Hàng hóa
     "vàng", "gold", "bạc", "silver", "dầu", "oil", "wti", "brent",
-    "đồng", "copper", "bạch kim", "platinum", "khí tự nhiên",
-    "hàng hóa", "commodity",
-    # Forex
-    "forex", "eur/usd", "gbp/usd", "usd/jpy", "tỷ giá",
     # Macro/Kinh tế
     "fed", "lãi suất", "interest rate", "cpi", "lạm phát", "inflation",
     "gdp", "việc làm", "unemployment", "recession", "suy thoái",
     "etf", "spot etf", "quỹ", "fund", "institutional",
     "dxy", "dollar", "usd", "đô la",
-    "fomc", "ecb", "boj", "trái phiếu", "bond", "yield",
-    # Altcoin chính
-    "solana", "sol", "xrp", "ripple", "bnb", "cardano", "ada",
-    "dogecoin", "doge", "avax", "sui", "ton", "link",
-    "hyperliquid", "stablecoin", "defi", "layer 2",
-    "altcoin", "altseason",
     # Pháp lý
     "sec", "quy định", "regulation", "luật", "cấm", "ban", "kiện", "lawsuit",
     "giấy phép", "license", "tornado cash", "binance", "coinbase",
@@ -99,58 +89,15 @@ SOURCES = [
         "selector": "article a, .post-title a, h2 a, h3 a",
         "base": "https://blogtienao.com"
     },
-    {
-        "name": "Investing.com Hàng hóa",
-        "url": "https://vn.investing.com/news/commodities-news",
-        "selector": "article a, .articleItem a, .js-article-item a, h2 a, h3 a",
-        "base": "https://vn.investing.com"
-    },
-    {
-        "name": "Investing.com Forex",
-        "url": "https://vn.investing.com/news/forex-news",
-        "selector": "article a, .articleItem a, .js-article-item a, h2 a, h3 a",
-        "base": "https://vn.investing.com"
-    },
 ]
 
-BINGX_CTA = '<p><strong>💰 Tiết kiệm phí trade?</strong> Đăng ký BingX hoàn phí 45% vĩnh viễn: <a href="https://bingx.com/vi-vn/partner/X7EZVIWI">Đăng ký ngay</a> ✨</p>\n\n<p><em>Theo dõi <a href="https://daututhongminh24h.com">Đầu Tư Thông Minh 24H</a> để cập nhật tin tức crypto mới nhất!</em></p>'
+BINGX_CTA = """
+---
 
-ALTCOIN_KEYWORDS = [
-    "solana", "sol", "bnb", "xrp", "ripple", "cardano", "ada",
-    "dogecoin", "doge", "shiba", "avax", "avalanche", "polygon", "matic",
-    "link", "chainlink", "dot", "polkadot", "uni", "uniswap",
-    "aave", "sui", "sei", "ton", "near", "apt", "aptos",
-    "pepe", "bonk", "floki", "wif", "jupiter", "jup",
-    "arbitrum", "arb", "optimism", "op", "base",
-    "altcoin", "alt season", "altseason", "layer 2", "l2",
-    "defi", "dex", "token", "memecoin", "meme coin",
-    "pi network", "pi coin", "hyperliquid",
-    "stablecoin", "usdt", "usdc",
-]
+💰 **Tiết kiệm phí trade?** Đăng ký BingX hoàn phí 45% vĩnh viễn: [Đăng ký ngay](https://bingx.com/vi-vn/partner/X7EZVIWI) ✨
 
-ANALYSIS_KEYWORDS = [
-    "phân tích", "analysis", "nhận định", "dự báo", "forecast",
-    "xu hướng", "trend", "hỗ trợ", "kháng cự", "support", "resistance",
-    "fibonacci", "rsi", "macd", "bollinger", "ema",
-    "kỹ thuật", "technical", "on-chain", "whale",
-    "tâm lý", "sentiment", "fear", "greed",
-    "thanh lý", "liquidat", "funding rate", "open interest",
-    "long", "short", "squeeze", "breakout", "breakdown",
-    "accumulation", "distribution", "rally", "correction",
-    "bull", "bear", "sideway", "tích lũy",
-    "mục tiêu giá", "price target", "vùng giá",
-]
-
-COMMODITY_KEYWORDS = [
-    "vàng", "gold", "xau", "bạc", "silver", "dầu", "oil", "wti", "brent",
-    "dxy", "dollar index", "usd index",
-    "forex", "eur/usd", "gbp/usd", "usd/jpy",
-    "hàng hóa", "commodity", "commodities",
-    "đồng", "copper", "bạch kim", "platinum", "khí tự nhiên", "natural gas",
-    "lãi suất", "interest rate", "trái phiếu", "bond", "treasury", "yield",
-    "fed", "ecb", "boj", "fomc",
-    "p2p", "tỷ giá", "exchange rate",
-]
+*Theo dõi [Đầu Tư Thông Minh 24H](https://daututhongminh24h.com) để cập nhật tin tức crypto mới nhất!*
+"""
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -211,64 +158,6 @@ def is_important(title: str) -> bool:
             return True
     
     return False
-
-
-def classify_article(title: str, content: str = "") -> str:
-    """Phân loại bài: tin-tuc, altcoin, phan-tich, hang-hoa."""
-    text = (title + " " + content[:300]).lower()
-
-    commodity_score = sum(1 for kw in COMMODITY_KEYWORDS if kw in text)
-    analysis_score = sum(1 for kw in ANALYSIS_KEYWORDS if kw in text)
-    altcoin_score = sum(1 for kw in ALTCOIN_KEYWORDS if kw in text)
-
-    if commodity_score >= 2:
-        return "hang-hoa"
-    if analysis_score >= 2:
-        return "phan-tich"
-    if altcoin_score >= 2:
-        return "altcoin"
-    return "tin-tuc"
-
-
-def html_escape(text: str) -> str:
-    return (
-        text.replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-    )
-
-
-def html_paragraph(text: str) -> str:
-    return f"<p>{html_escape(text.strip())}</p>"
-
-
-def html_heading(text: str) -> str:
-    return f"<h2>{html_escape(text.strip())}</h2>"
-
-
-def content_to_html(content: str) -> str:
-    """Convert plain/markdown-ish content to HTML blocks."""
-    blocks = []
-    for part in re.split(r"\n\s*\n", content or ""):
-        part = part.strip()
-        if not part:
-            continue
-        clean = re.sub(r"^#+\s*", "", part).strip()
-        if part.startswith("##") or part.startswith("###"):
-            blocks.append(html_heading(clean))
-        else:
-            blocks.append(html_paragraph(clean))
-    return "\n\n".join(blocks)
-
-
-def build_html_content(sections: list[tuple[str | None, str]]) -> str:
-    blocks = []
-    for heading, body in sections:
-        if heading:
-            blocks.append(html_heading(heading))
-        if body:
-            blocks.append(content_to_html(body))
-    return "\n\n".join(block for block in blocks if block)
 
 
 def crawl_source(source: dict) -> list:
@@ -374,55 +263,49 @@ def fetch_article_content(url: str) -> dict:
 
 
 def rewrite_article(title: str, content: str, source_name: str, source_url: str) -> dict:
-    """Rewrite article content for the website in HTML format."""
-    category = classify_article(title, content)
-
+    """Rewrite article content for the website."""
+    # Clean and structure content
     if not content or len(content) < 100:
-        summary = title.strip().rstrip(".") + "."
-        intro = (
-            f"{summary} Đây là một trong những tin tức đáng chú ý trong ngày hôm nay trên thị trường crypto. "
-            "Nhà đầu tư nên theo dõi sát các cập nhật tiếp theo để đánh giá tác động thực tế."
-        )
-        main_body = (
-            "Thông tin hiện tại vẫn đang được thị trường hấp thụ. Trong ngắn hạn, biến động giá có thể gia tăng khi dòng tiền "
-            "phản ứng với tin tức mới và các yếu tố vĩ mô liên quan."
-        )
+        # Short article - create summary style
+        summary = f"{title}."
+        body = f"""## {title}
+
+{summary}
+
+Đây là một trong những tin tức đáng chú ý trong ngày hôm nay trên thị trường crypto. Các nhà đầu tư cần theo dõi sát diễn biến tiếp theo để đưa ra quyết định giao dịch phù hợp.
+
+### Tác động đến thị trường
+
+Thông tin này có thể ảnh hưởng đến tâm lý thị trường trong ngắn hạn. Traders nên:
+- Theo dõi phản ứng giá của BTC và các altcoin liên quan
+- Cập nhật thêm thông tin từ các nguồn uy tín
+- Quản lý rủi ro chặt chẽ trong giai đoạn biến động
+
+{BINGX_CTA}"""
     else:
-        content_trimmed = content[:2000].strip()
-        raw_parts = [p.strip() for p in re.split(r"\n\s*\n", content_trimmed) if p.strip()]
-        first_para = raw_parts[0] if raw_parts else content_trimmed[:200]
+        # Has content - rewrite
+        # Take first 800 chars of content as body
+        content_trimmed = content[:2000]
+        
+        # Create summary from first paragraph
+        first_para = content.split("\n\n")[0] if "\n\n" in content else content[:200]
         summary = first_para[:200].strip()
-        if summary and not summary.endswith('.'):
+        if not summary.endswith('.'):
             summary = summary.rsplit(' ', 1)[0] + '...'
+        
+        body = f"""## {title}
 
-        intro = summary
-        main_body = "\n\n".join(raw_parts[1:] or [content_trimmed])
+{content_trimmed}
 
-    sections = [(None, intro), ("Diễn biến chính", main_body)]
+### Nhận định
 
-    if category == "altcoin":
-        sections.extend([
-            ("Thông tin dự án", "Dự án/đồng coin được nhắc tới đang thu hút sự chú ý nhờ narrative, hệ sinh thái hoặc dòng tiền đầu cơ quay trở lại. Nhà đầu tư nên kiểm tra thêm tokenomics, roadmap và yếu tố thanh khoản trước khi tham gia."),
-            ("Tác động đến giá", "Nếu thông tin tiếp tục được xác nhận và thị trường chung ủng hộ, giá có thể biến động mạnh hơn mặt bằng chung. Tuy nhiên, altcoin thường có rủi ro cao hơn BTC nên cần quản lý vị thế và điểm dừng lỗ chặt chẽ."),
-        ])
-    elif category == "phan-tich":
-        sections.extend([
-            ("Phân tích kỹ thuật", "Nhà đầu tư nên theo dõi vùng hỗ trợ - kháng cự gần nhất, khối lượng giao dịch, funding rate và phản ứng giá tại các mốc quan trọng để xác nhận xu hướng. Những tín hiệu như breakout giả, phân kỳ RSI/MACD hoặc thanh lý lớn có thể làm thay đổi kịch bản ngắn hạn."),
-            ("Kết luận & Chiến lược", "Ưu tiên chờ xác nhận trước khi vào lệnh lớn. Có thể chia nhỏ vị thế, đặt stop-loss rõ ràng và tránh FOMO khi biến động tăng mạnh. Với nhà đầu tư dài hạn, nên kết hợp thêm bối cảnh vĩ mô và xu hướng dòng tiền để ra quyết định."),
-        ])
-    elif category == "hang-hoa":
-        sections.extend([
-            ("Diễn biến thị trường hàng hóa", "Giá vàng, dầu, bạc và các hàng hóa liên quan đang phản ứng trước những tín hiệu vĩ mô mới nhất. Các yếu tố như chính sách Fed, biến động DXY, căng thẳng địa chính trị và dữ liệu kinh tế Mỹ/Trung tiếp tục chi phối xu hướng ngắn hạn."),
-            ("Tác động đến crypto", "Biến động hàng hóa — đặc biệt vàng và DXY — thường có tương quan nghịch/thuận với Bitcoin. Khi vàng tăng mạnh hoặc DXY suy yếu, dòng tiền có thể chảy sang crypto như một kênh trú ẩn thay thế. Traders nên theo dõi sát mối tương quan này."),
-        ])
-    else:
-        sections.append(("Nhận định", "Thông tin trên cho thấy thị trường crypto vẫn đang có nhiều biến động. Nhà đầu tư cần cân nhắc kỹ, cập nhật liên tục từ các nguồn uy tín và quản lý rủi ro trước khi đưa ra quyết định giao dịch."))
+Thông tin trên cho thấy thị trường crypto đang có nhiều biến động. Nhà đầu tư cần cân nhắc kỹ trước khi đưa ra quyết định giao dịch.
 
-    body = build_html_content(sections) + "\n\n" + BINGX_CTA
-
+{BINGX_CTA}"""
+    
     return {
         "title": title,
-        "summary": summary or title,
+        "summary": summary if 'summary' in dir() else title,
         "content": body,
     }
 
@@ -434,7 +317,7 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
         cfg = json.load(open(CONFIG_FILE))
         api_key = cfg['models']['providers']['google']['apiKey']
         
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key={api_key}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/nano-banana-pro-preview:generateContent?key={api_key}"
         
         # Tạo prompt dựa trên title
         prompt = f"Generate a news thumbnail image: {title}. Style: dark futuristic crypto digital art, neon blue and purple accents, professional financial news illustration, 16:9 ratio"
@@ -556,71 +439,24 @@ def main():
     print(f"\nTotal crawled: {len(all_articles)}")
     
     # Filter: dedup + quality + importance
-    strict_articles = []
-    relaxed_articles = []
+    new_articles = []
     skipped_unimportant = 0
-    seen_titles = []
     for art in all_articles:
-        if is_duplicate(art["title"], existing_titles + seen_titles):
+        if is_duplicate(art["title"], existing_titles + [a["title"] for a in new_articles]):
             continue
-        seen_titles.append(art["title"])
-
-        title_lower = art["title"].lower()
-        if any(re.search(kw, title_lower) for kw in SPAM_KEYWORDS):
-            continue
-
-        if is_important(art["title"]):
-            strict_articles.append(art)
-        else:
-            relaxed_articles.append(art)
+        if not is_important(art["title"]):
             skipped_unimportant += 1
-
-    print(f"After strict filter: {len(strict_articles)} important (skipped {skipped_unimportant} unimportant)")
-
-    categorized = {"tin-tuc": [], "altcoin": [], "phan-tich": [], "hang-hoa": []}
-    for art in strict_articles:
-        cat = classify_article(art["title"], art.get("content_preview", ""))
-        categorized[cat].append(art)
-
-    missing_categories = [cat for cat in categorized if not categorized[cat]]
-    if missing_categories:
-        print(f"Missing categories after strict filter: {', '.join(missing_categories)} -> relaxing selection")
-        for art in relaxed_articles:
-            cat = classify_article(art["title"], art.get("content_preview", ""))
-            if cat in missing_categories:
-                categorized[cat].append(art)
-                missing_categories = [c for c in categorized if not categorized[c]]
-                if not missing_categories:
-                    break
-
-    selected = []
-    selected_titles = set()
-    for cat in ["tin-tuc", "altcoin", "phan-tich", "hang-hoa"]:
-        if categorized[cat]:
-            art = categorized[cat].pop(0)
-            selected.append(art)
-            selected_titles.add(art["title"])
-
-    remaining = []
-    for cat_list in categorized.values():
-        remaining.extend(cat_list)
-    for art in strict_articles + relaxed_articles + remaining:
-        if len(selected) >= MAX_ARTICLES:
-            break
-        if art["title"] in selected_titles:
             continue
-        selected.append(art)
-        selected_titles.add(art["title"])
-
-    new_articles = selected[:MAX_ARTICLES]
-
+        new_articles.append(art)
+        if len(new_articles) >= MAX_ARTICLES:
+            break
+    
+    print(f"After filter: {len(new_articles)} important (skipped {skipped_unimportant} unimportant)")
+    
     if not new_articles:
         print("Không có bài mới. Done.")
         DEDUP_FILE.write_text(today)
         return
-
-    selected_categories = [classify_article(a["title"], a.get("content_preview", "")) for a in new_articles]
-    print(f"Selected {len(new_articles)} articles: {selected_categories}")
     
     # Process each article
     published = 0
@@ -652,7 +488,7 @@ def main():
             "title": rewritten["title"],
             "summary": rewritten["summary"][:200],
             "content": rewritten["content"],
-            "category": classify_article(rewritten["title"], rewritten.get("content", "")),
+            "category": "tin-tuc",
             "image": image_path,
             "date": today,
             "url": art["url"],
