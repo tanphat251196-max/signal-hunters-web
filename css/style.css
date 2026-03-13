@@ -1398,3 +1398,206 @@ body.light-mode .side-article p,
 body.light-mode .side-article .category-tag {
   color: var(--text);
 }
+
+
+/* ========== BingX Rewards Section ========== */
+.bingx-rewards {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  min-height: 420px;
+}
+
+.bingx-rewards-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bingx-rewards-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+
+.bingx-rewards-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15,15,19,0.85) 0%, rgba(15,15,19,0.5) 50%, rgba(231,76,60,0.15) 100%);
+}
+
+.bingx-rewards-content {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.bingx-rewards-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.bingx-icon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.bingx-rewards-subtitle {
+  color: var(--body);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.bingx-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.bingx-card {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.bingx-card:nth-child(2) { animation-delay: 0.5s; }
+.bingx-card:nth-child(3) { animation-delay: 0.6s; }
+
+.bingx-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(231,76,60,0.2);
+  border-color: var(--accent);
+}
+
+.bingx-card-main {
+  border-color: var(--accent);
+  background: rgba(231,76,60,0.1);
+}
+
+.bingx-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.bingx-card h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.bingx-card p {
+  color: var(--body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.bingx-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #ff6b4a 100%);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.8s ease-out 0.7s both;
+  box-shadow: 0 6px 20px rgba(231,76,60,0.35);
+}
+
+.bingx-cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(231,76,60,0.5);
+}
+
+.bingx-cta-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.bingx-cta-btn:hover .bingx-cta-arrow {
+  transform: translateX(5px);
+}
+
+.bingx-code {
+  color: var(--meta);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* Floating particles effect */
+.bingx-rewards::before,
+.bingx-rewards::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(231,76,60,0.15) 0%, transparent 70%);
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bingx-rewards::before {
+  top: -50px;
+  right: -50px;
+  animation-delay: 0s;
+}
+
+.bingx-rewards::after {
+  bottom: -50px;
+  left: -50px;
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15px, -15px) scale(1.1); }
+  66% { transform: translate(-10px, 10px) scale(0.95); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bingx-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .bingx-rewards-content {
+    padding: 2rem 1.2rem;
+  }
+  .bingx-rewards-title {
+    font-size: 1.5rem;
+  }
+  .bingx-cta-btn {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
+}

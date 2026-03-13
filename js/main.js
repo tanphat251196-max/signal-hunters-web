@@ -108,12 +108,7 @@ function toggleTheme() {
   updateThemeIcon();
   updateLogos();
 
-  // Reload TradingView widgets with correct theme.
-  // TradingView widgets don't support dynamic theme change,
-  // so this remains a known limitation until a full re-render is triggered.
-  if (document.getElementById('tradingview_btc') || document.getElementById('tradingview_eth')) {
-    initTradingViewWidgets(true);
-  }
+  // Theme-dependent UI is handled via CSS classes; no TradingView re-init needed.
 }
 
 (function initTheme() {
@@ -670,80 +665,6 @@ async function loadTrendingCoins() {
   }
 }
 
-function getTradingViewTheme() {
-  return document.body.classList.contains('light-mode') ? 'light' : 'dark';
-}
-
-function loadTradingViewScript() {
-  if (window.TradingView) return Promise.resolve();
-  if (window.__tradingViewScriptPromise) return window.__tradingViewScriptPromise;
-
-  window.__tradingViewScriptPromise = new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/tv.js';
-    script.async = true;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-
-  return window.__tradingViewScriptPromise;
-}
-
-async function initTradingViewWidgets(forceReload = false) {
-  const btcContainer = document.getElementById('tradingview_btc');
-  const ethContainer = document.getElementById('tradingview_eth');
-  if (!btcContainer && !ethContainer) return;
-
-  try {
-    await loadTradingViewScript();
-    const theme = getTradingViewTheme();
-
-    if (btcContainer && (forceReload || btcContainer.dataset.tvReady !== 'true')) {
-      btcContainer.innerHTML = '';
-      new TradingView.widget({
-        autosize: true,
-        symbol: 'BINANCE:BTCUSDT',
-        interval: '60',
-        timezone: 'Asia/Ho_Chi_Minh',
-        theme,
-        style: '1',
-        locale: 'vi_VN',
-        toolbar_bg: '#0f0f13',
-        enable_publishing: false,
-        hide_side_toolbar: false,
-        allow_symbol_change: true,
-        container_id: 'tradingview_btc',
-        hide_volume: false,
-        studies: ['RSI@tv-basicstudies']
-      });
-      btcContainer.dataset.tvReady = 'true';
-    }
-
-    if (ethContainer && (forceReload || ethContainer.dataset.tvReady !== 'true')) {
-      ethContainer.innerHTML = '';
-      new TradingView.widget({
-        autosize: true,
-        symbol: 'BINANCE:ETHUSDT',
-        interval: '60',
-        timezone: 'Asia/Ho_Chi_Minh',
-        theme,
-        style: '1',
-        locale: 'vi_VN',
-        toolbar_bg: '#0f0f13',
-        enable_publishing: false,
-        hide_side_toolbar: false,
-        allow_symbol_change: true,
-        container_id: 'tradingview_eth',
-        hide_volume: false,
-        studies: ['RSI@tv-basicstudies']
-      });
-      ethContainer.dataset.tvReady = 'true';
-    }
-  } catch (error) {
-    console.warn('TradingView widget error', error);
-  }
-}
 
 async function fetchRankingCoins() {
   // Try direct first
@@ -852,7 +773,6 @@ loadCryptoPrices();
 loadFearGreed();
 loadTrendingCoins();
 loadRanking();
-initTradingViewWidgets();
 window.setInterval(loadCryptoPrices, 60000);
 window.setInterval(loadFearGreed, 3600000);
 window.setInterval(loadTrendingCoins, 3600000);
