@@ -777,3 +777,18 @@ window.setInterval(loadCryptoPrices, 60000);
 window.setInterval(loadFearGreed, 3600000);
 window.setInterval(loadTrendingCoins, 3600000);
 window.setInterval(loadRanking, 300000);
+
+// BingX Particles
+(function() {
+  const container = document.getElementById('bingx-particles');
+  if (!container) return;
+  for (let i = 0; i < 15; i++) {
+    const p = document.createElement('div');
+    p.className = 'bingx-particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (6 + Math.random() * 6) + 's';
+    p.style.animationDelay = Math.random() * 8 + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+    container.appendChild(p);
+  }
+})();
