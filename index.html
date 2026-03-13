@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1773376692">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
   <header class="site-header" id="top">
@@ -72,7 +72,7 @@
           <span class="ticker-item"><strong>SOL</strong><em>$178</em><b class="up">+3.92%</b></span>
           <span class="ticker-item"><strong>XRP</strong><em>$1.28</em><b class="down">-1.14%</b></span>
         </div>
-        <div class="ticker-group" aria-hidden="true">
+        <div class="ticker-group" aria-hidden="true" data-ticker-clone>
           <span class="ticker-item"><strong>BTC</strong><em>$80,432</em><b class="up">+2.41%</b></span>
           <span class="ticker-item"><strong>ETH</strong><em>$4,285</em><b class="up">+1.76%</b></span>
           <span class="ticker-item"><strong>BNB</strong><em>$612</em><b class="down">-0.48%</b></span>
@@ -201,61 +201,9 @@
             </div>
           </section>
 
-          <section class="content-block economic-calendar-section" id="economic-calendar">
-            <div class="section-heading">
-              <p class="eyebrow">Lịch kinh tế</p>
-              <h2>Sự kiện quan trọng ⭐⭐⭐</h2>
-            </div>
-            
-            <div class="econ-tabs">
-              <button class="econ-tab active" onclick="showEconWeek('this')">📅 Tuần này</button>
-              <button class="econ-tab" onclick="showEconWeek('next')">📆 Tuần tới</button>
-            </div>
-            
-            <div class="econ-updated" id="econ-updated"></div>
-            
-            <div class="econ-table-wrap">
-              <table class="econ-table" id="econ-table-this">
-                <thead>
-                  <tr>
-                    <th>Thời gian</th>
-                    <th>Quốc gia</th>
-                    <th>Sự kiện</th>
-                    <th>⭐</th>
-                    <th>Thực tế</th>
-                    <th>Dự báo</th>
-                    <th>Trước đó</th>
-                  </tr>
-                </thead>
-                <tbody id="econ-body-this">
-                  <tr><td colspan="7" class="econ-loading">Đang tải dữ liệu...</td></tr>
-                </tbody>
-              </table>
-              
-              <table class="econ-table" id="econ-table-next" style="display:none">
-                <thead>
-                  <tr>
-                    <th>Thời gian</th>
-                    <th>Quốc gia</th>
-                    <th>Sự kiện</th>
-                    <th>⭐</th>
-                    <th>Thực tế</th>
-                    <th>Dự báo</th>
-                    <th>Trước đó</th>
-                  </tr>
-                </thead>
-                <tbody id="econ-body-next">
-                  <tr><td colspan="7" class="econ-loading">Đang tải dữ liệu...</td></tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <p class="econ-source">Nguồn: Investing.com | Chỉ hiển thị sự kiện ≥3 sao | Cập nhật mỗi thứ 2</p>
-          </section>
-
           <div class="ref-separator">
             <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
-              📊 Trade theo tin — BingX hoàn phí <strong>45%</strong>
+              🔥 Tiết kiệm <strong>45%</strong> phí trade — BingX
             </a>
           </div>
 
@@ -276,13 +224,14 @@
               </article>
             </div>
           </section>
-
           <div class="ref-separator">
             <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
               ✨ Hoàn tới <strong>225 USDT</strong> — BingX
             </a>
           </div>
         </div>
+
+        <aside class="sidebar-column">
           <section class="sidebar-widget article-panel">
             <div class="widget-heading">
               <h3>Giá Crypto</h3>
@@ -412,6 +361,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=1773376692"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
