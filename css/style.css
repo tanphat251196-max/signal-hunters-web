@@ -358,15 +358,15 @@ body.light-mode .ref-separator {
   display: inline-flex;
   align-items: center;
   min-width: max-content;
-  animation: ticker-scroll 36s linear infinite;
+  animation: ticker-scroll 30s linear infinite;
   will-change: transform;
 }
 
 .ticker-group {
   display: inline-flex;
   flex-shrink: 0;
-  gap: 34px;
-  padding: 12px 24px;
+  gap: 40px;
+  padding: 10px 40px;
 }
 
 .ticker-item {
