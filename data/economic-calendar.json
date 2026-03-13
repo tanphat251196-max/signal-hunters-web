@@ -1,10 +1,10 @@
 {
-  "updated": "2026-03-13 11:03",
+  "updated": "2026-03-13 11:10",
   "this_week": {
     "label": "Tuần này (09/03 - 15/03)",
     "events": [
       {
-        "time": "Thứ 3 11/03",
+        "time": "Thứ 3 11/03 — 20:30 VN",
         "country": "🇺🇸 Mỹ",
         "event": "CPI tháng 2 (YoY)",
         "stars": 3,
@@ -13,7 +13,7 @@
         "previous": "3.0%"
       },
       {
-        "time": "Thứ 3 11/03",
+        "time": "Thứ 3 11/03 — 20:30 VN",
         "country": "🇺🇸 Mỹ",
         "event": "CPI lõi tháng 2 (MoM)",
         "stars": 3,
@@ -22,7 +22,7 @@
         "previous": "0.4%"
       },
       {
-        "time": "Thứ 4 12/03",
+        "time": "Thứ 4 12/03 — 20:30 VN",
         "country": "🇺🇸 Mỹ",
         "event": "PPI tháng 2 (MoM)",
         "stars": 3,
@@ -31,7 +31,7 @@
         "previous": "0.4%"
       },
       {
-        "time": "Thứ 5 13/03",
+        "time": "Thứ 5 13/03 — 20:30 VN",
         "country": "🇺🇸 Mỹ",
         "event": "Số đơn xin trợ cấp thất nghiệp",
         "stars": 3,
@@ -40,7 +40,7 @@
         "previous": "221K"
       },
       {
-        "time": "Thứ 6 14/03",
+        "time": "Thứ 6 14/03 — 22:00 VN",
         "country": "🇺🇸 Mỹ",
         "event": "Chỉ số tâm lý người tiêu dùng Michigan (sơ bộ)",
         "stars": 3,
@@ -49,7 +49,7 @@
         "previous": "64.7"
       },
       {
-        "time": "Thứ 6 14/03",
+        "time": "Thứ 6 14/03 — 22:00 VN",
         "country": "🇺🇸 Mỹ",
         "event": "Kỳ vọng lạm phát Michigan 1 năm",
         "stars": 3,
@@ -63,7 +63,7 @@
     "label": "Tuần tới (16/03 - 22/03)",
     "events": [
       {
-        "time": "Thứ 3 18/03",
+        "time": "Thứ 3 18/03 — 20:30 VN",
         "country": "🇺🇸 Mỹ",
         "event": "Doanh số bán lẻ tháng 2",
         "stars": 3,
@@ -72,7 +72,7 @@
         "previous": ""
       },
       {
-        "time": "Thứ 4 19/03",
+        "time": "Thứ 4 19/03 — 01:00 VN (đêm 19→20)",
         "country": "🇺🇸 Mỹ",
         "event": "Quyết định lãi suất FOMC",
         "stars": 3,
@@ -81,7 +81,7 @@
         "previous": "4.50%"
       },
       {
-        "time": "Thứ 4 19/03",
+        "time": "Thứ 4 19/03 — 01:30 VN (đêm 19→20)",
         "country": "🇺🇸 Mỹ",
         "event": "Họp báo Chủ tịch Fed Powell",
         "stars": 3,
@@ -90,7 +90,7 @@
         "previous": ""
       },
       {
-        "time": "Thứ 4 19/03",
+        "time": "Thứ 4 19/03 — 01:00 VN (đêm 19→20)",
         "country": "🇺🇸 Mỹ",
         "event": "Dot Plot & SEP (dự báo kinh tế Fed)",
         "stars": 3,
@@ -99,7 +99,7 @@
         "previous": ""
       },
       {
-        "time": "Thứ 5 20/03",
+        "time": "Thứ 5 20/03 — 19:00 VN",
         "country": "🇬🇧 Anh",
         "event": "Quyết định lãi suất BOE",
         "stars": 3,
@@ -108,7 +108,7 @@
         "previous": "4.50%"
       },
       {
-        "time": "Thứ 5 20/03",
+        "time": "Thứ 5 20/03 — 20:30 VN",
         "country": "🇺🇸 Mỹ",
         "event": "Số đơn xin trợ cấp thất nghiệp",
         "stars": 3,
@@ -117,7 +117,7 @@
         "previous": ""
       },
       {
-        "time": "Thứ 6 21/03",
+        "time": "Thứ 6 21/03 — 21:45 VN",
         "country": "🇺🇸 Mỹ",
         "event": "PMI sản xuất & dịch vụ (sơ bộ)",
         "stars": 3,
