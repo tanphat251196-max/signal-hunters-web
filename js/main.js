@@ -792,3 +792,58 @@ window.setInterval(loadRanking, 300000);
     container.appendChild(p);
   }
 })();
+
+// ========== Economic Calendar ==========
+(function() {
+  fetch('data/economic-calendar.json?' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      const updatedEl = document.getElementById('econ-updated');
+      if (updatedEl && data.updated) {
+        updatedEl.textContent = 'Cập nhật: ' + data.updated;
+      }
+      renderEconTable('econ-body-this', data.this_week);
+      renderEconTable('econ-body-next', data.next_week);
+    })
+    .catch(err => {
+      console.log('Econ calendar not available:', err);
+      const body = document.getElementById('econ-body-this');
+      if (body) body.innerHTML = '<tr><td colspan="7" class="econ-empty">Chưa có dữ liệu. Sẽ cập nhật vào thứ 2.</td></tr>';
+    });
+})();
+
+function renderEconTable(bodyId, weekData) {
+  const body = document.getElementById(bodyId);
+  if (!body || !weekData) return;
+  const events = weekData.events || [];
+  if (events.length === 0) {
+    body.innerHTML = '<tr><td colspan="7" class="econ-empty">Chưa có sự kiện. Sẽ cập nhật vào thứ 2.</td></tr>';
+    return;
+  }
+  body.innerHTML = events.map(ev => {
+    const stars = '⭐'.repeat(ev.stars || 3);
+    const actualClass = ev.actual ?
+      (parseFloat(ev.actual) > parseFloat(ev.forecast || ev.previous || '0') ? 'econ-actual-positive' :
+       parseFloat(ev.actual) < parseFloat(ev.forecast || ev.previous || '0') ? 'econ-actual-negative' : '') : '';
+    return '<tr>' +
+      '<td>' + (ev.time || '-') + '</td>' +
+      '<td><span class="econ-country">' + (ev.country || '-') + '</span></td>' +
+      '<td><span class="econ-event-name">' + (ev.event || '-') + '</span></td>' +
+      '<td><span class="econ-stars">' + stars + '</span></td>' +
+      '<td class="' + actualClass + '">' + (ev.actual || '-') + '</td>' +
+      '<td>' + (ev.forecast || '-') + '</td>' +
+      '<td>' + (ev.previous || '-') + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+function showEconWeek(week) {
+  const thisTable = document.getElementById('econ-table-this');
+  const nextTable = document.getElementById('econ-table-next');
+  if (!thisTable || !nextTable) return;
+  thisTable.style.display = week === 'this' ? '' : 'none';
+  nextTable.style.display = week === 'next' ? '' : 'none';
+  document.querySelectorAll('.econ-tab').forEach((tab, i) => {
+    tab.classList.toggle('active', (week === 'this' && i === 0) || (week === 'next' && i === 1));
+  });
+}

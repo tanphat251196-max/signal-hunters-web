@@ -1758,3 +1758,140 @@ body.light-mode .side-article .category-tag {
     gap: 1rem;
   }
 }
+
+/* ========== Economic Calendar Section ========== */
+.economic-calendar-section {
+  margin-bottom: 2rem;
+}
+
+.econ-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.econ-tab {
+  padding: 0.6rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--body);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.econ-tab.active {
+  background: linear-gradient(135deg, var(--accent), #ff6b4a);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+}
+
+.econ-tab:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.econ-updated {
+  font-size: 0.8rem;
+  color: var(--meta);
+  margin-bottom: 1rem;
+}
+
+.econ-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.econ-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.econ-table thead {
+  background: rgba(255,255,255,0.04);
+}
+
+.econ-table th {
+  padding: 0.8rem 0.6rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.econ-table td {
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--body);
+  vertical-align: middle;
+}
+
+.econ-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.econ-table tbody tr:hover {
+  background: rgba(231,76,60,0.05);
+}
+
+.econ-table tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.02);
+}
+
+.econ-table tbody tr:nth-child(even):hover {
+  background: rgba(231,76,60,0.05);
+}
+
+.econ-stars {
+  color: #f1c40f;
+  font-size: 0.75rem;
+}
+
+.econ-event-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.econ-country {
+  font-weight: 500;
+}
+
+.econ-actual-positive { color: var(--green); font-weight: 700; }
+.econ-actual-negative { color: var(--red); font-weight: 700; }
+
+.econ-loading, .econ-empty {
+  text-align: center;
+  padding: 2rem !important;
+  color: var(--meta);
+}
+
+.econ-empty { font-style: italic; }
+
+.econ-source {
+  font-size: 0.75rem;
+  color: var(--meta);
+  margin-top: 0.8rem;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .econ-table th:nth-child(5),
+  .econ-table td:nth-child(5),
+  .econ-table th:nth-child(6),
+  .econ-table td:nth-child(6),
+  .econ-table th:nth-child(7),
+  .econ-table td:nth-child(7) {
+    display: none;
+  }
+  .econ-table { font-size: 0.8rem; }
+  .econ-tab { padding: 0.5rem 1rem; font-size: 0.8rem; }
+}

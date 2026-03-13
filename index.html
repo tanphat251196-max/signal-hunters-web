@@ -207,6 +207,64 @@
             </a>
           </div>
 
+          <section class="content-block economic-calendar-section" id="economic-calendar">
+            <div class="section-heading">
+              <p class="eyebrow">Lịch kinh tế</p>
+              <h2>Sự kiện quan trọng ⭐⭐⭐</h2>
+            </div>
+            
+            <div class="econ-tabs">
+              <button class="econ-tab active" onclick="showEconWeek('this')">📅 Tuần này</button>
+              <button class="econ-tab" onclick="showEconWeek('next')">📆 Tuần tới</button>
+            </div>
+            
+            <div class="econ-updated" id="econ-updated"></div>
+            
+            <div class="econ-table-wrap">
+              <table class="econ-table" id="econ-table-this">
+                <thead>
+                  <tr>
+                    <th>Thời gian</th>
+                    <th>Quốc gia</th>
+                    <th>Sự kiện</th>
+                    <th>⭐</th>
+                    <th>Thực tế</th>
+                    <th>Dự báo</th>
+                    <th>Trước đó</th>
+                  </tr>
+                </thead>
+                <tbody id="econ-body-this">
+                  <tr><td colspan="7" class="econ-loading">Đang tải dữ liệu...</td></tr>
+                </tbody>
+              </table>
+              
+              <table class="econ-table" id="econ-table-next" style="display:none">
+                <thead>
+                  <tr>
+                    <th>Thời gian</th>
+                    <th>Quốc gia</th>
+                    <th>Sự kiện</th>
+                    <th>⭐</th>
+                    <th>Thực tế</th>
+                    <th>Dự báo</th>
+                    <th>Trước đó</th>
+                  </tr>
+                </thead>
+                <tbody id="econ-body-next">
+                  <tr><td colspan="7" class="econ-loading">Đang tải dữ liệu...</td></tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <p class="econ-source">Chỉ hiển thị sự kiện ≥3 sao | Cập nhật mỗi thứ 2</p>
+          </section>
+
+          <div class="ref-separator">
+            <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
+              📊 Trade theo tin — BingX hoàn phí <strong>45%</strong>
+            </a>
+          </div>
+
           <section class="content-block" id="market-analysis">
             <div class="section-heading">
               <p class="eyebrow">Phân tích thị trường</p>
