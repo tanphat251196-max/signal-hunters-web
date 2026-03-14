@@ -195,7 +195,19 @@ function estimateReadTime(post) {
   return `${minutes} phút đọc`;
 }
 
+function normalizeCategory(category) {
+  const aliases = {
+    'phan-tich': 'analysis',
+    'tin-tuc': 'news',
+    'hang-hoa': 'commodity',
+    altcoin: 'altcoin',
+    onchain: 'onchain'
+  };
+  return aliases[category] || category;
+}
+
 function categoryLabel(category) {
+  const normalized = normalizeCategory(category);
   const labels = {
     analysis: 'Phân tích',
     news: 'Tin tức',
@@ -203,11 +215,19 @@ function categoryLabel(category) {
     altcoin: 'Altcoin',
     onchain: 'On-chain'
   };
-  return labels[category] || category;
+  return labels[normalized] || category;
 }
 
 function categoryClass(category) {
-  return category === 'analysis' ? 'category-tag' : 'category-tag muted-accent';
+  return normalizeCategory(category) === 'analysis' ? 'category-tag' : 'category-tag muted-accent';
+}
+
+function postSummary(post) {
+  return post.summary || post.excerpt || '';
+}
+
+function postImage(post) {
+  return post.image || post.thumbnail || 'images/og-banner.jpg';
 }
 
 function articleUrl(post) {
@@ -220,13 +240,13 @@ function createMetaHTML(post) {
 
 function createHeroArticle(post) {
   return `
-    <img src="${post.image}" alt="${post.title}">
+    <img src="${postImage(post)}" alt="${post.title}">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <p class="eyebrow">Bài nổi bật</p>
       <h1>${post.title}</h1>
-      <p class="hero-summary">${post.summary}</p>
+      <p class="hero-summary">${postSummary(post)}</p>
       ${createMetaHTML(post)}
     </div>
   `;
@@ -234,7 +254,7 @@ function createHeroArticle(post) {
 
 function createCompactArticle(post) {
   return `
-    <img src="${post.image}" alt="${post.title}">
+    <img src="${postImage(post)}" alt="${post.title}">
     <div>
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h2>${post.title}</h2>
@@ -245,11 +265,11 @@ function createCompactArticle(post) {
 
 function createNewsCard(post) {
   return `
-    <img src="${post.image}" alt="${post.title}">
+    <img src="${postImage(post)}" alt="${post.title}">
     <div class="card-content">
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h3>${post.title}</h3>
-      <p>${post.summary}</p>
+      <p>${postSummary(post)}</p>
       ${createMetaHTML(post)}
     </div>
   `;
@@ -257,11 +277,11 @@ function createNewsCard(post) {
 
 function createAnalysisItem(post) {
   return `
-    <img src="${post.image}" alt="${post.title}">
+    <img src="${postImage(post)}" alt="${post.title}">
     <div>
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h3>${post.title}</h3>
-      <p>${post.summary}</p>
+      <p>${postSummary(post)}</p>
       ${createMetaHTML(post)}
     </div>
   `;
@@ -312,13 +332,13 @@ function getFilteredPosts() {
     const matchesFilter = state.currentFilter === 'all'
       ? true
       : state.currentFilter === 'news'
-        ? ['news', 'altcoin', 'onchain'].includes(post.category)
-        : post.category === state.currentFilter;
+        ? ['news', 'altcoin', 'onchain'].includes(normalizeCategory(post.category))
+        : normalizeCategory(post.category) === state.currentFilter;
 
     if (!matchesFilter) return false;
     if (!searchTerm) return true;
 
-    const haystack = `${post.title} ${post.summary}`.toLowerCase();
+    const haystack = `${post.title} ${postSummary(post)}`.toLowerCase();
     return haystack.includes(searchTerm);
   });
 }
@@ -467,7 +487,7 @@ function renderHomePage(posts) {
   });
 
   analysisList.innerHTML = '';
-  posts.filter((post) => post.category === 'analysis').forEach((post) => {
+  posts.filter((post) => normalizeCategory(post.category) === 'analysis').forEach((post) => {
     const article = document.createElement('article');
     article.className = 'analysis-item article-panel';
     article.dataset.category = post.category;
@@ -539,14 +559,14 @@ function renderArticlePage(posts) {
   }
 
   document.title = `${post.title} | Signal Hunters`;
-  updateMetaTag('meta[name="description"]', 'content', post.summary);
+  updateMetaTag('meta[name="description"]', 'content', postSummary(post));
   updateMetaTag('meta[property="og:title"]', 'content', `${post.title} | Signal Hunters`);
-  updateMetaTag('meta[property="og:description"]', 'content', post.summary);
-  updateMetaTag('meta[property="og:image"]', 'content', post.image);
+  updateMetaTag('meta[property="og:description"]', 'content', postSummary(post));
+  updateMetaTag('meta[property="og:image"]', 'content', postImage(post));
   updateMetaTag('meta[property="og:url"]', 'content', `${window.location.origin}/${post.slug || post.id}.html`);
 
   articleDetail.innerHTML = `
-    <img class="article-cover" src="${post.image}" alt="${post.title}">
+    <img class="article-cover" src="${postImage(post)}" alt="${post.title}">
     <div class="article-detail-body">
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h1>${post.title}</h1>
