@@ -311,23 +311,88 @@ Thông tin trên cho thấy thị trường crypto đang có nhiều biến đ�
 
 
 def generate_ai_thumbnail(title: str, slug: str) -> str:
-    """Generate AI thumbnail using Gemini Nano Banana."""
+    """Generate AI thumbnail using Gemini 2.0 Flash Image Gen + Yume character."""
     try:
         import base64
         cfg = json.load(open(CONFIG_FILE))
         api_key = cfg['models']['providers']['google']['apiKey']
         
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/nano-banana-pro-preview:generateContent?key={api_key}"
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key={api_key}"
         
-        # Tạo prompt dựa trên title
-        prompt = f"Generate a news thumbnail image: {title}. Style: dark futuristic crypto digital art, neon blue and purple accents, professional financial news illustration, 16:9 ratio"
+        # Reference image cho character consistency
+        ref_path = Path("/home/shinyyume/.openclaw/workspace/assets/reference-yume-news.jpg")
+        ref_b64 = ""
+        if ref_path.exists():
+            ref_b64 = base64.b64encode(ref_path.read_bytes()).decode()
+        
+        # Character block chuẩn từ image-prompts.md
+        char_block = (
+            "masterpiece, best quality, Shiny Yume by Gin, beautiful petite cyber anime girl "
+            "21 years old adult, short black bob hair with straight blunt bangs, huge expressive "
+            "sparkling anime eyes with white highlights, two glowing white futuristic halo-ear "
+            "rings floating on head, black high choker with silver oval ring, black strapless "
+            "bustier top with intricate white geometric harness straps crossing chest, vibrant "
+            "neon cyberpunk lighting in cyan magenta electric purple pink accents glowing on "
+            "harness and eyes, black and white high contrast base with strong neon glow, "
+            "highly detailed anime illustration, dynamic rim lighting, no text, "
+            "high resolution, sharp focus"
+        )
+        
+        # Determine mood/pose from title keywords
+        title_lower = title.lower()
+        bearish_kw = ["crash", "dump", "giảm", "sụt", "lo ngại", "rủi ro", "cảnh báo", 
+                      "thanh lý", "liquidat", "phá sản", "bankrupt", "hack", "tấn công",
+                      "cấm", "ban", "kiện", "lawsuit", "bearish", "sell-off", "thua lỗ"]
+        bullish_kw = ["tăng", "pump", "rally", "ath", "kỷ lục", "đầu tư", "mua vào",
+                      "phê duyệt", "etf", "institutional", "bullish", "breakout", "lạc quan",
+                      "thông qua", "chấp nhận", "hỗ trợ"]
+        
+        is_bearish = any(kw in title_lower for kw in bearish_kw)
+        is_bullish = any(kw in title_lower for kw in bullish_kw)
+        
+        if is_bearish:
+            mood = "focused calm slightly concerned expression, hand on chin thinking pose"
+            scene_color = "crimson red + electric purple + cyan highlights, warning holographic indicators"
+        elif is_bullish:
+            mood = "excited confident expression with a bright smile, fist pump victory pose"
+            scene_color = "neon cyan + electric green + soft magenta, upward glowing charts"
+        else:
+            mood = "cute professional thoughtful expression, arms crossed confident pose"
+            scene_color = "balanced cyan + purple + magenta, mixed market signals"
+        
+        # Context-aware prompt based on title
+        prompt = (
+            f"This is the reference image of my character Shiny Yume. Keep her character design "
+            f"EXACTLY the same — same face style, same huge sparkling anime eyes, same short black "
+            f"bob with blunt bangs, same two glowing halo-ear rings, same black choker with silver "
+            f"oval ring, same black bustier with white geometric harness.\n\n"
+            f"Generate an image: wide 16:9 {char_block}, {mood}. "
+            f"She is the main character, prominently featured center-right. "
+            f"Scene context based on this news headline: \"{title}\". "
+            f"Background: futuristic cyberpunk environment with holographic displays showing "
+            f"relevant visual elements for this news topic. Color: {scene_color}. "
+            f"A glowing holographic sign displaying 'Signal Hunters' naturally in the scene. "
+            f"Leave negative space on left/top for headline overlay. "
+            f"No watermark, no extra characters."
+        )
+        
+        # Build payload with reference image
+        parts = []
+        if ref_b64:
+            parts.append({
+                "inlineData": {
+                    "mimeType": "image/jpeg",
+                    "data": ref_b64
+                }
+            })
+        parts.append({"text": prompt})
         
         payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
+            "contents": [{"parts": parts}],
             "generationConfig": {"responseModalities": ["TEXT", "IMAGE"]}
         }
         
-        resp = requests.post(url, json=payload, timeout=60)
+        resp = requests.post(api_url, json=payload, timeout=90)
         if resp.status_code == 200:
             data = resp.json()
             for c in data.get("candidates", []):
@@ -338,10 +403,32 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
                         filepath = IMAGES_DIR / filename
                         with open(filepath, "wb") as f:
                             f.write(img_bytes)
-                        print(f"    🎨 AI thumbnail: {filename} ({len(img_bytes)//1024}KB)")
+                        
+                        # Overlay logo watermark
+                        try:
+                            from PIL import Image
+                            img = Image.open(filepath).convert("RGBA")
+                            # Resize to FHD if needed
+                            if img.width < 1920:
+                                ratio = 1920 / img.width
+                                img = img.resize((1920, int(img.height * ratio)), Image.LANCZOS)
+                            logo_path = Path("/home/shinyyume/.openclaw/workspace/assets/sh-logo-watermark.png")
+                            if logo_path.exists():
+                                logo = Image.open(logo_path).convert("RGBA")
+                                img.paste(logo, (20, 20), logo)
+                            img.save(filepath, "PNG")
+                            print(f"    🎨 AI thumbnail + logo: {filename} ({filepath.stat().st_size//1024}KB)")
+                        except ImportError:
+                            print(f"    🎨 AI thumbnail (no logo - PIL missing): {filename} ({len(img_bytes)//1024}KB)")
+                        
                         return f"images/{filename}"
         
         print(f"    ⚠️ AI thumbnail failed: HTTP {resp.status_code}")
+        if resp.status_code != 200:
+            try:
+                print(f"    Response: {resp.text[:200]}")
+            except:
+                pass
     except Exception as e:
         print(f"    ⚠️ AI thumbnail error: {e}")
     
