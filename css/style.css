@@ -418,6 +418,15 @@ body.light-mode .ref-separator {
   color: var(--meta);
 }
 
+.article-views {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--meta);
+  opacity: 0.85;
+}
+
 .hero-side-list {
   display: grid;
   gap: 18px;
