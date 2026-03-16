@@ -98,6 +98,7 @@ BINGX_CTA = """
 
 *Theo dõi [Đầu Tư Thông Minh 24H](https://daututhongminh24h.com) để cập nhật tin tức crypto mới nhất!*
 """
+# NOTE: BINGX_CTA (markdown) kept for backward compat but new code uses BINGX_CTA_HTML below
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -262,51 +263,233 @@ def fetch_article_content(url: str) -> dict:
         return {"text": "", "image": ""}
 
 
+BINGX_CTA_HTML = """<div class="cta-box" style="background:#1a1a2e;border:1px solid #16213e;border-radius:12px;padding:20px;margin-top:30px;">
+<h3>💰 Tiết kiệm phí giao dịch crypto?</h3>
+<p>Đăng ký BingX qua link dưới đây để được <strong>hoàn phí 45% VĨNH VIỄN</strong>:</p>
+<p><a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">👉 Đăng ký BingX ngay (Code: X7EZVIWI)</a></p>
+</div>"""
+
+
+def categorize_article(title: str, content: str) -> str:
+    """Categorize article based on title + content keywords."""
+    text = (title + " " + content[:1000]).lower()  # Only use first 1000 chars of content for speed
+
+    # Commodities / macro (check early — very distinct keywords)
+    commodity_kw = [
+        "vàng", "gold", "bạc", "silver", "dầu mỏ", "crude oil", "dầu wti", "brent",
+        "khí đốt", "natural gas", "forex", "ngoại hối", "fed ", "lãi suất",
+        "interest rate", "cpi", "lạm phát", "inflation", "gdp", "suy thoái", "recession",
+        "dxy", "dollar index", "hàng hóa", "commodity", "commodities",
+        "tỷ lệ thất nghiệp", "unemployment", "powell", "nonfarm"
+    ]
+    if any(kw in text for kw in commodity_kw):
+        return "hang-hoa"
+
+    # Price analysis / technical / prediction (price-focused articles)
+    analysis_kw = [
+        "phân tích kỹ thuật", "technical analysis", "dự đoán giá", "mục tiêu giá",
+        "price target", "hỗ trợ và kháng cự", "support resistance",
+        "rsi", "macd", "bollinger", "fibonacci", "on-chain", "onchain",
+        "bull run", "bear market", "bearish", "bullish",
+        "phân tích giá", "price prediction", "dự báo giá", "dự đoán",
+        "soloway", "cryptoquant", "glassnode", "santiment", "nhà phân tích"
+    ]
+    if any(kw in text for kw in analysis_kw):
+        return "phan-tich"
+
+    # Altcoin — specific altcoins (NOT BTC)
+    altcoin_kw = [
+        "ethereum", " eth ", "eth,", "eth.", "xrp", "ripple", "solana", " sol ",
+        "bnb", "cardano", "ada", "avalanche", "avax", "polkadot", "dot",
+        "chainlink", "link", "polygon", "matic", "dogecoin", "doge",
+        "shiba", "litecoin", "ltc", "tron", "trx", "cosmos", "atom",
+        "near", "aptos", "apt", "sui", "pepe", "altcoin", "altseason",
+        "ethereum classic", "etc", "uniswap", "uni", "aave", "defi"
+    ]
+    if any(kw in text for kw in altcoin_kw):
+        return "altcoin"
+
+    # Politics / regulation / legal
+    politics_kw = [
+        "quy định", "regulation", "luật pháp", "cấm giao dịch", "ban crypto",
+        "kiện tụng", "lawsuit", "sec ", "cftc", "tòa án", "court ruling",
+        "doj", "bộ tư pháp", "nghị quyết", "quốc hội", "congress",
+        "trump", "biden", "tổng thống", "president", "chính phủ ra lệnh",
+        "pháp lý", "giấy phép hoạt động", "license", "trừng phạt", "sanction",
+        "thuế crypto", "tariff", "chiến tranh thương mại", "war", "iran", "nga", "russia",
+        "trung quốc", "china ban", "chính trị"
+    ]
+    if any(kw in text for kw in politics_kw):
+        return "chinh-tri"
+
+    return "tin-tuc"
+
+
 def rewrite_article(title: str, content: str, source_name: str, source_url: str) -> dict:
-    """Rewrite article content for the website."""
-    # Clean and structure content
-    if not content or len(content) < 100:
-        # Short article - create summary style
-        summary = f"{title}."
-        body = f"""## {title}
+    """Use Gemini AI to rewrite article into a high-quality 1000-2500 word Vietnamese article."""
+    import time
 
-{summary}
+    # Load API key
+    try:
+        cfg = json.load(open(CONFIG_FILE))
+        api_key = cfg['models']['providers']['google']['apiKey']
+    except Exception as e:
+        print(f"    ⚠️ Cannot load Gemini API key: {e}")
+        api_key = None
 
-Đây là một trong những tin tức đáng chú ý trong ngày hôm nay trên thị trường crypto. Các nhà đầu tư cần theo dõi sát diễn biến tiếp theo để đưa ra quyết định giao dịch phù hợp.
+    # Trim content to avoid token overflow — keep up to 4000 chars
+    content_trimmed = content[:4000].strip() if content else ""
 
-### Tác động đến thị trường
+    # Try Gemini rewrite if API key available
+    if api_key and content_trimmed:
+        prompt = f"""Viết lại bài báo sau thành bài viết chuyên nghiệp bằng tiếng Việt, dài 1000-2500 từ.
 
-Thông tin này có thể ảnh hưởng đến tâm lý thị trường trong ngắn hạn. Traders nên:
-- Theo dõi phản ứng giá của BTC và các altcoin liên quan
-- Cập nhật thêm thông tin từ các nguồn uy tín
-- Quản lý rủi ro chặt chẽ trong giai đoạn biến động
+YÊU CẦU:
+- Viết lại HOÀN TOÀN bằng ngôn ngữ của mình, KHÔNG copy paste
+- Tiêu đề hấp dẫn, đầy đủ (KHÔNG cắt ngắn, KHÔNG dấu "...")
+- Mở bài thu hút, giới thiệu vấn đề
+- Thân bài chia thành 3-5 heading (<h2> hoặc <h3>), mỗi phần phân tích sâu
+- Đưa số liệu cụ thể, trích dẫn nguồn
+- Liên hệ tác động đến nhà đầu tư Việt Nam
+- Kết bài có nhận định riêng, không generic
+- Giọng văn: chuyên nghiệp nhưng dễ hiểu, phong cách nhà phân tích crypto
 
-{BINGX_CTA}"""
-    else:
-        # Has content - rewrite
-        # Take first 800 chars of content as body
-        content_trimmed = content[:2000]
-        
-        # Create summary from first paragraph
-        first_para = content.split("\n\n")[0] if "\n\n" in content else content[:200]
-        summary = first_para[:200].strip()
-        if not summary.endswith('.'):
-            summary = summary.rsplit(' ', 1)[0] + '...'
-        
-        body = f"""## {title}
-
+THÔNG TIN GỐC:
+Tiêu đề: {title}
+Nguồn: {source_name} - {source_url}
+Nội dung gốc:
 {content_trimmed}
 
-### Nhận định
+TRẢ VỀ JSON (chỉ JSON, không markdown):
+{{
+  "title": "tiêu đề mới đầy đủ",
+  "summary": "tóm tắt 2-3 câu",
+  "content": "nội dung HTML đầy đủ (dùng <h2>, <h3>, <p>, <strong>, <ul><li>)"
+}}"""
 
-Thông tin trên cho thấy thị trường crypto đang có nhiều biến động. Nhà đầu tư cần cân nhắc kỹ trước khi đưa ra quyết định giao dịch.
+        for model in ["gemini-2.5-flash", "gemini-2.0-flash-exp", "gemini-1.5-flash"]:
+            try:
+                api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+                payload = {
+                    "contents": [{"parts": [{"text": prompt}]}],
+                    "generationConfig": {
+                        "temperature": 0.7,
+                        "maxOutputTokens": 8192
+                    }
+                }
+                resp = requests.post(api_url, json=payload, timeout=90)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    raw_text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
 
-{BINGX_CTA}"""
-    
+                    # Strip markdown code fences if present
+                    raw_text = re.sub(r'^```(?:json)?\s*', '', raw_text, flags=re.MULTILINE)
+                    raw_text = re.sub(r'\s*```$', '', raw_text, flags=re.MULTILINE)
+                    raw_text = raw_text.strip()
+
+                    # Robust JSON extraction: Gemini HTML often has unescaped quotes
+                    # Strategy: try standard parse first, then regex fallback
+                    new_title = title
+                    new_summary = ""
+                    new_content = ""
+                    try:
+                        result = json.loads(raw_text)
+                        new_title = result.get("title", title).strip()
+                        new_summary = result.get("summary", "").strip()
+                        new_content = result.get("content", "").strip()
+                    except json.JSONDecodeError:
+                        # Fallback: extract fields with regex (handles unescaped quotes in HTML)
+                        title_m = re.search(r'"title"\s*:\s*"([^"]+)"', raw_text)
+                        summary_m = re.search(r'"summary"\s*:\s*"([^"]+)"', raw_text)
+                        # Content: everything between "content": " ... " (last closing quote before })
+                        content_m = re.search(r'"content"\s*:\s*"(.*?)"\s*\}', raw_text, re.DOTALL)
+                        if not content_m:
+                            # Try: content is rest of the string after "content": "
+                            content_m2 = re.search(r'"content"\s*:\s*"(.*)', raw_text, re.DOTALL)
+                            if content_m2:
+                                raw_content = content_m2.group(1)
+                                # Remove trailing JSON closing
+                                raw_content = re.sub(r'"\s*\}\s*$', '', raw_content).strip()
+                                new_content = raw_content.replace('\\"', '"').replace('\\n', '\n')
+                        else:
+                            new_content = content_m.group(1).replace('\\"', '"').replace('\\n', '\n')
+                        if title_m:
+                            new_title = title_m.group(1).strip()
+                        if summary_m:
+                            new_summary = summary_m.group(1).strip()
+                        # If content still empty or too short, try extracting all HTML tags from raw
+                        if len(new_content) < 500:
+                            html_m = re.search(r'(<(?:h2|h3|p|ul|li|strong|div)[^>]*>.*)', raw_text, re.DOTALL)
+                            if html_m:
+                                new_content = html_m.group(1)
+                                # Clean trailing JSON artifacts
+                                new_content = re.sub(r'"\s*\}\s*$', '', new_content).strip()
+
+                    # Validate title — no trailing "..."
+                    if new_title.endswith("...") or new_title.endswith("…"):
+                        new_title = new_title.rstrip(".…").strip()
+                    if len(new_title) > 80:
+                        # Truncate at last space before 80 chars (must be full sentence)
+                        new_title = new_title[:80].rsplit(' ', 1)[0].rstrip('.,;:')
+
+                    # Append BingX CTA
+                    new_content = new_content + "\n" + BINGX_CTA_HTML
+
+                    # Validate minimum quality
+                    stripped = re.sub(r'<[^>]+>', '', new_content)
+                    word_count = len(stripped.split())
+                    heading_count = len(re.findall(r'<h[23][^>]*>', new_content))
+                    has_cta = "bingx.com" in new_content
+
+                    print(f"    ✅ Gemini ({model}): {word_count} words, {heading_count} headings, CTA={has_cta}")
+
+                    if word_count >= 800 and heading_count >= 3 and has_cta:
+                        return {
+                            "title": new_title,
+                            "summary": new_summary[:300],
+                            "content": new_content,
+                        }
+                    else:
+                        print(f"    ⚠️ Quality check failed (words={word_count}, headings={heading_count}), retrying...")
+                        time.sleep(3)
+                        continue
+
+                elif resp.status_code == 429:
+                    print(f"    ⚠️ Rate limit on {model}, waiting 15s...")
+                    time.sleep(15)
+                else:
+                    print(f"    ⚠️ Gemini {model} HTTP {resp.status_code}: {resp.text[:200]}")
+            except json.JSONDecodeError as e:
+                print(f"    ⚠️ JSON parse error from {model}: {e}")
+            except Exception as e:
+                print(f"    ⚠️ Gemini error ({model}): {e}")
+            time.sleep(2)
+
+    # Fallback: structured rewrite without AI (better than old version)
+    print(f"    ⚠️ Gemini unavailable — using structured fallback")
+    first_para = content_trimmed.split("\n\n")[0] if content_trimmed else title
+    summary = first_para[:250].strip().rstrip('.') + '.'
+
+    # Clean title — no "..."
+    clean_title = title.rstrip(".…").strip()
+    if clean_title.endswith("..."):
+        clean_title = clean_title[:-3].strip()
+
+    body_html = f"""<p>{first_para[:500]}</p>
+<h2>Diễn biến thị trường</h2>
+<p>{content_trimmed[500:1200] if len(content_trimmed) > 500 else content_trimmed}</p>
+<h2>Phân tích và nhận định</h2>
+<p>Thông tin trên có thể tác động đáng kể đến tâm lý nhà đầu tư trong ngắn hạn. Các chuyên gia khuyến nghị theo dõi sát diễn biến tiếp theo trước khi đưa ra quyết định giao dịch.</p>
+<h2>Tác động đến nhà đầu tư Việt Nam</h2>
+<p>Với thị trường crypto ngày càng toàn cầu hóa, những biến động này không chỉ ảnh hưởng đến nhà đầu tư quốc tế mà còn tác động trực tiếp đến cộng đồng nhà đầu tư Việt Nam. Traders cần quản lý rủi ro chặt chẽ và theo dõi thêm thông tin từ các nguồn uy tín.</p>
+<h2>Kết luận</h2>
+<p>Đây là một trong những tin tức quan trọng cần theo dõi trong ngày. Nhà đầu tư nên cập nhật liên tục để nắm bắt cơ hội và hạn chế rủi ro.</p>
+""" + BINGX_CTA_HTML
+
     return {
-        "title": title,
-        "summary": summary if 'summary' in dir() else title,
-        "content": body,
+        "title": clean_title,
+        "summary": summary[:300],
+        "content": body_html,
     }
 
 
@@ -317,7 +500,7 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
         cfg = json.load(open(CONFIG_FILE))
         api_key = cfg['models']['providers']['google']['apiKey']
         
-        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key={api_key}"
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key={api_key}"
         
         # Reference image cho character consistency
         ref_path = Path("/home/shinyyume/.openclaw/workspace/assets/reference-yume-news.jpg")
@@ -569,13 +752,16 @@ def main():
             import time
             time.sleep(5)  # Rate limit Gemini
         
+        # Categorize based on content
+        category = categorize_article(rewritten["title"], rewritten["content"])
+
         # Create post entry
         post = {
             "id": next_id,
             "title": rewritten["title"],
             "summary": rewritten["summary"][:200],
             "content": rewritten["content"],
-            "category": "tin-tuc",
+            "category": category,
             "image": image_path,
             "date": today,
             "url": art["url"],

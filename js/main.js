@@ -73,6 +73,7 @@ const state = {
   posts: null,
   currentFilter: 'all',
   currentPage: 1,
+  analysisPage: 1,
   searchTerm: ''
 };
 
@@ -467,6 +468,17 @@ function hydrateInitialPageFromUrl() {
   }
 }
 
+function changeAnalysisPage(delta) {
+  state.analysisPage += delta;
+  if (state.posts) {
+    renderHomePage(state.posts);
+    // Scroll to analysis section
+    const section = document.querySelector('#market-analysis');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+window.changeAnalysisPage = changeAnalysisPage;
+
 function renderHomePage(posts) {
   const heroArticle = document.querySelector('[data-hero-article]');
   const heroSideList = document.querySelector('[data-hero-side-list]');
@@ -487,7 +499,17 @@ function renderHomePage(posts) {
   });
 
   analysisList.innerHTML = '';
-  posts.filter((post) => normalizeCategory(post.category) === 'analysis').forEach((post) => {
+  const analysisPosts = posts.filter((post) => normalizeCategory(post.category) === 'analysis');
+  const ANALYSIS_PER_PAGE = 3;
+  const totalAnalysisPages = Math.max(1, Math.ceil(analysisPosts.length / ANALYSIS_PER_PAGE));
+  
+  if (state.analysisPage > totalAnalysisPages) state.analysisPage = totalAnalysisPages;
+  if (state.analysisPage < 1) state.analysisPage = 1;
+  
+  const startIdx = (state.analysisPage - 1) * ANALYSIS_PER_PAGE;
+  const analysisToShow = analysisPosts.slice(startIdx, startIdx + ANALYSIS_PER_PAGE);
+  
+  analysisToShow.forEach((post) => {
     const article = document.createElement('article');
     article.className = 'analysis-item article-panel';
     article.dataset.category = post.category;
@@ -495,6 +517,27 @@ function renderHomePage(posts) {
     makeArticleClickable(article, post);
     analysisList.appendChild(article);
   });
+
+  // Render analysis pagination
+  const existingPag = document.querySelector('.analysis-pagination');
+  if (existingPag) existingPag.remove();
+  
+  if (analysisPosts.length > ANALYSIS_PER_PAGE) {
+    const pagDiv = document.createElement('div');
+    pagDiv.className = 'analysis-pagination';
+    pagDiv.style.cssText = 'display:flex;justify-content:center;align-items:center;gap:12px;margin-top:24px;';
+    
+    const prevDisabled = state.analysisPage <= 1 ? 'opacity:0.4;pointer-events:none;' : 'cursor:pointer;';
+    const nextDisabled = state.analysisPage >= totalAnalysisPages ? 'opacity:0.4;pointer-events:none;' : 'cursor:pointer;';
+    const btnStyle = 'background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:14px;font-weight:600;transition:opacity .2s;';
+    
+    pagDiv.innerHTML = `
+      <button onclick="changeAnalysisPage(-1)" style="${btnStyle}${prevDisabled}">← Trước</button>
+      <span style="color:var(--text-muted);font-size:14px;">Trang ${state.analysisPage}/${totalAnalysisPages}</span>
+      <button onclick="changeAnalysisPage(1)" style="${btnStyle}${nextDisabled}">Sau →</button>
+    `;
+    analysisList.parentElement.appendChild(pagDiv);
+  }
 
   updateFilterNotice();
   renderPagedNews();

@@ -1,129 +1,204 @@
 {
-  "updated": "2026-03-13 11:10",
+  "updated": "2026-03-16 11:30",
   "this_week": {
-    "label": "Tuần này (09/03 - 15/03)",
+    "label": "Tuần này (16/03 - 22/03)",
     "events": [
       {
-        "time": "Thứ 3 11/03 — 20:30 VN",
-        "country": "🇺🇸 Mỹ",
-        "event": "CPI tháng 2 (YoY)",
+        "date": "17/03",
+        "day": "Thứ 3",
+        "time": "10:30",
+        "country": "🇦🇺 Úc",
+        "event": "Quyết Định Lãi Suất RBA (Tháng 3)",
         "stars": 3,
-        "actual": "2.8%",
-        "forecast": "2.9%",
-        "previous": "3.0%"
+        "actual": "",
+        "forecast": "4.10%",
+        "previous": "3.85%",
+        "impact": "Tăng lãi suất → AUD mạnh, risk-off → crypto chịu áp lực"
       },
       {
-        "time": "Thứ 3 11/03 — 20:30 VN",
-        "country": "🇺🇸 Mỹ",
-        "event": "CPI lõi tháng 2 (MoM)",
+        "date": "18/03",
+        "day": "Thứ 4",
+        "time": "17:00",
+        "country": "🇪🇺 EU",
+        "event": "Chỉ Số Giá Tiêu Dùng CPI (Năm trên năm) (Tháng 2)",
         "stars": 3,
-        "actual": "0.2%",
-        "forecast": "0.3%",
-        "previous": "0.4%"
+        "actual": "",
+        "forecast": "1.9%",
+        "previous": "1.9%",
+        "impact": "CPI cao → EUR mạnh → crypto chịu áp lực; CPI thấp → bullish"
       },
       {
-        "time": "Thứ 4 12/03 — 20:30 VN",
+        "date": "18/03",
+        "day": "Thứ 4",
+        "time": "19:30",
         "country": "🇺🇸 Mỹ",
-        "event": "PPI tháng 2 (MoM)",
+        "event": "Chỉ Số Giá Sản Xuất PPI (Tháng trên tháng) (Tháng 2)",
         "stars": 3,
         "actual": "",
         "forecast": "0.3%",
-        "previous": "0.4%"
+        "previous": "0.5%",
+        "impact": "PPI cao → lạm phát kỳ vọng tăng → Fed hawkish → crypto giảm"
       },
       {
-        "time": "Thứ 5 13/03 — 20:30 VN",
-        "country": "🇺🇸 Mỹ",
-        "event": "Số đơn xin trợ cấp thất nghiệp",
+        "date": "18/03",
+        "day": "Thứ 4",
+        "time": "20:45",
+        "country": "🇨🇦 Canada",
+        "event": "Quyết Định Lãi Suất BoC",
         "stars": 3,
         "actual": "",
-        "forecast": "225K",
-        "previous": "221K"
+        "forecast": "2.25%",
+        "previous": "2.25%",
+        "impact": "Tăng lãi suất → bearish crypto; giữ/giảm → bullish"
       },
       {
-        "time": "Thứ 6 14/03 — 22:00 VN",
+        "date": "18/03",
+        "day": "Thứ 4",
+        "time": "21:30",
         "country": "🇺🇸 Mỹ",
-        "event": "Chỉ số tâm lý người tiêu dùng Michigan (sơ bộ)",
+        "event": "Dự Trữ Dầu Thô EIA",
         "stars": 3,
         "actual": "",
-        "forecast": "63.5",
-        "previous": "64.7"
+        "forecast": "",
+        "previous": "3.824M",
+        "impact": "Tồn kho giảm → dầu tăng → inflation concern → mixed cho crypto"
       },
       {
-        "time": "Thứ 6 14/03 — 22:00 VN",
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:00",
         "country": "🇺🇸 Mỹ",
-        "event": "Kỳ vọng lạm phát Michigan 1 năm",
+        "event": "🔴 Quyết Định Lãi Suất Fed (FOMC)",
         "stars": 3,
         "actual": "",
-        "forecast": "4.3%",
-        "previous": "4.3%"
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "impact": "Tăng lãi suất → bearish crypto; giữ/giảm → bullish mạnh cho crypto"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:00",
+        "country": "🇺🇸 Mỹ",
+        "event": "Dự Báo Kinh Tế FOMC (Dot Plot)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "",
+        "previous": "",
+        "impact": "Dot plot diều hâu → bearish crypto; bồ câu → bullish mạnh"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:00",
+        "country": "🇺🇸 Mỹ",
+        "event": "Bản Tuyên Bố của FOMC",
+        "stars": 3,
+        "actual": "",
+        "forecast": "",
+        "previous": "",
+        "impact": "Ngôn ngữ diều hâu → crypto chịu áp lực; bồ câu → crypto tăng"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:30",
+        "country": "🇺🇸 Mỹ",
+        "event": "Cuộc Họp Báo FOMC (Powell)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "",
+        "previous": "",
+        "impact": "Phát biểu Powell ảnh hưởng lớn → theo dõi tín hiệu lãi suất"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "10:00",
+        "country": "🇯🇵 Nhật",
+        "event": "Quyết Định Lãi Suất BoJ",
+        "stars": 3,
+        "actual": "",
+        "forecast": "0.75%",
+        "previous": "0.75%",
+        "impact": "Tăng lãi suất → JPY mạnh → risk-off → crypto giảm ngắn hạn"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "15:30",
+        "country": "🇨🇭 Thụy Sĩ",
+        "event": "Quyết Định Lãi Suất SNB (Quý 1)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "0.00%",
+        "previous": "0.00%",
+        "impact": "Chính sách tiền tệ Switzerland → tác động nhỏ lên crypto"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "16:00",
+        "country": "🇨🇭 Thụy Sĩ",
+        "event": "Cuộc Họp Báo SNB",
+        "stars": 3,
+        "actual": "",
+        "forecast": "",
+        "previous": "",
+        "impact": "Tín hiệu chính sách tiền tệ Thụy Sĩ"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "19:00",
+        "country": "🇬🇧 Anh",
+        "event": "Quyết Định Lãi Suất BoE (Tháng 3)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "impact": "Tăng lãi suất → GBP mạnh, risk-off; giữ/giảm → risk-on → bullish crypto"
       }
     ]
   },
   "next_week": {
-    "label": "Tuần tới (16/03 - 22/03)",
+    "label": "Tuần tới (23/03 - 29/03)",
     "events": [
       {
-        "time": "Thứ 3 18/03 — 20:30 VN",
+        "date": "24/03",
+        "day": "Thứ 3",
+        "time": "20:45",
         "country": "🇺🇸 Mỹ",
-        "event": "Doanh số bán lẻ tháng 2",
+        "event": "PMI Sản Xuất (Flash) (Tháng 3)",
         "stars": 3,
         "actual": "",
         "forecast": "",
-        "previous": ""
+        "previous": "51.6",
+        "impact": "PMI > 50 → kinh tế mở rộng → USD mạnh → crypto mixed"
       },
       {
-        "time": "Thứ 4 19/03 — 01:00 VN (đêm 19→20)",
+        "date": "24/03",
+        "day": "Thứ 3",
+        "time": "20:45",
         "country": "🇺🇸 Mỹ",
-        "event": "Quyết định lãi suất FOMC",
-        "stars": 3,
-        "actual": "",
-        "forecast": "4.50%",
-        "previous": "4.50%"
-      },
-      {
-        "time": "Thứ 4 19/03 — 01:30 VN (đêm 19→20)",
-        "country": "🇺🇸 Mỹ",
-        "event": "Họp báo Chủ tịch Fed Powell",
+        "event": "PMI Dịch Vụ (Flash) (Tháng 3)",
         "stars": 3,
         "actual": "",
         "forecast": "",
-        "previous": ""
+        "previous": "51.7",
+        "impact": "PMI Dịch vụ > 50 → kinh tế mở rộng, USD mạnh hơn"
       },
       {
-        "time": "Thứ 4 19/03 — 01:00 VN (đêm 19→20)",
-        "country": "🇺🇸 Mỹ",
-        "event": "Dot Plot & SEP (dự báo kinh tế Fed)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "",
-        "previous": ""
-      },
-      {
-        "time": "Thứ 5 20/03 — 19:00 VN",
+        "date": "25/03",
+        "day": "Thứ 4",
+        "time": "14:00",
         "country": "🇬🇧 Anh",
-        "event": "Quyết định lãi suất BOE",
-        "stars": 3,
-        "actual": "",
-        "forecast": "4.50%",
-        "previous": "4.50%"
-      },
-      {
-        "time": "Thứ 5 20/03 — 20:30 VN",
-        "country": "🇺🇸 Mỹ",
-        "event": "Số đơn xin trợ cấp thất nghiệp",
+        "event": "Chỉ Số Giá Tiêu Dùng CPI (Năm trên năm) (Tháng 2)",
         "stars": 3,
         "actual": "",
         "forecast": "",
-        "previous": ""
-      },
-      {
-        "time": "Thứ 6 21/03 — 21:45 VN",
-        "country": "🇺🇸 Mỹ",
-        "event": "PMI sản xuất & dịch vụ (sơ bộ)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "",
-        "previous": ""
+        "previous": "3.0%",
+        "impact": "CPI cao → BoE có thể tăng lãi suất → GBP mạnh → crypto chịu áp lực"
       }
     ]
   }
