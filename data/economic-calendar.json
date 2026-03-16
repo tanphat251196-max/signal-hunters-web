@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-17 00:38",
+  "updated": "2026-03-17 02:45",
   "this_week": {
     "label": "Tuần này (17/03 - 23/03)",
     "events": [
@@ -10,103 +10,224 @@
         "country": "🇦🇺",
         "event": "Quyết Định Lãi Suất RBA (Tháng 3)",
         "stars": 3,
-        "actual": "",
+        "actual": "4.10%",
         "forecast": "4.10%",
-        "previous": "3.85%",
-        "impact": "Tăng lãi suất → AUD mạnh, risk-off → crypto chịu áp lực"
+        "previous": "4.35%",
+        "impact": "RBA giữ lãi suất 4.10% → AUD ổn định, thị trường không bị shock"
       },
       {
         "date": "18/03",
         "day": "Thứ 4",
-        "time": "14:00",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "Chỉ số PPI (Producer Price Index) Tháng 2",
+        "event": "Chỉ Số Giá Sản Xuất PPI (Tháng trên tháng) (Tháng 2)",
         "stars": 3,
-        "actual": "",
+        "actual": "0.3%",
         "forecast": "0.3%",
-        "previous": "0.4%",
-        "impact": "PPI cao → lạm phát rủi ro → tăng nhu cầu vàng/crypto"
+        "previous": "0.5%",
+        "impact": "PPI đúng dự báo → lạm phát ổn định → neutral với crypto"
+      },
+      {
+        "date": "18/03",
+        "day": "Thứ 4",
+        "time": "19:30",
+        "country": "🇺🇸",
+        "event": "PPI Lõi (Tháng trên tháng) (Tháng 2)",
+        "stars": 3,
+        "actual": "0.3%",
+        "forecast": "0.3%",
+        "previous": "0.8%",
+        "impact": "Core PPI hạ từ 0.8% → 0.3% → lạm phát hạ nhiệt → bullish nhẹ cho crypto"
+      },
+      {
+        "date": "18/03",
+        "day": "Thứ 4",
+        "time": "20:45",
+        "country": "🇨🇦",
+        "event": "Quyết Định Lãi Suất BoC (Tháng 3)",
+        "stars": 3,
+        "actual": "2.75%",
+        "forecast": "2.75%",
+        "previous": "3.00%",
+        "impact": "BoC cắt giảm 25bps → dấu hiệu easing toàn cầu → tích cực cho risk assets"
       },
       {
         "date": "19/03",
         "day": "Thứ 5",
-        "time": "13:30",
+        "time": "01:00",
         "country": "🇺🇸",
-        "event": "CPI Tháng 2 (Chỉ số Giá Tiêu Dùng)",
+        "event": "Quyết Định Lãi Suất FOMC (Tháng 3)",
         "stars": 4,
-        "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.3%",
-        "impact": "CPI core cao → Fed có thể tiếp tục giữ lãi suất cao, dấn áp lên crypto"
+        "actual": "3.75%",
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "impact": "⭐ Fed giữ nguyên lãi suất 3.75% — thị trường chú ý dot plot & tín hiệu cắt giảm tương lai"
       },
       {
-        "date": "20/03",
-        "day": "Thứ 6",
-        "time": "21:00",
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:30",
         "country": "🇺🇸",
-        "event": "Báo Cáo Việc Làm Phi Nông Nghiệp (Non-Farm Payrolls)",
+        "event": "Cuộc Họp Báo FOMC - Powell Phát Biểu",
         "stars": 4,
         "actual": "",
-        "forecast": "275K",
-        "previous": "353K",
-        "impact": "Nếu cao hơn → tăng USD, áp lực lên crypto; thấp hơn → dễ risk-on"
+        "forecast": "",
+        "previous": "",
+        "impact": "⭐⭐ Rất quan trọng — Powell sẽ nói về lộ trình lãi suất 2026, tác động lớn đến crypto/vàng"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "07:30",
+        "country": "🇦🇺",
+        "event": "Tỷ Lệ Thất Nghiệp Úc (Tháng 2)",
+        "stars": 3,
+        "actual": "4.1%",
+        "forecast": "4.1%",
+        "previous": "4.1%",
+        "impact": "Việc làm Úc ổn định → AUD giữ vững"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "10:00",
+        "country": "🇯🇵",
+        "event": "Quyết Định Lãi Suất BoJ (Tháng 3)",
+        "stars": 4,
+        "actual": "0.75%",
+        "forecast": "0.75%",
+        "previous": "0.50%",
+        "impact": "⭐ BoJ tăng lãi suất lên 0.75% → JPY mạnh, ảnh hưởng carry trade toàn cầu"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "14:00",
+        "country": "🇬🇧",
+        "event": "Tỷ Lệ Thất Nghiệp Anh (Tháng 1)",
+        "stars": 3,
+        "actual": "5.3%",
+        "forecast": "5.3%",
+        "previous": "5.2%",
+        "impact": "Thất nghiệp Anh tăng nhẹ → GBP chịu áp lực nhẹ"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "19:00",
+        "country": "🇬🇧",
+        "event": "Quyết Định Lãi Suất BoE (Tháng 3)",
+        "stars": 4,
+        "actual": "3.75%",
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "impact": "⭐ BoE giữ nguyên 3.75% — MPC vote 6-3 giữ, 3 ủng hộ cắt → dove tín hiệu sắp cắt"
       }
     ]
   },
   "next_week": {
     "label": "Tuần sau (24/03 - 30/03)",
-    "events": []
-  },
-  "high_impact": {
-    "label": "Sự kiện quan trọng (3+ sao)",
     "events": [
       {
-        "date": "17/03",
-        "day": "Thứ 3",
-        "time": "10:30",
-        "country": "🇦🇺",
-        "event": "Quyết Định Lãi Suất RBA (Tháng 3)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "4.10%",
-        "previous": "3.85%",
-        "impact": "Tăng lãi suất → AUD mạnh, risk-off → crypto chịu áp lực"
-      },
-      {
-        "date": "18/03",
+        "date": "26/03",
         "day": "Thứ 4",
-        "time": "14:00",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "Chỉ số PPI (Producer Price Index) Tháng 2",
+        "event": "Đơn Xin Trợ Cấp Thất Nghiệp Hàng Tuần",
         "stars": 3,
         "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.4%",
-        "impact": "PPI cao → lạm phát rủi ro → tăng nhu cầu vàng/crypto"
+        "forecast": "",
+        "previous": "220K",
+        "impact": "Thị trường lao động Mỹ — tăng đột biến → bad cho USD, tốt cho crypto"
       },
       {
-        "date": "19/03",
+        "date": "27/03",
         "day": "Thứ 5",
-        "time": "13:30",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "CPI Tháng 2 (Chỉ số Giá Tiêu Dùng)",
+        "event": "PCE Price Index Lõi (Tháng trên tháng) (Tháng 2)",
         "stars": 4,
         "actual": "",
         "forecast": "0.3%",
         "previous": "0.3%",
-        "impact": "CPI core cao → Fed có thể tiếp tục giữ lãi suất cao, dấn áp lên crypto"
+        "impact": "⭐ Chỉ số lạm phát yêu thích của Fed — quan trọng nhất tuần sau. Thấp hơn dự báo → bullish crypto/vàng"
       },
       {
-        "date": "20/03",
-        "day": "Thứ 6",
-        "time": "21:00",
+        "date": "27/03",
+        "day": "Thứ 5",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "Báo Cáo Việc Làm Phi Nông Nghiệp (Non-Farm Payrolls)",
+        "event": "PCE Price Index (Năm trên năm) (Tháng 2)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "2.5%",
+        "previous": "2.5%",
+        "impact": "Lạm phát theo thước đo Fed — nếu tiếp tục hạ → tăng kỳ vọng cắt lãi suất"
+      },
+      {
+        "date": "28/03",
+        "day": "Thứ 6",
+        "time": "19:30",
+        "country": "🇺🇸",
+        "event": "Doanh Thu Cá Nhân (Tháng trên tháng) (Tháng 2)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "0.4%",
+        "previous": "0.9%",
+        "impact": "Thu nhập cá nhân ảnh hưởng sức tiêu dùng → tác động đến kỳ vọng kinh tế"
+      }
+    ]
+  },
+  "high_impact": {
+    "label": "Sự kiện 4 sao tuần này",
+    "events": [
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:00",
+        "country": "🇺🇸",
+        "event": "Quyết Định Lãi Suất FOMC",
+        "stars": 4,
+        "actual": "3.75%",
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "impact": "Fed giữ 3.75% — chú ý tuyên bố + dot plot về lộ trình 2026"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "01:30",
+        "country": "🇺🇸",
+        "event": "Họp Báo FOMC - Powell",
         "stars": 4,
         "actual": "",
-        "forecast": "275K",
-        "previous": "353K",
-        "impact": "Nếu cao hơn → tăng USD, áp lực lên crypto; thấp hơn → dễ risk-on"
+        "forecast": "",
+        "previous": "",
+        "impact": "⭐⭐ Quan trọng nhất tuần — Powell có thể hint cắt giảm 2026, rất bullish nếu dovish"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "10:00",
+        "country": "🇯🇵",
+        "event": "Quyết Định Lãi Suất BoJ",
+        "stars": 4,
+        "actual": "0.75%",
+        "forecast": "0.75%",
+        "previous": "0.50%",
+        "impact": "BoJ tăng lãi suất → JPY mạnh → ảnh hưởng carry trade toàn cầu"
+      },
+      {
+        "date": "19/03",
+        "day": "Thứ 5",
+        "time": "19:00",
+        "country": "🇬🇧",
+        "event": "Quyết Định Lãi Suất BoE",
+        "stars": 4,
+        "actual": "3.75%",
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "impact": "BoE giữ nguyên, 3 thành viên ủng hộ cắt → dove tín hiệu sắp cắt"
       }
     ]
   }
