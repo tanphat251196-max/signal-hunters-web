@@ -224,7 +224,15 @@ function categoryClass(category) {
 }
 
 function postSummary(post) {
-  return post.summary || post.excerpt || '';
+  // Use summary/excerpt first
+  if (post.summary) return post.summary;
+  if (post.excerpt) return post.excerpt;
+  // Auto-generate from content: strip HTML tags, take first 160 chars
+  if (post.content) {
+    const stripped = post.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    return stripped.length > 160 ? stripped.substring(0, 157) + '...' : stripped;
+  }
+  return '';
 }
 
 function postImage(post) {
@@ -601,19 +609,88 @@ function renderArticlePage(posts) {
     window.history.replaceState(null, '', `/${post.slug}.html`);
   }
 
-  document.title = `${post.title} | Signal Hunters`;
-  updateMetaTag('meta[name="description"]', 'content', postSummary(post));
-  updateMetaTag('meta[property="og:title"]', 'content', `${post.title} | Signal Hunters`);
-  updateMetaTag('meta[property="og:description"]', 'content', postSummary(post));
-  updateMetaTag('meta[property="og:image"]', 'content', postImage(post));
-  updateMetaTag('meta[property="og:url"]', 'content', `${window.location.origin}/${post.slug || post.id}.html`);
+  const BASE_URL = 'https://daututhongminh24h.com';
+  const DEFAULT_IMAGE = `${BASE_URL}/images/og-banner.jpg`;
+  const postUrl = `${BASE_URL}/${post.slug || post.id}.html`;
+  const postImageUrl = postImage(post).startsWith('http') 
+    ? postImage(post) 
+    : `${BASE_URL}/${postImage(post)}`;
+  const description = postSummary(post);
 
+  // ── SEO meta tags ──────────────────────────────────────────────
+  document.title = `${post.title} | Signal Hunters`;
+  updateMetaTag('meta[name="description"]', 'content', description);
+  // Keywords: title words + category + general crypto terms
+  const keywordBase = (post.title || '').split(/\s+/).slice(0, 8).join(', ');
+  const categoryKeyword = categoryLabel(post.category || '');
+  updateMetaTag('meta[name="keywords"]', 'content', `${keywordBase}, ${categoryKeyword}, crypto, bitcoin, Signal Hunters, đầu tư thông minh`);
+  // Open Graph
+  updateMetaTag('meta[property="og:title"]', 'content', `${post.title} | Signal Hunters`);
+  updateMetaTag('meta[property="og:description"]', 'content', description);
+  updateMetaTag('meta[property="og:image"]', 'content', postImageUrl || DEFAULT_IMAGE);
+  updateMetaTag('meta[property="og:url"]', 'content', postUrl);
+  // Twitter
+  updateMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
+  updateMetaTag('meta[name="twitter:image"]', 'content', postImageUrl || DEFAULT_IMAGE);
+
+  // ── JSON-LD Article Schema ──────────────────────────────────────
+  const existingSchema = document.getElementById('article-schema');
+  if (existingSchema) existingSchema.remove();
+  const schemaScript = document.createElement('script');
+  schemaScript.id = 'article-schema';
+  schemaScript.type = 'application/ld+json';
+  schemaScript.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": description,
+    "image": [postImageUrl || DEFAULT_IMAGE],
+    "datePublished": post.date ? `${post.date}T07:00:00+07:00` : new Date().toISOString(),
+    "dateModified": post.date ? `${post.date}T07:00:00+07:00` : new Date().toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": "Shiny Yume",
+      "url": "https://x.com/ShinyYumeSH"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Signal Hunters",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/logo-combo.png`
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": postUrl
+    },
+    "url": postUrl
+  });
+  document.head.appendChild(schemaScript);
+
+  // ── View Counter (localStorage-based) ──────────────────────────
+  const articleKey = `views_${post.slug || post.id}`;
+  let views = parseInt(localStorage.getItem(articleKey) || '0', 10);
+  // Only count if not viewed in last hour (session-based dedup)
+  const sessionKey = `viewed_${post.slug || post.id}`;
+  if (!sessionStorage.getItem(sessionKey)) {
+    views += 1;
+    localStorage.setItem(articleKey, String(views));
+    sessionStorage.setItem(sessionKey, '1');
+  }
+  const viewsLabel = views === 1 ? '1 lượt xem' : `${views.toLocaleString()} lượt xem`;
+
+  // ── Render article HTML ────────────────────────────────────────
   articleDetail.innerHTML = `
     <img class="article-cover" src="${postImage(post)}" alt="${post.title}">
     <div class="article-detail-body">
       <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
       <h1>${post.title}</h1>
-      <div class="article-meta"><span>${formatDate(post.date)}</span><span>${categoryLabel(post.category)}</span></div>
+      <div class="article-meta">
+        <span>${formatDate(post.date)}</span>
+        <span>${categoryLabel(post.category)}</span>
+        <span class="article-views" title="Lượt xem">👁 ${viewsLabel}</span>
+      </div>
       <div class="article-content" data-article-content>${markdownToHtml(post.content)}</div>
       <div class="ref-separator">
         <a href="https://bingx.com/vi-vn/partner/X7EZVIWI" target="_blank" rel="noopener">
