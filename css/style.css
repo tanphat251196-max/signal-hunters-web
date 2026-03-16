@@ -1051,6 +1051,38 @@ body.light-mode .ref-separator {
   font-weight: 700;
 }
 
+/* ── Commodity & Forex Widget ──────────────────────────────────────── */
+.commodity-widget .commodity-price-list {
+  margin-top: 14px;
+}
+
+.commodity-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+  opacity: 0.6;
+}
+
+.commodity-updated {
+  font-size: 0.7rem;
+  color: var(--meta);
+  text-align: right;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.usdt-vnd-row strong {
+  font-size: 0.88rem;
+}
+
+#commodity-price-list .price-row strong,
+#usdt-vnd-list .price-row strong {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── */
 .fng-display {
   text-align: center;
 }

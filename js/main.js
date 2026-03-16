@@ -759,6 +759,185 @@ async function loadCryptoPrices() {
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// COMMODITY & FOREX WIDGET
+// APIs: Bybit (Gold/Silver - CORS ✅), OKX (Oil WTI - CORS ✅),
+//       open.er-api.com (USD/VND - CORS ✅)
+// ─────────────────────────────────────────────────────────────────────────────
+const BYBIT_TICKER_URL = 'https://api.bybit.com/v5/market/tickers?category=linear&symbol=';
+const OKX_TICKER_URL = 'https://www.okx.com/api/v5/market/ticker?instId=CL-USDT-SWAP';
+const EXCHANGE_RATE_URL = 'https://open.er-api.com/v6/latest/USD';
+
+const commodityConfig = [
+  { id: 'gold',   name: 'Vàng',    icon: '🥇', symbol: 'XAUUSDT',  source: 'bybit', unit: '$' },
+  { id: 'silver', name: 'Bạc',     icon: '🥈', symbol: 'XAGUSDT',  source: 'bybit', unit: '$' },
+  { id: 'oil',    name: 'Dầu WTI', icon: '🛢️', symbol: 'CL-USDT-SWAP', source: 'okx', unit: '$' },
+];
+
+// Simple commodity price cache to track prev prices for manual % calc
+const commodityCache = {
+  gold:   { price: null, prevPrice: null },
+  silver: { price: null, prevPrice: null },
+  oil:    { price: null, prevPrice: null },
+  usdVnd: { price: null, prevPrice: null },
+};
+
+function formatCommodityPrice(price, decimals = 2) {
+  if (price === null || price === undefined || isNaN(price)) return 'N/A';
+  if (price >= 1000) {
+    return '$' + price.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+  return '$' + price.toFixed(decimals);
+}
+
+function formatVndPrice(price) {
+  if (!price) return 'N/A';
+  // Format with comma as thousands separator for clarity
+  return price.toLocaleString('en-US') + 'đ';
+}
+
+function formatCommodityChange(pct) {
+  if (pct === null || pct === undefined || isNaN(pct)) return '--';
+  const sign = pct >= 0 ? '+' : '';
+  return sign + pct.toFixed(2) + '%';
+}
+
+async function fetchBybitTicker(symbol) {
+  const res = await fetch(BYBIT_TICKER_URL + symbol, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Bybit HTTP ${res.status}`);
+  const data = await res.json();
+  const ticker = data?.result?.list?.[0];
+  if (!ticker) throw new Error('No Bybit ticker data');
+  return {
+    price: parseFloat(ticker.lastPrice),
+    changePct: parseFloat(ticker.price24hPcnt) * 100,
+  };
+}
+
+async function fetchOkxTicker() {
+  const res = await fetch(OKX_TICKER_URL, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`OKX HTTP ${res.status}`);
+  const data = await res.json();
+  const ticker = data?.data?.[0];
+  if (!ticker) throw new Error('No OKX ticker data');
+  const price = parseFloat(ticker.last);
+  const open24h = parseFloat(ticker.open24h);
+  const changePct = open24h > 0 ? ((price - open24h) / open24h) * 100 : 0;
+  return { price, changePct };
+}
+
+async function fetchUsdVnd() {
+  const res = await fetch(EXCHANGE_RATE_URL, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`ExchangeRate HTTP ${res.status}`);
+  const data = await res.json();
+  const vnd = data?.rates?.VND;
+  if (!vnd) throw new Error('No VND rate');
+  return parseFloat(vnd);
+}
+
+function renderCommodityWidget(results) {
+  const list = document.getElementById('commodity-price-list');
+  if (!list) return;
+
+  list.innerHTML = results.map((item) => {
+    const trendClass = item.changePct >= 0 ? 'up' : 'down';
+    return `
+      <div class="price-row">
+        <strong><span class="coin-icon">${item.icon}</span>${item.name}</strong>
+        <span>${formatCommodityPrice(item.price, item.decimals || 2)}</span>
+        <b class="${trendClass}">${formatCommodityChange(item.changePct)}</b>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderUsdtVnd(price, changePct) {
+  const priceEl = document.getElementById('usdt-vnd-price');
+  const changeEl = document.getElementById('usdt-vnd-change');
+  if (priceEl) priceEl.textContent = price !== null ? formatVndPrice(Math.round(price)) : 'N/A';
+  if (changeEl) {
+    if (changePct !== null && !isNaN(changePct)) {
+      changeEl.textContent = formatCommodityChange(changePct);
+      changeEl.className = changePct >= 0 ? 'up' : 'down';
+    } else {
+      changeEl.textContent = '--';
+      changeEl.className = '';
+    }
+  }
+}
+
+function updateCommodityTimestamp() {
+  const el = document.getElementById('commodity-updated');
+  if (!el) return;
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('vi-VN', {
+    hour: '2-digit', minute: '2-digit', hour12: false
+  });
+  el.textContent = 'Cập nhật: ' + timeStr;
+}
+
+async function loadCommodityPrices() {
+  const statusEl = document.getElementById('commodity-status');
+
+  try {
+    // Fetch Gold, Silver (Bybit) and Oil (OKX) in parallel
+    const [goldData, silverData, oilData] = await Promise.allSettled([
+      fetchBybitTicker('XAUUSDT'),
+      fetchBybitTicker('XAGUSDT'),
+      fetchOkxTicker(),
+    ]);
+
+    const results = [
+      {
+        icon: '🥇', name: 'Vàng',
+        price: goldData.status === 'fulfilled' ? goldData.value.price : null,
+        changePct: goldData.status === 'fulfilled' ? goldData.value.changePct : null,
+        decimals: 0,
+      },
+      {
+        icon: '🥈', name: 'Bạc',
+        price: silverData.status === 'fulfilled' ? silverData.value.price : null,
+        changePct: silverData.status === 'fulfilled' ? silverData.value.changePct : null,
+        decimals: 2,
+      },
+      {
+        icon: '🛢️', name: 'Dầu WTI',
+        price: oilData.status === 'fulfilled' ? oilData.value.price : null,
+        changePct: oilData.status === 'fulfilled' ? oilData.value.changePct : null,
+        decimals: 2,
+      },
+    ];
+
+    renderCommodityWidget(results);
+    updateCommodityTimestamp();
+    if (statusEl) statusEl.textContent = 'Live';
+
+    // Log errors for any failed fetches
+    if (goldData.status === 'rejected') console.warn('Gold fetch failed:', goldData.reason);
+    if (silverData.status === 'rejected') console.warn('Silver fetch failed:', silverData.reason);
+    if (oilData.status === 'rejected') console.warn('Oil fetch failed:', oilData.reason);
+
+  } catch (err) {
+    console.warn('Commodity widget error:', err);
+    if (statusEl) statusEl.textContent = 'Err';
+  }
+}
+
+async function loadUsdtVnd() {
+  try {
+    const vnd = await fetchUsdVnd();
+    // Store previous for change calculation
+    const prev = commodityCache.usdVnd.price;
+    const changePct = prev ? ((vnd - prev) / prev) * 100 : 0;
+    commodityCache.usdVnd.price = vnd;
+    renderUsdtVnd(vnd, prev ? changePct : null);
+    updateCommodityTimestamp();
+  } catch (err) {
+    console.warn('USD/VND fetch failed:', err);
+    renderUsdtVnd(null, null);
+  }
+}
+
 async function loadFearGreed() {
   const valueEl = document.getElementById('fng-value');
   const labelEl = document.getElementById('fng-label');
@@ -1073,7 +1252,11 @@ loadFearGreed();
 loadTrendingCoins();
 initNewsletter();
 loadRanking();
+loadCommodityPrices();
+loadUsdtVnd();
 window.setInterval(loadCryptoPrices, 60000);
+window.setInterval(loadCommodityPrices, 300000);  // every 5 min
+window.setInterval(loadUsdtVnd, 600000);           // every 10 min
 window.setInterval(loadFearGreed, 3600000);
 window.setInterval(loadTrendingCoins, 3600000);
 window.setInterval(loadRanking, 300000);
