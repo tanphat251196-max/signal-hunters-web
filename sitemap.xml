@@ -1,9 +1,397 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
   <url>
-    <loc>https://signalhunters.io/</loc>
-    <lastmod>2026-03-05</lastmod>
+    <loc>https://daututhongminh24h.com/</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/article.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitcoin-truoc-nguong-cua-chu-ky-tang-truong-moi-phan-tich-a-.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitcoin-truoc-nguong-cua-phan-tich-chuyen-sau-ve-song-giam-h.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitcoin-trong-giai-oan-ieu-chinh-hien-tai-tam-nhin-lich-su-x.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/phan-tich-chuyen-sau-tu-gareth-soloway-bitcoin-huong-en-nguo.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/ethereum-truoc-nguong-thu-thach-lon-giai-ma-nghich-ly-chap-n.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/gia-bitcoin-da-dieu-chinh-trong-159-ngay-nhung-lieu.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/dong-von-do-vao-cac-quy-etf-bitcoin-dat-767.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitcoin-giam-xuong-duoi-71000-usd-sau-khi-trump-canh.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/du-doan-gia-bitcoin-trong-15-nam-toi-gay-soc-cua-anthony-scaramucci.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/du-doan-gia-bitcoin-lieu-100000-do-la-co-phai-la-muc-tieu-lon-tiep-theo.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/tether-dat-loi-nhuan-hon-10-ty-usd-va-nam-giu-122-ty-usd-trai-phieu-kho-bac-my.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/khi-nao-bitcoin-se-cham-day-du-lieu-on-chain-he-lo-cau-tra-loi-bat-ngo.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/tai-sao-tien-dien-tu-tang-257-trong-khi-thi-truong-chung-khoan-giam-hom-nay.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/xrp-ledger-trien-khai-ban-cap-nhat-bao-mat-rippled-312-khi-gia-tri-tai-san-duoc-.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/my-trung-phat-mang-luoi-lua-dao-crypto-lien-quan-trieu-tien-xuat-hien-nhieu-cai-.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/a16z-va-quy-giao-duc-defi-de-xuat-khu-vuc-an-toan-cho-cac-ung-dung-blockchain.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/hyperliquid-hang-dau-tung-ra-ban-nang-cap-lon-gioi-thieu-stablecoin-usdh.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/thi-truong-tien-dien-tu-chuan-bi-cho-cuoc-doi-dau-tai-nha-trang-khi-dao-luat-cla.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/dao-luat-tai-san-ao-2026-pakistan-chinh-thuc-hoa-thi-truong-tien-dien-tu-tri-gia.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/nha-phan-tich-cho-rang-gia-pi-075-usd-la-hoan-toan-co-the-dat-duoc-vao-ngay-pi.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/dao-luat-clarity-cua-my-bi-tri-hoan-do-cac-ngan-hang-phan-doi-phan-thuong-stable.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/gia-bitcoin-ethereum-va-xrp-se-ra-sao-khi-trump-tuyen.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/fed-van-co-the-ha-lai-suat-trong-nam-nay.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/binance-us-bo-nhiem-stephen-gregory-lam-ceo-moi.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/mike-novogratz-va-anthony-scaramucci-bitcoin-co-the-bung-no.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/altcoin-niem-yet-tren-binance-quyet-dinh-tro-thanh-cong.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/binance-va-ripple-hop-tac-voi-mastercard-trong-buoc-di-moi-ve-thanh-toan-blockch.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/nha-kinh-te-dat-giai-nobel-cho-biet-bitcoin-kho-dat-125000-usd-neu-thieu-yeu-to-.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/ghana-mo-cua-thu-nghiem-cho-11-cong-ty-crypto-giay-phep-co-the-den-sau-6-thang.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/cz-gia-nhap-cau-lac-bo-100-ty-usd-tai-san-tang-vot-nho-de-che-binance.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/gia-bitcoin-co-nguy-co-bien-dong-manh-khi-peter.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/lanh-dao-ripple-xrp-nhu-chat-keo-ket-noi-giua.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/nhung-ly-do-chinh-khien-thi-truong-tien-dien-tu-phuc-hoi.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/privacy-coin-dang-bi-chi-trich-khi-bo-tu-phap-hoa-ky-yeu-cau-xet-xu-lai-nha-phat.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/binance-khoi-kien-the-wall-street-journal-bao-cao-dieu-tra-o-my-co-gi-khien-thi-.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/gia-bitcoin-ethereum-va-xrp-se-ra-sao-khi-trump-tuyen-bo-chien-tranh-voi-iran-co.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/cac-chuyen-gia-hang-dau-cho-rang-so-luong-ai-agent-giao-dich-tien-dien-tu-se-som.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/cryptoquant-tiet-lo-danh-sach-cac-san-tien-ao-minh-bach-nhat.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitcoin-khong-chay-cung-co-phieu-cong-nghe-nhu-nhieu-nguoi-nghi.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/trump-phat-tin-hieu-chien-tranh-iran-se-som-khep-lai-bitcoin-bat-len-70500-usd.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bo-tu-phap-my-dieu-tra-binance-vi-nghi-van-lach-cam-van-iran-bnb-doi-mat-rui-ro.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/aave-thanh-ly-gan-27-trieu-usd-vi-lech-oracle-wsteth-bai-test-kho-cho-defi-nam.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitcoin-va-vang-phan-ung-trai-chieu-sau-cpi-my-thang-2-thi-truong-dang-dinh-gia.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/ethereum-giu-hon-57-thi-phan-token-hoa-rwa-vi-sao-pho-wall-van-chon-eth.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/mastercard-lap-lien-minh-hon-85-doi-tac-crypto-stablecoin-dang-tien-gan-he.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/arthur-hayes-cho-bitcoin-duoi-60000-usd-moi-mua-manh-canh-bao-dieu-gi-cho-trader.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/bitwise-dat-kich-ban-bitcoin-1-trieu-usd-dieu-gi-phai-xay-ra-trong-10-nam-toi.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/hyperliquid-bung-no-nho-giao-dich-dau-hype-vuot-35-usd-defi-dang-an-mieng-banh.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/my-muon-cam-ca-cuoc-chien-tranh-va-am-sat-prediction-market-buoc-vao-vung-phap.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/cz-vuot-moc-100-ty-usd-binance-van-la-co-may-in-tien-lon-nhat-crypto.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/my-doi-tich-thu-34-trieu-usdt-tu-vu-lua-dao-crypto-stablecoin-dang-thanh-diem.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/doanh-nghiep-nga-dung-crypto-giao-thuong-voi-iran-blockchain-tro-thanh-duong.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/roman-storm-co-the-bi-xu-lai-vu-tornado-cash-lai-day-cuoc-chien-quyen-rieng-tu.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://daututhongminh24h.com/vi-sao-thi-truong-crypto-bat-tang-tro-lai-dau-ha-nhiet-short-bi-quet-va-bitcoin.html</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 </urlset>
