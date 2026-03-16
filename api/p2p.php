@@ -18,17 +18,30 @@ if (file_exists($cache_file) && (time() - filemtime($cache_file)) < $cache_ttl) 
     exit;
 }
 
-// Fetch OKX P2P (Binance block server-side request, OKX không)
-$url  = 'https://www.okx.com/v3/c2c/tradingOrders/books?quoteCurrency=VND&baseCurrency=USDT&side=buy&paymentMethod=all&userType=all&showTrade=false&showFollow=false&showAlreadyTraded=false&isAbleFilter=false';
-$body = null;
+// Fetch Binance P2P trực tiếp (skip ad đầu tiên)
+$url  = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
+$body = json_encode([
+    'page'          => 1,
+    'rows'          => 10,
+    'payTypes'      => [],
+    'asset'         => 'USDT',
+    'fiat'          => 'VND',
+    'tradeType'     => 'BUY',
+    'publisherType' => null,
+]);
 
 $opts = [
     'http' => [
-        'method'  => 'GET',
+        'method'  => 'POST',
         'header'  => implode("\r\n", [
+            'Content-Type: application/json',
+            'Accept-Encoding: identity',
             'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/122.0.0.0 Safari/537.36',
-            'Accept: application/json',
+            'Origin: https://p2p.binance.com',
+            'Referer: https://p2p.binance.com/trade/all-payments/USDT?fiat=VND',
+            'clienttype: web',
         ]),
+        'content' => $body,
         'timeout' => 10,
     ],
 ];
@@ -45,14 +58,19 @@ if (!$response) {
 }
 
 $data = json_decode($response, true);
-$ads  = $data['data']['buy'] ?? [];
+$ads  = $data['data'] ?? [];
+
+// Bỏ qua ad đầu tiên (quảng cáo), lấy từ index 1
+if (count($ads) > 1) {
+    $ads = array_slice($ads, 1);
+}
 
 if (empty($ads)) {
     echo json_encode(['price' => 0, 'change' => 0, 'updated' => date('H:i'), 'source' => 'empty']);
     exit;
 }
 
-$prices = array_map(fn($a) => (float)($a['price'] ?? 0), $ads);
+$prices = array_map(fn($a) => (float)($a['adv']['price'] ?? 0), $ads);
 $prices = array_filter($prices);
 $avg    = count($prices) ? array_sum($prices) / count($prices) : 0;
 
@@ -60,7 +78,7 @@ $result = json_encode([
     'price'   => round($avg),
     'change'  => 0,
     'updated' => date('H:i'),
-    'source'  => 'okx_p2p',
+    'source'  => 'binance_p2p',
 ]);
 
 // Lưu cache
