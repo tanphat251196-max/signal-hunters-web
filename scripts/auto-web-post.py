@@ -24,7 +24,10 @@ POSTS_FILE = REPO_DIR / "data" / "posts.json"
 IMAGES_DIR = REPO_DIR / "images"
 DEPLOY_SCRIPT = REPO_DIR / "scripts" / "deploy.sh"
 DEDUP_FILE = Path("/tmp/openclaw/web-post-last-date.txt")
-MAX_ARTICLES = 5  # Chỉ 5 tin quan trọng nhất mỗi ngày
+MAX_ARTICLES = 8   # Tối đa 8 bài/ngày
+MIN_ARTICLES = 4   # Tối thiểu 4 bài/ngày
+# Bắt buộc mỗi ngày phải có ít nhất 1 bài mỗi category:
+REQUIRED_CATEGORIES = ["tin-tuc", "phan-tich", "altcoin", "hang-hoa"]
 MIN_TITLE_LEN = 15
 SIMILARITY_THRESHOLD = 0.7
 CONFIG_FILE = Path("/home/shinyyume/.openclaw/openclaw.json")
@@ -727,6 +730,36 @@ def main():
         print("Không có bài mới. Done.")
         DEDUP_FILE.write_text(today)
         return
+    
+    # === ĐẢM BẢO ĐỦ 4 CATEGORY BẮT BUỘC ===
+    # Pre-categorize để kiểm tra coverage
+    def quick_category(title):
+        return categorize_article(title, "")
+    
+    categorized = [(art, quick_category(art["title"])) for art in new_articles]
+    covered = set(cat for _, cat in categorized)
+    missing = [c for c in REQUIRED_CATEGORIES if c not in covered]
+    
+    if missing:
+        print(f"⚠️ Thiếu category bắt buộc: {missing} — crawl bổ sung...")
+        # Crawl thêm từ all_articles để tìm bài thuộc category thiếu
+        for needed_cat in missing:
+            for art in all_articles:
+                if art in new_articles:
+                    continue
+                if is_duplicate(art["title"], existing_titles + [a["title"] for a in new_articles]):
+                    continue
+                cat = quick_category(art["title"])
+                if cat == needed_cat:
+                    new_articles.append(art)
+                    print(f"   ✅ Bổ sung [{needed_cat}]: {art['title'][:60]}")
+                    break
+    
+    # Giới hạn MAX_ARTICLES
+    if len(new_articles) > MAX_ARTICLES:
+        new_articles = new_articles[:MAX_ARTICLES]
+    
+    print(f"Final articles to publish: {len(new_articles)} (min={MIN_ARTICLES}, max={MAX_ARTICLES})")
     
     # Process each article
     published = 0
