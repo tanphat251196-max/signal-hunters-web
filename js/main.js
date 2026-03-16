@@ -926,7 +926,7 @@ async function loadCommodityPrices() {
 async function loadUsdtVnd() {
   // Try P2P proxy first (real Binance P2P rate), fallback to er-api.com
   try {
-    const res = await fetch('http://localhost:7788/api/p2p', { cache: 'no-store' });
+    const res = await fetch('/api/p2p.php', { cache: 'no-store' });
     if (!res.ok) throw new Error(`P2P proxy HTTP ${res.status}`);
     const data = await res.json();
     if (!data.price) throw new Error('No price in P2P response');
