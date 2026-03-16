@@ -46,6 +46,18 @@
       </nav>
 
       <div class="header-actions">
+        <!-- Header Search -->
+        <div class="header-search" id="header-search">
+          <input
+            type="search"
+            class="header-search-input search-input-field"
+            id="header-search-input"
+            placeholder="Tìm bài viết..."
+            aria-label="Tìm kiếm bài viết"
+            oninput="searchPosts(this.value)"
+          >
+          <button class="header-search-toggle" id="header-search-toggle" aria-label="Tìm kiếm" onclick="toggleHeaderSearch()">🔍</button>
+        </div>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
           <span class="theme-icon">🌙</span>
         </button>
@@ -115,7 +127,7 @@
 
             <div class="filter-notice" data-filter-notice hidden></div>
             <div class="search-container">
-              <input type="text" id="search-input" placeholder="🔍 Tìm kiếm bài viết..." oninput="searchPosts(this.value)">
+              <input type="search" id="search-input" class="search-input-field" placeholder="🔍 Tìm kiếm bài viết..." oninput="searchPosts(this.value)" aria-label="Tìm kiếm bài viết">
             </div>
             <div class="news-grid" data-news-grid>
               <!-- Posts loaded dynamically from posts.json -->
@@ -371,6 +383,30 @@
       </div>
     </section>
   </main>
+
+  <!-- ========== Newsletter Section ========== -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="container">
+      <p class="eyebrow">📬 Bản tin Signal Hunters</p>
+      <h2>Nhận Phân Tích Crypto Mỗi Ngày</h2>
+      <p>Đăng ký để nhận tin tức crypto, phân tích BTC/ETH và cập nhật thị trường hàng hóa — miễn phí, thẳng vào email của bạn.</p>
+
+      <form class="newsletter-form" novalidate
+        data-formspree="">
+        <input
+          type="email"
+          class="nl-email-input"
+          placeholder="Email của bạn..."
+          autocomplete="email"
+          required
+          aria-label="Email đăng ký bản tin"
+        >
+        <button type="submit" class="nl-submit-btn">Đăng ký miễn phí →</button>
+        <p class="nl-message" hidden></p>
+      </form>
+      <p class="nl-privacy">🔒 Chúng tôi không spam. Hủy đăng ký bất kỳ lúc nào.</p>
+    </div>
+  </section>
 
   <!-- ========== About Section ========== -->
   <section class="about-section" id="about">

@@ -272,13 +272,18 @@ function createCompactArticle(post) {
   `;
 }
 
-function createNewsCard(post) {
+function createNewsCard(post, keyword) {
+  const kw = keyword || state.searchTerm || '';
+  const title = kw ? highlightKeyword(post.title, kw) : post.title;
+  const summary = kw ? highlightKeyword(postSummary(post), kw) : postSummary(post);
+  const catLabel = categoryLabel(post.category);
+  const catHl = kw ? highlightKeyword(catLabel, kw) : catLabel;
   return `
     <img src="${postImage(post)}" alt="${post.title}">
     <div class="card-content">
-      <span class="${categoryClass(post.category)}">${categoryLabel(post.category)}</span>
-      <h3>${post.title}</h3>
-      <p>${postSummary(post)}</p>
+      <span class="${categoryClass(post.category)}">${catHl}</span>
+      <h3>${title}</h3>
+      <p>${summary}</p>
       ${createMetaHTML(post)}
     </div>
   `;
@@ -347,7 +352,7 @@ function getFilteredPosts() {
     if (!matchesFilter) return false;
     if (!searchTerm) return true;
 
-    const haystack = `${post.title} ${postSummary(post)}`.toLowerCase();
+    const haystack = `${post.title} ${postSummary(post)} ${categoryLabel(post.category)}`.toLowerCase();
     return haystack.includes(searchTerm);
   });
 }
@@ -395,7 +400,7 @@ function renderNewsGrid(postsToRender) {
     const article = document.createElement('article');
     article.className = 'news-card article-panel';
     article.dataset.category = post.category;
-    article.innerHTML = createNewsCard(post);
+    article.innerHTML = createNewsCard(post, state.searchTerm);
     makeArticleClickable(article, post);
     newsGrid.appendChild(article);
   });
@@ -890,11 +895,58 @@ function showRanking(type) {
 
 window.showRanking = showRanking;
 
+// ─── HEADER SEARCH TOGGLE ───────────────────────────────────────────────────
+function toggleHeaderSearch() {
+  const wrap = document.getElementById('header-search');
+  const input = document.getElementById('header-search-input');
+  if (!wrap) return;
+  const isOpen = wrap.classList.toggle('open');
+  if (isOpen && input) {
+    input.focus();
+  } else if (!isOpen && input) {
+    input.value = '';
+    searchPosts('');
+  }
+}
+window.toggleHeaderSearch = toggleHeaderSearch;
+
+// Close header search on outside click
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('header-search');
+  if (wrap && wrap.classList.contains('open') && !wrap.contains(e.target)) {
+    wrap.classList.remove('open');
+    const input = document.getElementById('header-search-input');
+    if (input) { input.value = ''; searchPosts(''); }
+  }
+});
+// ─────────────────────────────────────────────────────────────────────────────
+
+
+let _searchDebounceTimer = null;
+
 function searchPosts(keyword) {
-  state.searchTerm = keyword || '';
-  state.currentPage = 1;
-  updateFilterNotice();
-  renderPagedNews();
+  clearTimeout(_searchDebounceTimer);
+  _searchDebounceTimer = setTimeout(() => {
+    state.searchTerm = keyword || '';
+    state.currentPage = 1;
+    updateFilterNotice();
+    renderPagedNews();
+    // Sync both search inputs (header + inline)
+    document.querySelectorAll('.search-input-field').forEach(el => {
+      if (el.value !== keyword) el.value = keyword;
+    });
+  }, 300);
+}
+
+/**
+ * Highlight matching keyword inside a text string (HTML-safe).
+ * Returns HTML string with <mark class="search-hl"> wrapping matches.
+ */
+function highlightKeyword(text, keyword) {
+  if (!keyword || !text) return text || '';
+  const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(${safe})`, 'gi');
+  return String(text).replace(re, '<mark class="search-hl">$1</mark>');
 }
 
 function changePage(direction) {
@@ -913,11 +965,113 @@ function changePage(direction) {
 window.searchPosts = searchPosts;
 window.changePage = changePage;
 
+// ─── NEWSLETTER SUBSCRIPTION ─────────────────────────────────────────────────
+const NEWSLETTER_KEY = 'sh_newsletter_subscribers';
+const NEWSLETTER_SUBMITTED_KEY = 'sh_newsletter_submitted';
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email).trim());
+}
+
+function getSubscribers() {
+  try {
+    return JSON.parse(localStorage.getItem(NEWSLETTER_KEY) || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveSubscriber(email) {
+  const list = getSubscribers();
+  const normalized = String(email).trim().toLowerCase();
+  if (list.includes(normalized)) return false; // already subscribed
+  list.push(normalized);
+  localStorage.setItem(NEWSLETTER_KEY, JSON.stringify(list));
+  return true;
+}
+
+function handleNewsletterSubmit(formEl) {
+  const input = formEl.querySelector('.nl-email-input');
+  const msgEl = formEl.querySelector('.nl-message');
+  if (!input || !msgEl) return;
+
+  const email = input.value.trim();
+
+  if (!isValidEmail(email)) {
+    msgEl.className = 'nl-message nl-error';
+    msgEl.textContent = '⚠️ Vui lòng nhập địa chỉ email hợp lệ.';
+    msgEl.hidden = false;
+    return;
+  }
+
+  // Check if already submitted in this browser session / ever
+  const alreadySubmitted = localStorage.getItem(NEWSLETTER_SUBMITTED_KEY);
+  if (alreadySubmitted) {
+    msgEl.className = 'nl-message nl-success';
+    msgEl.textContent = '✅ Bạn đã đăng ký trước đó rồi. Cảm ơn!';
+    msgEl.hidden = false;
+    return;
+  }
+
+  const isNew = saveSubscriber(email);
+  localStorage.setItem(NEWSLETTER_SUBMITTED_KEY, '1');
+
+  msgEl.hidden = false;
+  if (isNew) {
+    msgEl.className = 'nl-message nl-success';
+    msgEl.textContent = '🎉 Đăng ký thành công! Chúng tôi sẽ gửi tin tức mới nhất đến bạn.';
+  } else {
+    msgEl.className = 'nl-message nl-success';
+    msgEl.textContent = '✅ Email này đã được đăng ký. Cảm ơn bạn!';
+  }
+
+  // Optionally submit to Formspree if configured
+  const formspreeEndpoint = formEl.dataset.formspree;
+  if (formspreeEndpoint) {
+    fetch(formspreeEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email })
+    }).catch(() => { /* silent fail – localStorage is the source of truth */ });
+  }
+
+  input.value = '';
+  input.disabled = true;
+  formEl.querySelector('.nl-submit-btn').disabled = true;
+}
+
+function initNewsletter() {
+  document.querySelectorAll('.newsletter-form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleNewsletterSubmit(form);
+    });
+  });
+
+  // Pre-fill if already submitted
+  if (localStorage.getItem(NEWSLETTER_SUBMITTED_KEY)) {
+    document.querySelectorAll('.newsletter-form').forEach(form => {
+      const msgEl = form.querySelector('.nl-message');
+      if (msgEl) {
+        msgEl.className = 'nl-message nl-success';
+        msgEl.textContent = '✅ Bạn đã đăng ký nhận bản tin Signal Hunters. Cảm ơn!';
+        msgEl.hidden = false;
+        const btn = form.querySelector('.nl-submit-btn');
+        if (btn) btn.disabled = true;
+      }
+    });
+  }
+}
+
+window.handleNewsletterSubmit = handleNewsletterSubmit;
+// ─────────────────────────────────────────────────────────────────────────────
+
 bindHomeNavigation();
 loadPosts();
 loadCryptoPrices();
 loadFearGreed();
 loadTrendingCoins();
+initNewsletter();
 loadRanking();
 window.setInterval(loadCryptoPrices, 60000);
 window.setInterval(loadFearGreed, 3600000);
