@@ -33,7 +33,7 @@ ENV_FILE   = ROOT_DIR / ".env"
 
 # ─── Config ──────────────────────────────────────────────────────────────────
 # Base URL của website (không dấu slash cuối)
-SITE_BASE_URL = "https://tanphat251196-max.github.io/signal-hunters-web"
+SITE_BASE_URL = "https://daututhongminh24h.com"
 GRAPH_API_VERSION = "v19.0"
 
 # Số giờ tối đa để coi bài là "mới" (default 48h)
@@ -94,17 +94,17 @@ def post_to_facebook(page_id: str, page_token: str, message: str, link: str | No
 
 
 def build_post_message(post: dict) -> str:
-    """Build the text body for a Facebook post."""
+    """Build the text body for a Facebook post — Identity: Thiên Kim."""
     title   = post.get("title", "")
     summary = post.get("summary") or post.get("excerpt") or ""
     category_map = {
-        "analysis": "📊 Phân tích", "phan-tich": "📊 Phân tích",
-        "news": "📰 Tin tức",       "tin-tuc": "📰 Tin tức",
-        "commodity": "🏅 Hàng hóa", "hang-hoa": "🏅 Hàng hóa",
+        "analysis": "📊 Phân tích kỹ thuật", "phan-tich": "📊 Phân tích kỹ thuật",
+        "news": "📰 Tin tức crypto",          "tin-tuc": "📰 Tin tức crypto",
+        "commodity": "🏅 Hàng hóa",           "hang-hoa": "🏅 Hàng hóa",
         "altcoin": "🔷 Altcoin",
-        "onchain": "🔗 On-chain",
+        "chinh-tri": "🏛️ Vĩ mô & Chính sách",
     }
-    cat_label = category_map.get(post.get("category", ""), "📌 Signal Hunters")
+    cat_label = category_map.get(post.get("category", ""), "💡 Đầu Tư Thông Minh")
 
     lines = [
         f"{cat_label}",
@@ -113,16 +113,19 @@ def build_post_message(post: dict) -> str:
         f"",
     ]
     if summary:
-        # Trim to first 280 chars for readability
-        short = summary[:280].rsplit(" ", 1)[0] + "..." if len(summary) > 280 else summary
+        # Trim to first 300 chars for readability
+        short = summary[:300].rsplit(" ", 1)[0] + "..." if len(summary) > 300 else summary
         lines.append(short)
         lines.append("")
 
     lines += [
         "─────────────────────",
-        "👉 Đọc full bài tại link bên dưới",
+        "✨ Thiên Kim — Đầu Tư Thông Minh 24H",
+        "👉 Đọc full bài phân tích tại link bên dưới nhé anh em~",
         "",
-        "#SignalHunters #Crypto #Bitcoin #ĐầuTưThôngMinh",
+        "📌 Theo dõi để không bỏ lỡ tín hiệu quan trọng!",
+        "",
+        "#ThiênKim #Crypto #Bitcoin #DeFi #ĐầuTưThôngMinh #SignalHunters",
     ]
     return "\n".join(lines)
 
