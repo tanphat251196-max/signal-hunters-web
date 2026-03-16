@@ -924,14 +924,37 @@ async function loadCommodityPrices() {
 }
 
 async function loadUsdtVnd() {
+  // Try P2P proxy first (real Binance P2P rate), fallback to er-api.com
+  try {
+    const res = await fetch('http://localhost:7788/api/p2p', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`P2P proxy HTTP ${res.status}`);
+    const data = await res.json();
+    if (!data.price) throw new Error('No price in P2P response');
+
+    commodityCache.usdVnd.price = data.price;
+    renderUsdtVnd(data.price, data.change !== undefined ? data.change : null);
+    updateCommodityTimestamp();
+
+    // Update label to show P2P source
+    const labelEl = document.querySelector('.usdt-vnd-row strong');
+    if (labelEl) labelEl.innerHTML = '<span class="coin-icon">💵</span>USDT/VND P2P';
+    return;
+  } catch (p2pErr) {
+    console.warn('P2P proxy unavailable, falling back to er-api.com:', p2pErr);
+  }
+
+  // Fallback: er-api.com USD/VND
   try {
     const vnd = await fetchUsdVnd();
-    // Store previous for change calculation
     const prev = commodityCache.usdVnd.price;
     const changePct = prev ? ((vnd - prev) / prev) * 100 : 0;
     commodityCache.usdVnd.price = vnd;
     renderUsdtVnd(vnd, prev ? changePct : null);
     updateCommodityTimestamp();
+
+    // Restore fallback label
+    const labelEl = document.querySelector('.usdt-vnd-row strong');
+    if (labelEl) labelEl.innerHTML = '<span class="coin-icon">💵</span>USD/VND';
   } catch (err) {
     console.warn('USD/VND fetch failed:', err);
     renderUsdtVnd(null, null);
