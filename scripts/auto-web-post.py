@@ -516,13 +516,13 @@ TRẢ VỀ JSON (chỉ JSON, không markdown):
 
 
 def generate_ai_thumbnail(title: str, slug: str) -> str:
-    """Generate AI thumbnail using Imagen 4.0 API."""
+    """Generate AI thumbnail using Gemini 3.1 Flash Image API (Nano Banana 2)."""
     try:
         import base64
         cfg = json.load(open(CONFIG_FILE))
         api_key = cfg['models']['providers']['google']['apiKey']
 
-        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key={api_key}"
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key={api_key}"
 
         # Determine mood/theme from title keywords
         title_lower = title.lower()
@@ -546,7 +546,7 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
             mood = "professional thoughtful expression, arms crossed confidently"
             scene_color = "balanced cyan purple and magenta, mixed holographic market data in background"
 
-        # Clean, detailed Imagen prompt — NO TEXT in image
+        # Clean, detailed prompt — NO TEXT in image
         prompt = (
             f"Cinematic 16:9 illustration for a crypto news article about: \"{title}\". "
             f"Main subject: beautiful petite anime girl with short black bob hair with straight blunt bangs, "
@@ -558,20 +558,24 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
             f"Color palette: {scene_color}. "
             f"Style: high quality anime illustration, masterpiece, sharp focus, dramatic rim lighting, "
             f"vibrant neon glow. "
-            f"IMPORTANT: absolutely no text, no letters, no words, no numbers, no labels, no signs, no captions anywhere in the image. Pure visual only."
+            f"absolutely no text, no letters, no words, no numbers, no labels, no signs, no captions anywhere in the image. Pure visual only."
         )
 
         payload = {
-            "instances": [{"prompt": prompt}],
-            "parameters": {"sampleCount": 1, "aspectRatio": "16:9"}
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"responseModalities": ["IMAGE", "TEXT"]}
         }
 
         resp = requests.post(api_url, json=payload, timeout=90)
         if resp.status_code == 200:
             data = resp.json()
-            predictions = data.get("predictions", [])
-            if predictions and "bytesBase64Encoded" in predictions[0]:
-                img_bytes = base64.b64decode(predictions[0]["bytesBase64Encoded"])
+            img_b64 = None
+            for part in data.get('candidates', [{}])[0].get('content', {}).get('parts', []):
+                if 'inlineData' in part:
+                    img_b64 = part['inlineData']['data']
+                    break
+            if img_b64:
+                img_bytes = base64.b64decode(img_b64)
                 filename = f"post-{slug[:40]}.png"
                 filepath = IMAGES_DIR / filename
                 with open(filepath, "wb") as f:

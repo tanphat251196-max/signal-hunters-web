@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate AI thumbnails for 8 posts dated 2026-03-17 using Imagen 4.0 API.
+Generate AI thumbnails for 8 posts dated 2026-03-17 using Gemini 3.1 Flash Image API (Nano Banana 2).
 """
 
 import json
@@ -30,8 +30,8 @@ def slugify(text: str) -> str:
 
 
 def generate_thumbnail(title: str, category: str, api_key: str) -> bytes | None:
-    """Call Imagen 4.0 API to generate a thumbnail. Returns image bytes or None."""
-    api_url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key={api_key}"
+    """Call Gemini 3.1 Flash Image API (Nano Banana 2) to generate a thumbnail. Returns image bytes or None."""
+    api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key={api_key}"
 
     title_lower = title.lower()
     bearish_kw = ["crash", "dump", "giảm", "sụt", "lo ngại", "rủi ro", "cảnh báo",
@@ -79,18 +79,17 @@ def generate_thumbnail(title: str, category: str, api_key: str) -> bytes | None:
     )
 
     payload = {
-        "instances": [{"prompt": prompt}],
-        "parameters": {"sampleCount": 1, "aspectRatio": "16:9"}
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"responseModalities": ["IMAGE", "TEXT"]}
     }
 
     resp = requests.post(api_url, json=payload, timeout=120)
     if resp.status_code == 200:
         data = resp.json()
-        predictions = data.get("predictions", [])
-        if predictions and "bytesBase64Encoded" in predictions[0]:
-            return base64.b64decode(predictions[0]["bytesBase64Encoded"])
-        else:
-            print(f"  ⚠️ No image in response: {str(data)[:200]}")
+        for part in data.get('candidates', [{}])[0].get('content', {}).get('parts', []):
+            if 'inlineData' in part:
+                return base64.b64decode(part['inlineData']['data'])
+        print(f"  ⚠️ No image in response: {str(data)[:200]}")
     elif resp.status_code == 429:
         print(f"  ⏳ Rate limited (429), waiting 30s...")
         time.sleep(30)
