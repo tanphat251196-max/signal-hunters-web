@@ -274,10 +274,32 @@ BINGX_CTA_HTML = """<div class="cta-box" style="background:#1a1a2e;border:1px so
 
 
 def categorize_article(title: str, content: str) -> str:
-    """Categorize article based on title + content keywords."""
+    """Categorize article based on title + content keywords.
+
+    Priority order (highest to lowest):
+    1. phan-tich  — analysis, technical, prediction
+    2. hang-hoa   — commodities, macro, forex
+    3. tin-tuc    — news, announcements, partnerships
+    4. altcoin    — specific altcoin names (only if no higher match)
+    5. chinh-tri  — politics, regulation, legal
+    Default fallback: tin-tuc
+    """
     text = (title + " " + content[:1000]).lower()  # Only use first 1000 chars of content for speed
 
-    # Commodities / macro (check early — very distinct keywords)
+    # 1. HIGHEST PRIORITY: Analysis / technical / prediction
+    analysis_kw = [
+        "phân tích kỹ thuật", "phân tích giá", "kỹ thuật", "technical analysis",
+        "dự đoán giá", "dự báo giá", "price prediction", "price target", "mục tiêu giá",
+        "hỗ trợ và kháng cự", "support resistance", "hỗ trợ kháng cự",
+        "rsi", "macd", "bollinger", "fibonacci", "on-chain", "onchain",
+        "bull run", "bear market", "bearish", "bullish",
+        "dự đoán", "nhà phân tích", "phân tích chuyên sâu",
+        "cryptoquant", "glassnode", "santiment", "chart"
+    ]
+    if any(kw in text for kw in analysis_kw):
+        return "phan-tich"
+
+    # 2. Commodities / macro / forex
     commodity_kw = [
         "vàng", "gold", "bạc", "silver", "dầu mỏ", "crude oil", "dầu wti", "brent",
         "khí đốt", "natural gas", "forex", "ngoại hối", "fed ", "lãi suất",
@@ -288,19 +310,18 @@ def categorize_article(title: str, content: str) -> str:
     if any(kw in text for kw in commodity_kw):
         return "hang-hoa"
 
-    # Price analysis / technical / prediction (price-focused articles)
-    analysis_kw = [
-        "phân tích kỹ thuật", "technical analysis", "dự đoán giá", "mục tiêu giá",
-        "price target", "hỗ trợ và kháng cự", "support resistance",
-        "rsi", "macd", "bollinger", "fibonacci", "on-chain", "onchain",
-        "bull run", "bear market", "bearish", "bullish",
-        "phân tích giá", "price prediction", "dự báo giá", "dự đoán",
-        "soloway", "cryptoquant", "glassnode", "santiment", "nhà phân tích"
+    # 3. News / announcements / partnerships / legal events
+    news_kw = [
+        "tin tức", "thông báo", "ra mắt", "hợp tác", "partnership",
+        "pháp lý", "sec ", "cftc", "etf approval", "etf được phê duyệt",
+        "quy định", "regulation", "luật",
+        "hack", "tấn công", "bị hack", "stolen", "phát hành", "launch",
+        "listing", "niêm yết", "update", "nâng cấp", "upgrade", "mainnet"
     ]
-    if any(kw in text for kw in analysis_kw):
-        return "phan-tich"
+    if any(kw in text for kw in news_kw):
+        return "tin-tuc"
 
-    # Altcoin — specific altcoins (NOT BTC)
+    # 4. Altcoin — specific altcoins (only when no higher priority match)
     altcoin_kw = [
         "ethereum", " eth ", "eth,", "eth.", "xrp", "ripple", "solana", " sol ",
         "bnb", "cardano", "ada", "avalanche", "avax", "polkadot", "dot",
@@ -312,15 +333,13 @@ def categorize_article(title: str, content: str) -> str:
     if any(kw in text for kw in altcoin_kw):
         return "altcoin"
 
-    # Politics / regulation / legal
+    # 5. Politics / government / macro policy
     politics_kw = [
-        "quy định", "regulation", "luật pháp", "cấm giao dịch", "ban crypto",
-        "kiện tụng", "lawsuit", "sec ", "cftc", "tòa án", "court ruling",
-        "doj", "bộ tư pháp", "nghị quyết", "quốc hội", "congress",
-        "trump", "biden", "tổng thống", "president", "chính phủ ra lệnh",
-        "pháp lý", "giấy phép hoạt động", "license", "trừng phạt", "sanction",
-        "thuế crypto", "tariff", "chiến tranh thương mại", "war", "iran", "nga", "russia",
-        "trung quốc", "china ban", "chính trị"
+        "chính phủ", "government", "quốc hội", "congress", "chính trị",
+        "trump", "biden", "tổng thống", "president",
+        "trừng phạt", "sanction", "thuế", "tariff",
+        "chiến tranh", "war", "iran", "nga", "russia", "trung quốc", "china",
+        "kinh tế vĩ mô", "macroeconomics"
     ]
     if any(kw in text for kw in politics_kw):
         return "chinh-tri"
@@ -497,127 +516,97 @@ TRẢ VỀ JSON (chỉ JSON, không markdown):
 
 
 def generate_ai_thumbnail(title: str, slug: str) -> str:
-    """Generate AI thumbnail using Gemini 2.0 Flash Image Gen + Yume character."""
+    """Generate AI thumbnail using Imagen 4.0 API."""
     try:
         import base64
         cfg = json.load(open(CONFIG_FILE))
         api_key = cfg['models']['providers']['google']['apiKey']
-        
-        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key={api_key}"
-        
-        # Reference image cho character consistency
-        ref_path = Path("/home/shinyyume/.openclaw/workspace/assets/reference-yume-news.jpg")
-        ref_b64 = ""
-        if ref_path.exists():
-            ref_b64 = base64.b64encode(ref_path.read_bytes()).decode()
-        
-        # Character block chuẩn từ image-prompts.md
-        char_block = (
-            "masterpiece, best quality, Shiny Yume by Gin, beautiful petite cyber anime girl "
-            "21 years old adult, short black bob hair with straight blunt bangs, huge expressive "
-            "sparkling anime eyes with white highlights, two glowing white futuristic halo-ear "
-            "rings floating on head, black high choker with silver oval ring, black strapless "
-            "bustier top with intricate white geometric harness straps crossing chest, vibrant "
-            "neon cyberpunk lighting in cyan magenta electric purple pink accents glowing on "
-            "harness and eyes, black and white high contrast base with strong neon glow, "
-            "highly detailed anime illustration, dynamic rim lighting, no text, "
-            "high resolution, sharp focus"
-        )
-        
-        # Determine mood/pose from title keywords
+
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key={api_key}"
+
+        # Determine mood/theme from title keywords
         title_lower = title.lower()
-        bearish_kw = ["crash", "dump", "giảm", "sụt", "lo ngại", "rủi ro", "cảnh báo", 
+        bearish_kw = ["crash", "dump", "giảm", "sụt", "lo ngại", "rủi ro", "cảnh báo",
                       "thanh lý", "liquidat", "phá sản", "bankrupt", "hack", "tấn công",
                       "cấm", "ban", "kiện", "lawsuit", "bearish", "sell-off", "thua lỗ"]
         bullish_kw = ["tăng", "pump", "rally", "ath", "kỷ lục", "đầu tư", "mua vào",
                       "phê duyệt", "etf", "institutional", "bullish", "breakout", "lạc quan",
                       "thông qua", "chấp nhận", "hỗ trợ"]
-        
+
         is_bearish = any(kw in title_lower for kw in bearish_kw)
         is_bullish = any(kw in title_lower for kw in bullish_kw)
-        
+
         if is_bearish:
-            mood = "focused calm slightly concerned expression, hand on chin thinking pose"
-            scene_color = "crimson red + electric purple + cyan highlights, warning holographic indicators"
+            mood = "concerned analytical expression, hand on chin thinking"
+            scene_color = "crimson red and electric purple with cyan highlights, warning holographic indicators in background"
         elif is_bullish:
-            mood = "excited confident expression with a bright smile, fist pump victory pose"
-            scene_color = "neon cyan + electric green + soft magenta, upward glowing charts"
+            mood = "excited confident smile, victory fist pump gesture"
+            scene_color = "neon cyan and electric green with soft magenta accents, upward glowing price charts in background"
         else:
-            mood = "cute professional thoughtful expression, arms crossed confident pose"
-            scene_color = "balanced cyan + purple + magenta, mixed market signals"
-        
-        # Context-aware prompt based on title
+            mood = "professional thoughtful expression, arms crossed confidently"
+            scene_color = "balanced cyan purple and magenta, mixed holographic market data in background"
+
+        # Clean, detailed Imagen prompt
         prompt = (
-            f"This is the reference image of my character Shiny Yume. Keep her character design "
-            f"EXACTLY the same — same face style, same huge sparkling anime eyes, same short black "
-            f"bob with blunt bangs, same two glowing halo-ear rings, same black choker with silver "
-            f"oval ring, same black bustier with white geometric harness.\n\n"
-            f"Generate an image: wide 16:9 {char_block}, {mood}. "
-            f"She is the main character, prominently featured center-right. "
-            f"Scene context based on this news headline: \"{title}\". "
-            f"Background: futuristic cyberpunk environment with holographic displays showing "
-            f"relevant visual elements for this news topic. Color: {scene_color}. "
-            f"A glowing holographic sign displaying 'Signal Hunters' naturally in the scene. "
-            f"Leave negative space on left/top for headline overlay. "
-            f"No watermark, no extra characters."
+            f"Cinematic 16:9 thumbnail for crypto news article titled: \"{title}\". "
+            f"Main subject: beautiful petite anime girl with short black bob hair with straight blunt bangs, "
+            f"huge expressive sparkling anime eyes, two glowing white futuristic halo rings near ears, "
+            f"black choker with silver ring, black strapless top with white geometric harness straps, "
+            f"neon cyberpunk lighting. She has a {mood}. "
+            f"She is prominently featured on the right side of the frame. "
+            f"Scene: futuristic cyberpunk trading room with holographic displays showing cryptocurrency charts and data. "
+            f"Color palette: {scene_color}. "
+            f"A glowing holographic sign reading 'Signal Hunters' appears naturally in the scene. "
+            f"Left side has dark negative space suitable for text overlay. "
+            f"Style: high quality anime illustration, masterpiece, sharp focus, dramatic rim lighting, "
+            f"vibrant neon glow, no watermark, no extra text."
         )
-        
-        # Build payload with reference image
-        parts = []
-        if ref_b64:
-            parts.append({
-                "inlineData": {
-                    "mimeType": "image/jpeg",
-                    "data": ref_b64
-                }
-            })
-        parts.append({"text": prompt})
-        
+
         payload = {
-            "contents": [{"parts": parts}],
-            "generationConfig": {"responseModalities": ["TEXT", "IMAGE"]}
+            "instances": [{"prompt": prompt}],
+            "parameters": {"sampleCount": 1, "aspectRatio": "16:9"}
         }
-        
+
         resp = requests.post(api_url, json=payload, timeout=90)
         if resp.status_code == 200:
             data = resp.json()
-            for c in data.get("candidates", []):
-                for part in c.get("content", {}).get("parts", []):
-                    if "inlineData" in part:
-                        img_bytes = base64.b64decode(part["inlineData"]["data"])
-                        filename = f"post-{slug[:40]}.png"
-                        filepath = IMAGES_DIR / filename
-                        with open(filepath, "wb") as f:
-                            f.write(img_bytes)
-                        
-                        # Overlay logo watermark
-                        try:
-                            from PIL import Image
-                            img = Image.open(filepath).convert("RGBA")
-                            # Resize to FHD if needed
-                            if img.width < 1920:
-                                ratio = 1920 / img.width
-                                img = img.resize((1920, int(img.height * ratio)), Image.LANCZOS)
-                            logo_path = Path("/home/shinyyume/.openclaw/workspace/assets/sh-logo-watermark.png")
-                            if logo_path.exists():
-                                logo = Image.open(logo_path).convert("RGBA")
-                                img.paste(logo, (20, 20), logo)
-                            img.save(filepath, "PNG")
-                            print(f"    🎨 AI thumbnail + logo: {filename} ({filepath.stat().st_size//1024}KB)")
-                        except ImportError:
-                            print(f"    🎨 AI thumbnail (no logo - PIL missing): {filename} ({len(img_bytes)//1024}KB)")
-                        
-                        return f"images/{filename}"
-        
-        print(f"    ⚠️ AI thumbnail failed: HTTP {resp.status_code}")
-        if resp.status_code != 200:
+            predictions = data.get("predictions", [])
+            if predictions and "bytesBase64Encoded" in predictions[0]:
+                img_bytes = base64.b64decode(predictions[0]["bytesBase64Encoded"])
+                filename = f"post-{slug[:40]}.png"
+                filepath = IMAGES_DIR / filename
+                with open(filepath, "wb") as f:
+                    f.write(img_bytes)
+
+                # Overlay logo watermark if PIL available
+                try:
+                    from PIL import Image
+                    img = Image.open(filepath).convert("RGBA")
+                    # Resize to FHD if needed
+                    if img.width < 1920:
+                        ratio = 1920 / img.width
+                        img = img.resize((1920, int(img.height * ratio)), Image.LANCZOS)
+                    logo_path = Path("/home/shinyyume/.openclaw/workspace/assets/sh-logo-watermark.png")
+                    if logo_path.exists():
+                        logo = Image.open(logo_path).convert("RGBA")
+                        img.paste(logo, (20, 20), logo)
+                    img.save(filepath, "PNG")
+                    print(f"    🎨 AI thumbnail + logo: {filename} ({filepath.stat().st_size//1024}KB)")
+                except ImportError:
+                    print(f"    🎨 AI thumbnail (no logo - PIL missing): {filename} ({len(img_bytes)//1024}KB)")
+
+                return f"images/{filename}"
+            else:
+                print(f"    ⚠️ AI thumbnail: no image in response predictions")
+        else:
+            print(f"    ⚠️ AI thumbnail failed: HTTP {resp.status_code}")
             try:
-                print(f"    Response: {resp.text[:200]}")
+                print(f"    Response: {resp.text[:300]}")
             except:
                 pass
     except Exception as e:
         print(f"    ⚠️ AI thumbnail error: {e}")
-    
+
     return "images/og-banner.jpg"
 
 
