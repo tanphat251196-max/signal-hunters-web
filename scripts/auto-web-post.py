@@ -763,7 +763,9 @@ def main():
     
     # Process each article
     published = 0
-    next_id = max([p.get("id", 0) for p in posts], default=0) + 1 if posts else 1
+    # IDs are string slugs — generate timestamp-based ID for new posts
+    ts_id = datetime.now().strftime("%Y%m%d%H%M%S")
+    next_id_counter = [0]  # mutable counter for multiple posts in same run
     
     for i, art in enumerate(new_articles):
         print(f"\n📝 [{i+1}/{len(new_articles)}] {art['title'][:60]}...")
@@ -788,9 +790,14 @@ def main():
         # Categorize based on content
         category = categorize_article(rewritten["title"], rewritten["content"])
 
-        # Create post entry
+        # Create post entry — ID is slug-based (string, not int)
+        post_id = slug if slug else f"{ts_id}-{next_id_counter[0]}"
+        # Ensure uniqueness: append counter if slug already exists
+        existing_ids = {p.get("id") for p in posts}
+        if post_id in existing_ids:
+            post_id = f"{slug}-{ts_id}" if slug else f"{ts_id}-{next_id_counter[0]}"
         post = {
-            "id": next_id,
+            "id": post_id,
             "title": rewritten["title"],
             "summary": rewritten["summary"][:200],
             "content": rewritten["content"],
@@ -803,7 +810,7 @@ def main():
         
         # Insert at beginning (newest first)
         posts.insert(0, post)
-        next_id += 1
+        next_id_counter[0] += 1
         published += 1
         print(f"  ✅ Added: {slug}")
     
