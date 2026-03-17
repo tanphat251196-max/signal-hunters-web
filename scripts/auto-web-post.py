@@ -546,9 +546,9 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
             mood = "professional thoughtful expression, arms crossed confidently"
             scene_color = "balanced cyan purple and magenta, mixed holographic market data in background"
 
-        # Clean, detailed Imagen prompt
+        # Clean, detailed Imagen prompt — NO TEXT in image
         prompt = (
-            f"Cinematic 16:9 thumbnail for crypto news article titled: \"{title}\". "
+            f"Cinematic 16:9 illustration for a crypto news article about: \"{title}\". "
             f"Main subject: beautiful petite anime girl with short black bob hair with straight blunt bangs, "
             f"huge expressive sparkling anime eyes, two glowing white futuristic halo rings near ears, "
             f"black choker with silver ring, black strapless top with white geometric harness straps, "
@@ -556,10 +556,9 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
             f"She is prominently featured on the right side of the frame. "
             f"Scene: futuristic cyberpunk trading room with holographic displays showing cryptocurrency charts and data. "
             f"Color palette: {scene_color}. "
-            f"A glowing holographic sign reading 'Signal Hunters' appears naturally in the scene. "
-            f"Left side has dark negative space suitable for text overlay. "
             f"Style: high quality anime illustration, masterpiece, sharp focus, dramatic rim lighting, "
-            f"vibrant neon glow, no watermark, no extra text."
+            f"vibrant neon glow. "
+            f"IMPORTANT: absolutely no text, no letters, no words, no numbers, no labels, no signs, no captions anywhere in the image. Pure visual only."
         )
 
         payload = {
