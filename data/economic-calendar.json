@@ -1,10 +1,12 @@
 {
-  "updated": "2026-03-18 01:20",
+  "week": "17-23/03/2026",
+  "generated": "2026-03-19",
+  "updated": "2026-03-19 23:30",
   "this_week": {
-    "label": "Tuần này (16/03 - 22/03)",
+    "label": "Tuần này (17/03 - 23/03)",
     "events": [
       {
-        "date": "16/03",
+        "date": "17/03",
         "day": "Thứ 2",
         "time": "19:30",
         "country": "🇨🇦",
@@ -16,7 +18,7 @@
         "impact": "CPI Canada thấp hơn dự báo 0.5% vs 0.7% → lạm phát hạ nhiệt tại Canada → BoC có thể cắt tiếp → CAD yếu nhẹ"
       },
       {
-        "date": "16/03",
+        "date": "17/03",
         "day": "Thứ 2",
         "time": "19:30",
         "country": "🇨🇦",
@@ -28,7 +30,7 @@
         "impact": "Lạm phát lõi Canada hạ từ 2.6% → 2.3% → tín hiệu dove cho BoC"
       },
       {
-        "date": "16/03",
+        "date": "17/03",
         "day": "Thứ 2",
         "time": "19:30",
         "country": "🇺🇸",
@@ -40,7 +42,7 @@
         "impact": "Empire State yếu -0.2 vs dự báo 4.0 → sản xuất Mỹ thu hẹp → USD yếu, bullish nhẹ cho crypto"
       },
       {
-        "date": "17/03",
+        "date": "18/03",
         "day": "Thứ 3",
         "time": "10:30",
         "country": "🇦🇺",
@@ -49,10 +51,10 @@
         "actual": "4.10%",
         "forecast": "4.10%",
         "previous": "3.85%",
-        "impact": "⭐ RBA giữ lãi suất 4.10% — nhưng đã tăng so với kỳ trước 3.85%. Tín hiệu hawkish → AUD mạnh"
+        "impact": "⭐ RBA tăng lãi suất lên 4.10% từ 3.85% — hawkish hơn kỳ trước. AUD mạnh"
       },
       {
-        "date": "17/03",
+        "date": "18/03",
         "day": "Thứ 3",
         "time": "19:15",
         "country": "🇺🇸",
@@ -70,22 +72,10 @@
         "country": "🇪🇺",
         "event": "CPI Eurozone (Năm trên năm) (Tháng 2)",
         "stars": 3,
-        "actual": "",
+        "actual": "1.9%",
         "forecast": "1.9%",
         "previous": "1.7%",
-        "impact": "Lạm phát châu Âu tăng nhẹ → ECB theo dõi, ít khả năng cắt giảm sớm → EUR ổn định"
-      },
-      {
-        "date": "18/03",
-        "day": "Thứ 4",
-        "time": "17:00",
-        "country": "🇪🇺",
-        "event": "CPI Lõi Eurozone (Năm trên năm) (Tháng 2)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "2.4%",
-        "previous": "2.2%",
-        "impact": "CPI lõi EU tăng từ 2.2% → 2.4% (dự báo) → lạm phát dai dẳng hơn mong đợi → ECB cẩn trọng"
+        "impact": "Lạm phát châu Âu tăng nhẹ 1.9% → ECB theo dõi, ít khả năng cắt giảm sớm → EUR ổn định"
       },
       {
         "date": "18/03",
@@ -94,22 +84,10 @@
         "country": "🇺🇸",
         "event": "Chỉ Số Giá Sản Xuất PPI (Tháng trên tháng) (Tháng 2)",
         "stars": 3,
-        "actual": "",
+        "actual": "0.3%",
         "forecast": "0.3%",
         "previous": "0.5%",
         "impact": "PPI Mỹ giảm từ 0.5% → 0.3% — lạm phát tại nguồn hạ nhiệt → tín hiệu dove cho Fed → bullish nhẹ crypto"
-      },
-      {
-        "date": "18/03",
-        "day": "Thứ 4",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "PPI Lõi (Tháng trên tháng) (Tháng 2)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.8%",
-        "impact": "PPI Lõi hạ mạnh từ 0.8% → 0.3% — áp lực lạm phát giảm đáng kể → Fed có thể cân nhắc cắt giảm → bullish"
       },
       {
         "date": "18/03",
@@ -118,46 +96,22 @@
         "country": "🇨🇦",
         "event": "Quyết Định Lãi Suất BoC (Tháng 3)",
         "stars": 4,
-        "actual": "",
+        "actual": "2.25%",
         "forecast": "2.25%",
         "previous": "2.25%",
-        "impact": "⭐ BoC giữ nguyên 2.25% (dự báo) — chú ý tuyên bố về lộ trình cắt giảm tiếp theo"
-      },
-      {
-        "date": "18/03",
-        "day": "Thứ 4",
-        "time": "21:30",
-        "country": "🇨🇦",
-        "event": "Cuộc Họp Báo BoC",
-        "stars": 3,
-        "actual": "",
-        "forecast": "",
-        "previous": "",
-        "impact": "Họp báo BoC — tín hiệu về chu kỳ cắt giảm tiếp, ảnh hưởng CAD và risk sentiment"
+        "impact": "⭐ BoC giữ nguyên 2.25% — chú ý tuyên bố về lộ trình cắt giảm tiếp theo"
       },
       {
         "date": "19/03",
         "day": "Thứ 5",
         "time": "01:00",
         "country": "🇺🇸",
-        "event": "Quyết Định Lãi Suất FOMC (Tháng 3)",
+        "event": "Quyết Định Lãi Suất FOMC (Tháng 3) + Dot Plot",
         "stars": 4,
         "actual": "3.75%",
         "forecast": "3.75%",
         "previous": "3.75%",
-        "impact": "⭐⭐ Fed giữ nguyên 3.75% — Quan trọng nhất: chú ý Dot Plot về lộ trình lãi suất 2026. Market đang kỳ vọng 2-3 lần cắt giảm"
-      },
-      {
-        "date": "19/03",
-        "day": "Thứ 5",
-        "time": "01:00",
-        "country": "🇺🇸",
-        "event": "Dự Báo Kinh Tế FOMC (Dot Plot)",
-        "stars": 4,
-        "actual": "",
-        "forecast": "",
-        "previous": "",
-        "impact": "⭐ Dot Plot — tín hiệu quan trọng nhất về số lần cắt giảm 2026. Dovish → BTC/ETH pump mạnh"
+        "impact": "⭐⭐ QUAN TRỌNG NHẤT TUẦN — Fed giữ nguyên 3.75%. Dot Plot định hình kỳ vọng lãi suất 2026. Market kỳ vọng 2-3 lần cắt giảm trong năm"
       },
       {
         "date": "19/03",
@@ -169,7 +123,7 @@
         "actual": "",
         "forecast": "",
         "previous": "",
-        "impact": "⭐⭐ Powell sẽ giải thích lập trường Fed. Nếu dovish → crypto/vàng pump. Nếu hawkish → áp lực bán. Rất dễ biến động mạnh"
+        "impact": "⭐⭐ Powell giải thích lập trường Fed — Dovish → crypto/vàng pump. Hawkish → áp lực bán. Rất dễ biến động mạnh"
       },
       {
         "date": "19/03",
@@ -178,10 +132,10 @@
         "country": "🇦🇺",
         "event": "Tỷ Lệ Thất Nghiệp Úc (Tháng 2)",
         "stars": 3,
-        "actual": "",
+        "actual": "4.3%",
         "forecast": "4.1%",
         "previous": "4.1%",
-        "impact": "Thị trường lao động Úc — ổn định ở 4.1%. Không nhiều tác động đến crypto"
+        "impact": "Thất nghiệp Úc tăng 4.3% vs dự báo 4.1% — thị trường lao động yếu hơn kỳ vọng → RBA có thể cân nhắc cắt giảm"
       },
       {
         "date": "19/03",
@@ -190,10 +144,10 @@
         "country": "🇯🇵",
         "event": "Quyết Định Lãi Suất BoJ (Tháng 3)",
         "stars": 4,
-        "actual": "",
+        "actual": "0.75%",
         "forecast": "0.75%",
         "previous": "0.75%",
-        "impact": "⭐ BoJ giữ nguyên 0.75% (kỳ trước đã tăng từ 0.5%). JPY ổn định — theo dõi tín hiệu tăng tiếp. Carry trade quan trọng với BTC"
+        "impact": "⭐ BoJ giữ nguyên 0.75% — JPY ổn định. Theo dõi tín hiệu tăng tiếp. Carry trade quan trọng với BTC"
       },
       {
         "date": "19/03",
@@ -202,10 +156,10 @@
         "country": "🇬🇧",
         "event": "Tỷ Lệ Thất Nghiệp Anh (Tháng 1)",
         "stars": 3,
-        "actual": "",
+        "actual": "5.2%",
         "forecast": "5.3%",
         "previous": "5.2%",
-        "impact": "Thất nghiệp Anh tăng nhẹ → GBP chịu áp lực → BoE có thể cắt giảm sớm hơn"
+        "impact": "Thất nghiệp Anh giữ nguyên 5.2% — tốt hơn dự báo 5.3% → GBP ổn định"
       },
       {
         "date": "19/03",
@@ -214,27 +168,63 @@
         "country": "🇬🇧",
         "event": "Quyết Định Lãi Suất BoE (Tháng 3)",
         "stars": 4,
-        "actual": "",
+        "actual": "3.75%",
         "forecast": "3.75%",
         "previous": "3.75%",
-        "impact": "⭐ BoE giữ nguyên 3.75% (dự báo) — chú ý phiếu bầu MPC. Nếu nhiều phiếu cắt giảm → dove tín hiệu → bullish crypto nhẹ"
+        "impact": "⭐ BoE giữ nguyên 3.75% — chú ý phiếu bầu MPC. Nhiều phiếu cắt giảm → dove tín hiệu → bullish crypto nhẹ"
       },
       {
         "date": "19/03",
         "day": "Thứ 5",
-        "time": "04:45",
-        "country": "🇳🇿",
-        "event": "GDP New Zealand (Quý trên quý) (Quý 4)",
+        "time": "19:30",
+        "country": "🇺🇸",
+        "event": "Đề Nghị Trợ Cấp Thất Nghiệp Lần Đầu (Initial Jobless Claims)",
         "stars": 3,
         "actual": "",
-        "forecast": "0.4%",
-        "previous": "1.1%",
-        "impact": "GDP NZ dự báo giảm từ 1.1% → 0.4% — kinh tế chậm lại → RBNZ có thể tiếp tục nới lỏng"
+        "forecast": "225K",
+        "previous": "220K",
+        "impact": "Initial Jobless Claims — tăng trên 240K → thị trường lao động yếu → Fed dove → bullish crypto. Hiện dự báo 225K là mức bình thường"
+      },
+      {
+        "date": "20/03",
+        "day": "Thứ 6",
+        "time": "15:30",
+        "country": "🇬🇧",
+        "event": "Quyết Định Lãi Suất BoE — Biên Bản MPC",
+        "stars": 3,
+        "actual": "",
+        "forecast": "",
+        "previous": "",
+        "impact": "Biên bản MPC BoE — chi tiết về phiếu bầu và quan điểm thành viên về lộ trình cắt giảm lãi suất"
+      },
+      {
+        "date": "20/03",
+        "day": "Thứ 6",
+        "time": "20:45",
+        "country": "🇺🇸",
+        "event": "Flash PMI Sản Xuất Mỹ (Tháng 3)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "51.5",
+        "previous": "51.6",
+        "impact": "Flash PMI Sản Xuất — dưới 50 → sản xuất thu hẹp → bearish USD, bullish crypto. Dự báo 51.5 vẫn trong vùng mở rộng"
+      },
+      {
+        "date": "20/03",
+        "day": "Thứ 6",
+        "time": "20:45",
+        "country": "🇺🇸",
+        "event": "Flash PMI Dịch Vụ Mỹ (Tháng 3)",
+        "stars": 3,
+        "actual": "",
+        "forecast": "51.0",
+        "previous": "51.7",
+        "impact": "Flash PMI Dịch Vụ — quan trọng hơn PMI sản xuất. Yếu → Fed dovish → bullish crypto. Đây là dữ liệu đầu tiên của tháng 3"
       }
     ]
   },
   "next_week": {
-    "label": "Tuần sau (23/03 - 29/03)",
+    "label": "Tuần sau (24/03 - 29/03)",
     "events": [
       {
         "date": "24/03",
@@ -258,7 +248,7 @@
         "actual": "",
         "forecast": "",
         "previous": "51.6",
-        "impact": "PMI Mỹ — dưới 50 → suy giảm sản xuất → bearish USD, bullish crypto. Trên 50 → tích cực kinh tế"
+        "impact": "PMI Sản Xuất Mỹ — dưới 50 → suy giảm sản xuất → bearish USD, bullish crypto. Trên 50 → tích cực kinh tế"
       },
       {
         "date": "24/03",
@@ -287,26 +277,14 @@
       {
         "date": "26/03",
         "day": "Thứ 5",
-        "time": "19:20",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "Đề Nghị Trợ Cấp Thất Nghiệp Lần Đầu",
+        "event": "Đề Nghị Trợ Cấp Thất Nghiệp Lần Đầu (Jobless Claims)",
         "stars": 3,
         "actual": "",
         "forecast": "",
         "previous": "",
         "impact": "Jobless Claims tuần — tăng đột biến → thị trường lao động yếu → Fed dove → bullish crypto. Dưới 220K là bình thường"
-      },
-      {
-        "date": "27/03",
-        "day": "Thứ 6",
-        "time": "14:00",
-        "country": "🇬🇧",
-        "event": "Doanh Số Bán Lẻ Anh (Tháng trên tháng) (Tháng 2)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "",
-        "previous": "1.8%",
-        "impact": "Tiêu dùng Anh — yếu hơn dự báo → GBP chịu áp lực, BoE hawk giảm"
       },
       {
         "date": "27/03",
@@ -326,7 +304,7 @@
     "label": "Sự kiện 4 sao tuần này",
     "events": [
       {
-        "date": "17/03",
+        "date": "18/03",
         "day": "Thứ 3",
         "time": "10:30",
         "country": "🇦🇺",
@@ -344,7 +322,7 @@
         "country": "🇨🇦",
         "event": "Quyết Định Lãi Suất BoC",
         "stars": 4,
-        "actual": "",
+        "actual": "2.25%",
         "forecast": "2.25%",
         "previous": "2.25%",
         "impact": "BoC giữ 2.25% — theo dõi tín hiệu cắt giảm tiếp theo. Tác động CAD và risk sentiment"
@@ -380,7 +358,7 @@
         "country": "🇯🇵",
         "event": "Quyết Định Lãi Suất BoJ",
         "stars": 4,
-        "actual": "",
+        "actual": "0.75%",
         "forecast": "0.75%",
         "previous": "0.75%",
         "impact": "⭐ BoJ giữ nguyên 0.75% — JPY ổn định. Nếu BoJ hawkish hint tăng thêm → carry trade unwind → ảnh hưởng crypto"
@@ -392,7 +370,7 @@
         "country": "🇬🇧",
         "event": "Quyết Định Lãi Suất BoE",
         "stars": 4,
-        "actual": "",
+        "actual": "3.75%",
         "forecast": "3.75%",
         "previous": "3.75%",
         "impact": "⭐ BoE giữ 3.75% — chú ý phiếu bầu MPC. Nhiều phiếu cắt giảm → tín hiệu sắp cắt → GBP yếu, bullish risk assets"
