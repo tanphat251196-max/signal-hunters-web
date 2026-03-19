@@ -546,19 +546,19 @@ def generate_ai_thumbnail(title: str, slug: str) -> str:
             mood = "professional thoughtful expression, arms crossed confidently"
             scene_color = "balanced cyan purple and magenta, mixed holographic market data in background"
 
-        # Clean, detailed prompt — NO TEXT in image
+        # Clean, detailed prompt — NO TEXT in image, follows article theme
         prompt = (
-            f"Cinematic 16:9 illustration for a crypto news article about: \"{title}\". "
-            f"Main subject: beautiful petite anime girl with short black bob hair with straight blunt bangs, "
-            f"huge expressive sparkling anime eyes, two glowing white futuristic halo rings near ears, "
-            f"black choker with silver ring, black strapless top with white geometric harness straps, "
-            f"neon cyberpunk lighting. She has a {mood}. "
-            f"She is prominently featured on the right side of the frame. "
-            f"Scene: futuristic cyberpunk trading room with holographic displays showing cryptocurrency charts and data. "
+            f"Cinematic 16:9 cyberpunk illustration for a crypto/finance article about: \"{title}\". "
+            f"Visual concept must reflect the article theme directly — show relevant elements like: "
+            f"cryptocurrency symbols, blockchain networks, trading charts, financial data holograms, "
+            f"decentralized nodes, digital vaults, market movements, or thematic metaphors matching the topic. "
+            f"Mood and atmosphere: {mood}. "
+            f"Style: futuristic cyberpunk, neon-lit cityscape or digital space, holographic displays, "
+            f"high contrast dramatic lighting. "
             f"Color palette: {scene_color}. "
-            f"Style: high quality anime illustration, masterpiece, sharp focus, dramatic rim lighting, "
-            f"vibrant neon glow. "
-            f"absolutely no text, no letters, no words, no numbers, no labels, no signs, no captions anywhere in the image. Pure visual only."
+            f"Art style: high quality digital illustration, cinematic composition, masterpiece quality, "
+            f"sharp focus, dramatic rim lighting, vibrant neon glow effects. "
+            f"Absolutely no text, no letters, no words, no numbers, no labels, no signs, no captions anywhere in the image. Pure visual only."
         )
 
         payload = {
