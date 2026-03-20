@@ -597,89 +597,94 @@ def build_image_prompt(title: str, category: str = "") -> str:
 
 
 def generate_ai_thumbnail(title: str, slug: str) -> str:
-    """Generate AI thumbnail using Gemini 3.1 Flash Image API (Nano Banana 2)."""
+    """Generate AI thumbnail using Gemini image generation (Nano Banana).
+    Primary: gemini-2.5-flash-preview-04-17 (2000 RPD quota)
+    Fallback: imagen-4.0-fast-generate-001 (70 RPD quota)
+    """
+    import base64
     try:
-        import base64
         cfg = json.load(open(CONFIG_FILE))
         api_key = cfg['models']['providers']['google']['apiKey']
+    except Exception as e:
+        print(f"    ⚠️ AI thumbnail: config error {e}")
+        return "images/og-banner.jpg"
 
+    prompt = build_image_prompt(title, slug)
+    filename = f"post-{slug[:40]}.jpg"
+    filepath = IMAGES_DIR / filename
+
+    # ── Method 1: Gemini generateContent (Nano Banana 2 — 1000 RPD) ──
+    def try_gemini_image():
         api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key={api_key}"
-
-        # Determine mood/theme from title keywords
-        title_lower = title.lower()
-        bearish_kw = ["crash", "dump", "giảm", "sụt", "lo ngại", "rủi ro", "cảnh báo",
-                      "thanh lý", "liquidat", "phá sản", "bankrupt", "hack", "tấn công",
-                      "cấm", "ban", "kiện", "lawsuit", "bearish", "sell-off", "thua lỗ"]
-        bullish_kw = ["tăng", "pump", "rally", "ath", "kỷ lục", "đầu tư", "mua vào",
-                      "phê duyệt", "etf", "institutional", "bullish", "breakout", "lạc quan",
-                      "thông qua", "chấp nhận", "hỗ trợ"]
-
-        is_bearish = any(kw in title_lower for kw in bearish_kw)
-        is_bullish = any(kw in title_lower for kw in bullish_kw)
-
-        if is_bearish:
-            mood = "concerned analytical expression, hand on chin thinking"
-            scene_color = "crimson red and electric purple with cyan highlights, warning holographic indicators in background"
-        elif is_bullish:
-            mood = "excited confident smile, victory fist pump gesture"
-            scene_color = "neon cyan and electric green with soft magenta accents, upward glowing price charts in background"
-        else:
-            mood = "professional thoughtful expression, arms crossed confidently"
-            scene_color = "balanced cyan purple and magenta, mixed holographic market data in background"
-
-        # Build prompt dynamically based on article content
-        prompt = build_image_prompt(title, slug)
-
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {"responseModalities": ["IMAGE", "TEXT"]}
         }
-
-        resp = requests.post(api_url, json=payload, timeout=90)
-        if resp.status_code == 200:
-            data = resp.json()
-            img_b64 = None
-            for part in data.get('candidates', [{}])[0].get('content', {}).get('parts', []):
-                if 'inlineData' in part:
-                    img_b64 = part['inlineData']['data']
-                    break
-            if img_b64:
-                img_bytes = base64.b64decode(img_b64)
-                filename = f"post-{slug[:40]}.png"
-                filepath = IMAGES_DIR / filename
+        resp = requests.post(api_url, json=payload, timeout=120)
+        if resp.status_code != 200:
+            print(f"    ⚠️ Gemini image HTTP {resp.status_code}: {resp.text[:200]}")
+            return None
+        data = resp.json()
+        for part in data.get("candidates", [{}])[0].get("content", {}).get("parts", []):
+            if "inlineData" in part:
+                img_bytes = base64.b64decode(part["inlineData"]["data"])
                 with open(filepath, "wb") as f:
                     f.write(img_bytes)
+                return img_bytes
+        return None
 
-                # Overlay logo watermark if PIL available
-                try:
-                    from PIL import Image
-                    img = Image.open(filepath).convert("RGBA")
-                    # Resize to FHD if needed
-                    if img.width < 1920:
-                        ratio = 1920 / img.width
-                        img = img.resize((1920, int(img.height * ratio)), Image.LANCZOS)
-                    logo_path = Path("/home/shinyyume/.openclaw/workspace/assets/sh-logo-watermark.png")
-                    if logo_path.exists():
-                        logo = Image.open(logo_path).convert("RGBA")
-                        img.paste(logo, (20, 20), logo)
-                    img.save(filepath, "PNG")
-                    print(f"    🎨 AI thumbnail + logo: {filename} ({filepath.stat().st_size//1024}KB)")
-                except ImportError:
-                    print(f"    🎨 AI thumbnail (no logo - PIL missing): {filename} ({len(img_bytes)//1024}KB)")
+    # ── Method 2: Imagen 4 Fast (fallback — 70 RPD) ──
+    def try_imagen_fast():
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-fast-generate-001:predict?key={api_key}"
+        payload = {
+            "instances": [{"prompt": prompt}],
+            "parameters": {"sampleCount": 1, "aspectRatio": "16:9"}
+        }
+        resp = requests.post(api_url, json=payload, timeout=120)
+        if resp.status_code != 200:
+            print(f"    ⚠️ Imagen4 HTTP {resp.status_code}: {resp.text[:200]}")
+            return None
+        predictions = resp.json().get('predictions', [])
+        if predictions and predictions[0].get('bytesBase64Encoded'):
+            img_bytes = base64.b64decode(predictions[0]['bytesBase64Encoded'])
+            with open(filepath, "wb") as f:
+                f.write(img_bytes)
+            return img_bytes
+        return None
 
-                return f"images/{filename}"
-            else:
-                print(f"    ⚠️ AI thumbnail: no image in response predictions")
-        else:
-            print(f"    ⚠️ AI thumbnail failed: HTTP {resp.status_code}")
-            try:
-                print(f"    Response: {resp.text[:300]}")
-            except:
-                pass
+    # ── Try primary, then fallback ──
+    img_bytes = None
+    for attempt_name, attempt_fn in [("Gemini Nano Banana 2", try_gemini_image), ("Imagen 4 Fast", try_imagen_fast)]:
+        try:
+            img_bytes = attempt_fn()
+            if img_bytes:
+                print(f"    🎨 [{attempt_name}] Generated: {filename} ({len(img_bytes)//1024}KB)")
+                break
+        except Exception as e:
+            print(f"    ⚠️ [{attempt_name}] error: {e}")
+            continue
+
+    if not img_bytes:
+        print(f"    ⚠️ All image methods failed, using fallback banner")
+        return "images/og-banner.jpg"
+
+    # ── Overlay logo watermark ──
+    try:
+        from PIL import Image
+        img = Image.open(filepath).convert("RGBA")
+        logo_path = Path("/home/shinyyume/.openclaw/workspace/assets/sh-logo-watermark.png")
+        if logo_path.exists():
+            logo = Image.open(logo_path).convert("RGBA")
+            img.paste(logo, (20, 20), logo)
+        img = img.convert("RGB")
+        img.save(filepath, "JPEG", quality=90)
+        print(f"    ✅ Watermark applied: {filename} ({filepath.stat().st_size//1024}KB)")
+    except ImportError:
+        pass  # No PIL, keep raw image
     except Exception as e:
-        print(f"    ⚠️ AI thumbnail error: {e}")
+        print(f"    ⚠️ Watermark error: {e}")
 
-    return "images/og-banner.jpg"
+    return f"images/{filename}"
 
 
 def download_image(url: str, slug: str) -> str:

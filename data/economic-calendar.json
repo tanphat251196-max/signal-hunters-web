@@ -1,149 +1,170 @@
 {
   "week": "17-23/03/2026",
   "generated": "2026-03-19",
-  "events": [
-    {
-      "date": "2026-03-19",
-      "time": "09:30",
-      "country": "AU",
-      "event": "Thay Đổi Việc Làm (Tháng 2)",
-      "importance": 3,
-      "previous": "26.1K",
-      "forecast": "20.8K",
-      "actual": "48.9K",
-      "impact": "bullish AUD"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "09:30",
-      "country": "AU",
-      "event": "Tỷ Lệ Thất Nghiệp (Tháng 2)",
-      "importance": 3,
-      "previous": "4.1%",
-      "forecast": "4.1%",
-      "actual": "4.3%",
-      "impact": "bearish AUD"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "12:00",
-      "country": "JP",
-      "event": "Quyết Định Lãi Suất BoJ",
-      "importance": 3,
-      "previous": "0.75%",
-      "forecast": "0.75%",
-      "actual": "0.75%",
-      "impact": "neutral JPY — giữ nguyên như dự báo"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "12:30",
-      "country": "JP",
-      "event": "Họp Báo BoJ — Thống Đốc Ueda",
-      "importance": 3,
-      "previous": "",
-      "forecast": "",
-      "actual": "",
-      "impact": "theo dõi tín hiệu tăng lãi suất tiếp theo"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "17:00",
-      "country": "UK",
-      "event": "Tỷ Lệ Thất Nghiệp UK (Tháng 1)",
-      "importance": 3,
-      "previous": "5.2%",
-      "forecast": "5.3%",
-      "actual": "5.2%",
-      "impact": "neutral GBP"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "19:00",
-      "country": "EU",
-      "event": "CPI Eurozone (Tháng 2) — Final",
-      "importance": 3,
-      "previous": "2.5%",
-      "forecast": "2.4%",
-      "actual": "",
-      "impact": "quan trọng với ECB policy"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "21:30",
-      "country": "US",
-      "event": "Đơn Xin Trợ Cấp Thất Nghiệp Hàng Tuần",
-      "importance": 3,
-      "previous": "220K",
-      "forecast": "225K",
-      "actual": "",
-      "impact": "chỉ báo sức khỏe thị trường lao động Mỹ"
-    },
-    {
-      "date": "2026-03-19",
-      "time": "21:30",
-      "country": "US",
-      "event": "Phát Biểu Thành Viên Fed",
-      "importance": 3,
-      "previous": "",
-      "forecast": "",
-      "actual": "",
-      "impact": "tín hiệu chính sách tiền tệ Fed"
-    },
-    {
-      "date": "2026-03-20",
-      "time": "15:30",
-      "country": "UK",
-      "event": "Quyết Định Lãi Suất BoE",
-      "importance": 3,
-      "previous": "4.5%",
-      "forecast": "4.5%",
-      "actual": "",
-      "impact": "tác động GBP + sentiment risk"
-    },
-    {
-      "date": "2026-03-20",
-      "time": "16:00",
-      "country": "EU",
-      "event": "Flash PMI Sản Xuất Eurozone (Tháng 3)",
-      "importance": 3,
-      "previous": "47.6",
-      "forecast": "48.2",
-      "actual": "",
-      "impact": "chỉ báo tăng trưởng kinh tế EU"
-    },
-    {
-      "date": "2026-03-20",
-      "time": "16:30",
-      "country": "UK",
-      "event": "Flash PMI Tổng Hợp UK (Tháng 3)",
-      "importance": 3,
-      "previous": "50.5",
-      "forecast": "50.8",
-      "actual": "",
-      "impact": "sức khỏe kinh tế Anh"
-    },
-    {
-      "date": "2026-03-20",
-      "time": "21:45",
-      "country": "US",
-      "event": "Flash PMI Sản Xuất Mỹ (Tháng 3)",
-      "importance": 3,
-      "previous": "52.7",
-      "forecast": "52.5",
-      "actual": "",
-      "impact": "tác động mạnh USD + thị trường crypto"
-    },
-    {
-      "date": "2026-03-20",
-      "time": "21:45",
-      "country": "US",
-      "event": "Flash PMI Dịch Vụ Mỹ (Tháng 3)",
-      "importance": 3,
-      "previous": "51.0",
-      "forecast": "51.2",
-      "actual": "",
-      "impact": "chỉ báo kinh tế Mỹ quan trọng"
-    }
-  ]
+  "updated": "2026-03-20 15:15",
+  "this_week": {
+    "label": "Tuần Này (17-23/03)",
+    "events": [
+      {
+        "date": "2026-03-19",
+        "time": "09:30",
+        "country": "AU",
+        "event": "Thay Đổi Việc Làm (Tháng 2)",
+        "importance": 3,
+        "previous": "26.1K",
+        "forecast": "20.8K",
+        "actual": "48.9K",
+        "impact": "bullish AUD",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "09:30",
+        "country": "AU",
+        "event": "Tỷ Lệ Thất Nghiệp (Tháng 2)",
+        "importance": 3,
+        "previous": "4.1%",
+        "forecast": "4.1%",
+        "actual": "4.3%",
+        "impact": "bearish AUD",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "12:00",
+        "country": "JP",
+        "event": "Quyết Định Lãi Suất BoJ",
+        "importance": 3,
+        "previous": "0.75%",
+        "forecast": "0.75%",
+        "actual": "0.75%",
+        "impact": "neutral JPY — giữ nguyên như dự báo",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "12:30",
+        "country": "JP",
+        "event": "Họp Báo BoJ — Thống Đốc Ueda",
+        "importance": 3,
+        "previous": "",
+        "forecast": "",
+        "actual": "",
+        "impact": "theo dõi tín hiệu tăng lãi suất tiếp theo",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "17:00",
+        "country": "UK",
+        "event": "Tỷ Lệ Thất Nghiệp UK (Tháng 1)",
+        "importance": 3,
+        "previous": "5.2%",
+        "forecast": "5.3%",
+        "actual": "5.2%",
+        "impact": "neutral GBP",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "19:00",
+        "country": "EU",
+        "event": "CPI Eurozone (Tháng 2) — Final",
+        "importance": 3,
+        "previous": "2.5%",
+        "forecast": "2.4%",
+        "actual": "",
+        "impact": "quan trọng với ECB policy",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "21:30",
+        "country": "US",
+        "event": "Đơn Xin Trợ Cấp Thất Nghiệp Hàng Tuần",
+        "importance": 3,
+        "previous": "220K",
+        "forecast": "225K",
+        "actual": "",
+        "impact": "chỉ báo sức khỏe thị trường lao động Mỹ",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-19",
+        "time": "21:30",
+        "country": "US",
+        "event": "Phát Biểu Thành Viên Fed",
+        "importance": 3,
+        "previous": "",
+        "forecast": "",
+        "actual": "",
+        "impact": "tín hiệu chính sách tiền tệ Fed",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-20",
+        "time": "15:30",
+        "country": "UK",
+        "event": "Quyết Định Lãi Suất BoE",
+        "importance": 3,
+        "previous": "4.5%",
+        "forecast": "4.5%",
+        "actual": "",
+        "impact": "tác động GBP + sentiment risk",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-20",
+        "time": "16:00",
+        "country": "EU",
+        "event": "Flash PMI Sản Xuất Eurozone (Tháng 3)",
+        "importance": 3,
+        "previous": "47.6",
+        "forecast": "48.2",
+        "actual": "",
+        "impact": "chỉ báo tăng trưởng kinh tế EU",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-20",
+        "time": "16:30",
+        "country": "UK",
+        "event": "Flash PMI Tổng Hợp UK (Tháng 3)",
+        "importance": 3,
+        "previous": "50.5",
+        "forecast": "50.8",
+        "actual": "",
+        "impact": "sức khỏe kinh tế Anh",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-20",
+        "time": "21:45",
+        "country": "US",
+        "event": "Flash PMI Sản Xuất Mỹ (Tháng 3)",
+        "importance": 3,
+        "previous": "52.7",
+        "forecast": "52.5",
+        "actual": "",
+        "impact": "tác động mạnh USD + thị trường crypto",
+        "stars": 3
+      },
+      {
+        "date": "2026-03-20",
+        "time": "21:45",
+        "country": "US",
+        "event": "Flash PMI Dịch Vụ Mỹ (Tháng 3)",
+        "importance": 3,
+        "previous": "51.0",
+        "forecast": "51.2",
+        "actual": "",
+        "impact": "chỉ báo kinh tế Mỹ quan trọng",
+        "stars": 3
+      }
+    ]
+  },
+  "next_week": {
+    "label": "Tuần Sau (24-30/03)",
+    "events": []
+  }
 }
