@@ -655,7 +655,7 @@ function renderArticlePage(posts) {
     "author": {
       "@type": "Person",
       "name": "Shiny Yume",
-      "url": "https://x.com/ShinyYumeSH"
+      "url": "https://x.com/ThienKimCrypto"
     },
     "publisher": {
       "@type": "Organization",
