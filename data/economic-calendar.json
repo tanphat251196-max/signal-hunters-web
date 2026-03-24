@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-24 12:28",
+  "updated": "2026-03-25 00:15",
   "this_week": [
     {
       "date": "23/03",
@@ -9,6 +9,18 @@
       "event": "FOMC Member Miran Speaks",
       "impact": "Low",
       "stars": 1,
+      "forecast": "",
+      "previous": "",
+      "actual": ""
+    },
+    {
+      "date": "23/03",
+      "day": "Thứ 2",
+      "time": "20:30",
+      "country": "🇺🇸 USD",
+      "event": "Bài Phát Biểu của Tổng Thống Trump",
+      "impact": "High",
+      "stars": 3,
       "forecast": "",
       "previous": "",
       "actual": ""
@@ -191,7 +203,7 @@
       "stars": 3,
       "forecast": "51.5",
       "previous": "51.2",
-      "actual": ""
+      "actual": "52.4"
     },
     {
       "date": "24/03",
@@ -203,7 +215,7 @@
       "stars": 3,
       "forecast": "52.0",
       "previous": "52.3",
-      "actual": ""
+      "actual": "51.1"
     },
     {
       "date": "24/03",
@@ -347,6 +359,18 @@
       "stars": 2,
       "forecast": "",
       "previous": "",
+      "actual": ""
+    },
+    {
+      "date": "25/03",
+      "day": "Thứ 4",
+      "time": "21:30",
+      "country": "🇺🇸 USD",
+      "event": "Crude Oil Inventories",
+      "impact": "High",
+      "stars": 3,
+      "forecast": "-1.400M",
+      "previous": "6.156M",
       "actual": ""
     },
     {

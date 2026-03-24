@@ -1308,8 +1308,13 @@ window.setInterval(loadRanking, 300000);
       if (updatedEl && data.updated) {
         updatedEl.textContent = 'Cập nhật: ' + data.updated;
       }
-      renderEconTable('econ-body-this', data.this_week);
-      renderEconTable('econ-body-next', data.next_week);
+      // Filter chỉ hiển thị sự kiện >= 3 sao
+      const filterHigh = (arr) => {
+        const list = Array.isArray(arr) ? arr : (arr && arr.events ? arr.events : []);
+        return list.filter(ev => (ev.stars || 0) >= 3);
+      };
+      renderEconTable('econ-body-this', filterHigh(data.this_week));
+      renderEconTable('econ-body-next', filterHigh(data.next_week));
     })
     .catch(err => {
       console.log('Econ calendar not available:', err);
