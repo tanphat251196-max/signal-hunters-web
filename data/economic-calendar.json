@@ -1,568 +1,607 @@
 {
-  "updated": "2026-03-24 12:07",
+  "updated": "2026-03-24 12:28",
   "this_week": [
     {
       "date": "23/03",
       "day": "Thứ 2",
       "time": "19:45",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Miran Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
+    },
+    {
+      "date": "24/03",
+      "day": "Thứ 3",
+      "time": "03:00",
+      "country": "🇳🇿 NZD",
+      "event": "RBNZ Gov Breman Speaks",
+      "impact": "Medium",
+      "stars": 2,
+      "forecast": "",
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "05:00",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "Flash Manufacturing PMI",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": "51.5"
+      "previous": "51.5",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "05:00",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "Flash Services PMI",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": "52.2"
+      "previous": "52.2",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "06:30",
-      "country": "🇯🇵",
+      "country": "🇯🇵 JPY",
       "event": "National Core CPI y/y",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "1.7%",
-      "previous": "2.0%"
+      "previous": "2.0%",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "07:30",
-      "country": "🇯🇵",
+      "country": "🇯🇵 JPY",
       "event": "Flash Manufacturing PMI",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "53.2",
-      "previous": "52.8"
+      "previous": "52.8",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "15:15",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "French Flash Manufacturing PMI",
+      "impact": "Medium",
       "stars": 2,
-      "actual": "",
       "forecast": "49.4",
-      "previous": "49.9"
+      "previous": "49.9",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "15:15",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "French Flash Services PMI",
+      "impact": "Medium",
       "stars": 2,
-      "actual": "",
       "forecast": "49.2",
-      "previous": "49.6"
+      "previous": "49.6",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "15:30",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "German Flash Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "49.6",
-      "previous": "50.7"
+      "previous": "50.7",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "15:30",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "German Flash Services PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "52.5",
-      "previous": "53.4"
+      "previous": "53.4",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "16:00",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "Flash Manufacturing PMI",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "49.4",
-      "previous": "50.8"
+      "previous": "50.8",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "16:00",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "Flash Services PMI",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "51.1",
-      "previous": "51.8"
+      "previous": "51.8",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "16:30",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Flash Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "50.0",
-      "previous": "52.0"
+      "previous": "52.0",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "16:30",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Flash Services PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "52.8",
-      "previous": "53.9"
+      "previous": "53.9",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "19:15",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "ADP Weekly Employment Change",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": "9.0K"
-    },
-    {
-      "date": "24/03",
-      "day": "Thứ 3",
-      "time": "19:30",
-      "country": "🇺🇸",
-      "event": "Revised Nonfarm Productivity q/q",
-      "stars": 1,
-      "actual": "",
-      "forecast": "1.9%",
-      "previous": "2.8%"
+      "previous": "9.0K",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "20:45",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "Flash Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "51.5",
-      "previous": "51.2"
+      "previous": "51.2",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "20:45",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "Flash Services PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "52.0",
-      "previous": "52.3"
+      "previous": "52.3",
+      "actual": ""
+    },
+    {
+      "date": "24/03",
+      "day": "Thứ 3",
+      "time": "21:00",
+      "country": "🇺🇸 USD",
+      "event": "Richmond Manufacturing Index",
+      "impact": "Medium",
+      "stars": 2,
+      "forecast": "-8",
+      "previous": "-10",
+      "actual": ""
+    },
+    {
+      "date": "25/03",
+      "day": "Thứ 4",
+      "time": "00:00",
+      "country": "🇨🇭 CHF",
+      "event": "SNB Chairman Schlegel Speaks",
+      "impact": "Medium",
+      "stars": 2,
+      "forecast": "",
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "05:30",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Barr Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
-    },
-    {
-      "date": "25/03",
-      "day": "Thứ 4",
-      "time": "06:50",
-      "country": "🇯🇵",
-      "event": "Monetary Policy Meeting Minutes",
-      "stars": 1,
-      "actual": "",
-      "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "07:30",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "CPI m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "0.1%",
-      "previous": "0.4%"
+      "previous": "0.4%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "07:30",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "CPI y/y",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "3.8%",
-      "previous": "3.8%"
+      "previous": "3.8%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "07:30",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "Trimmed Mean CPI m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "0.3%",
-      "previous": "0.3%"
+      "previous": "0.3%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "09:40",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "RBA Assist Gov Jones Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "CPI y/y",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "3.0%",
-      "previous": "3.0%"
+      "previous": "3.0%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Core CPI y/y",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "3.1%",
-      "previous": "3.1%"
+      "previous": "3.1%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "PPI Input m/m",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "0.5%",
-      "previous": "0.4%"
+      "previous": "0.4%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "PPI Output m/m",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "0.3%",
-      "previous": "0.0%"
+      "previous": "0.0%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "15:45",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "ECB President Lagarde Speaks",
+      "impact": "Medium",
       "stars": 2,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "26/03",
       "day": "Thứ 5",
       "time": "03:10",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Miran Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "26/03",
       "day": "Thứ 5",
       "time": "05:15",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "RBA Assist Gov Kent Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "26/03",
       "day": "Thứ 5",
       "time": "06:50",
-      "country": "🇯🇵",
+      "country": "🇯🇵 JPY",
       "event": "SPPI y/y",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "2.6%",
-      "previous": "2.6%"
+      "previous": "2.6%",
+      "actual": ""
     },
     {
       "date": "26/03",
       "day": "Thứ 5",
       "time": "12:00",
-      "country": "🇯🇵",
+      "country": "🇯🇵 JPY",
       "event": "BOJ Core CPI y/y",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "1.6%",
-      "previous": "1.7%"
+      "previous": "1.7%",
+      "actual": ""
     },
     {
       "date": "26/03",
       "day": "Thứ 5",
       "time": "19:30",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "Unemployment Claims",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "211K",
-      "previous": "205K"
+      "previous": "205K",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "03:00",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Cook Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "05:30",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Miran Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "06:00",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Jefferson Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "06:10",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Barr Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Retail Sales m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "-0.6%",
-      "previous": "1.8%"
+      "previous": "1.8%",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "15:00",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "Spanish Flash CPI y/y",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "3.6%",
-      "previous": "2.3%"
+      "previous": "2.3%",
+      "actual": ""
+    },
+    {
+      "date": "27/03",
+      "day": "Thứ 6",
+      "time": "21:00",
+      "country": "🇺🇸 USD",
+      "event": "Revised UoM Consumer Sentiment",
+      "impact": "Medium",
+      "stars": 2,
+      "forecast": "53.9",
+      "previous": "55.5",
+      "actual": ""
+    },
+    {
+      "date": "27/03",
+      "day": "Thứ 6",
+      "time": "21:00",
+      "country": "🇺🇸 USD",
+      "event": "Revised UoM Inflation Expectations",
+      "impact": "Low",
+      "stars": 1,
+      "forecast": "",
+      "previous": "3.4%",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "22:30",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Daly Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "22:40",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "FOMC Member Paulson Speaks",
+      "impact": "Low",
       "stars": 1,
-      "actual": "",
       "forecast": "",
-      "previous": ""
+      "previous": "",
+      "actual": ""
     }
   ],
   "next_week": [
     {
-      "date": "31/03",
-      "day": "Thứ 3",
-      "time": "07:30",
-      "country": "🇯🇵",
-      "event": "Tankan Manufacturing Index (Q1)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "13",
-      "previous": "14"
-    },
-    {
-      "date": "31/03",
+      "date": "01/04",
       "day": "Thứ 3",
       "time": "19:00",
-      "country": "🇺🇸",
-      "event": "Chicago PMI (Mar)",
-      "stars": 2,
-      "actual": "",
-      "forecast": "43.6",
-      "previous": "45.5"
-    },
-    {
-      "date": "01/04",
-      "day": "Thứ 4",
-      "time": "13:30",
-      "country": "🇪🇺",
-      "event": "Manufacturing PMI Final (Mar)",
-      "stars": 2,
-      "actual": "",
-      "forecast": "49.5",
-      "previous": "50.8"
-    },
-    {
-      "date": "01/04",
-      "day": "Thứ 4",
-      "time": "20:45",
-      "country": "🇺🇸",
-      "event": "Manufacturing PMI (Mar)",
-      "stars": 2,
-      "actual": "",
-      "forecast": "51.5",
-      "previous": "51.6"
-    },
-    {
-      "date": "01/04",
-      "day": "Thứ 4",
-      "time": "21:00",
-      "country": "🇺🇸",
-      "event": "ISM Manufacturing PMI (Mar)",
+      "country": "🇺🇸 USD",
+      "event": "ISM Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
-      "forecast": "49.8",
-      "previous": "50.3"
+      "forecast": "49.6",
+      "previous": "50.3",
+      "actual": ""
     },
     {
       "date": "02/04",
-      "day": "Thứ 5",
-      "time": "13:30",
-      "country": "🇪🇺",
-      "event": "Services PMI Final (Mar)",
-      "stars": 2,
-      "actual": "",
-      "forecast": "50.8",
-      "previous": "51.9"
-    },
-    {
-      "date": "02/04",
-      "day": "Thứ 5",
+      "day": "Thứ 4",
       "time": "19:15",
-      "country": "🇺🇸",
-      "event": "ADP Employment Change (Mar)",
+      "country": "🇺🇸 USD",
+      "event": "ADP Non-Farm Employment",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
-      "forecast": "105K",
-      "previous": "77K"
+      "forecast": "120K",
+      "previous": "77K",
+      "actual": ""
     },
     {
       "date": "03/04",
+      "day": "Thứ 5",
+      "time": "19:30",
+      "country": "🇺🇸 USD",
+      "event": "Unemployment Claims",
+      "impact": "High",
+      "stars": 3,
+      "forecast": "226K",
+      "previous": "224K",
+      "actual": ""
+    },
+    {
+      "date": "04/04",
       "day": "Thứ 6",
       "time": "19:30",
-      "country": "🇺🇸",
-      "event": "Non-Farm Payrolls (Mar)",
+      "country": "🇺🇸 USD",
+      "event": "Non-Farm Payrolls",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "140K",
-      "previous": "151K"
+      "previous": "151K",
+      "actual": ""
     },
     {
-      "date": "03/04",
+      "date": "04/04",
       "day": "Thứ 6",
       "time": "19:30",
-      "country": "🇺🇸",
-      "event": "Unemployment Rate (Mar)",
+      "country": "🇺🇸 USD",
+      "event": "Unemployment Rate",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "4.1%",
-      "previous": "4.1%"
+      "previous": "4.1%",
+      "actual": ""
     },
     {
-      "date": "03/04",
+      "date": "04/04",
       "day": "Thứ 6",
       "time": "19:30",
-      "country": "🇨🇦",
-      "event": "Employment Change (Mar)",
+      "country": "🇺🇸 USD",
+      "event": "Average Hourly Earnings m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
-      "forecast": "5.0K",
-      "previous": "-3.2K"
+      "forecast": "0.3%",
+      "previous": "0.3%",
+      "actual": ""
     }
   ],
   "high_impact": [
@@ -570,199 +609,145 @@
       "date": "24/03",
       "day": "Thứ 3",
       "time": "15:30",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "German Flash Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "49.6",
-      "previous": "50.7"
+      "previous": "50.7",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "15:30",
-      "country": "🇪🇺",
+      "country": "🇪🇺 EUR",
       "event": "German Flash Services PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "52.5",
-      "previous": "53.4"
+      "previous": "53.4",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "16:30",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Flash Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "50.0",
-      "previous": "52.0"
+      "previous": "52.0",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "16:30",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Flash Services PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "52.8",
-      "previous": "53.9"
+      "previous": "53.9",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "20:45",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "Flash Manufacturing PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "51.5",
-      "previous": "51.2"
+      "previous": "51.2",
+      "actual": ""
     },
     {
       "date": "24/03",
       "day": "Thứ 3",
       "time": "20:45",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "Flash Services PMI",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "52.0",
-      "previous": "52.3"
+      "previous": "52.3",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "07:30",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "CPI m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "0.1%",
-      "previous": "0.4%"
+      "previous": "0.4%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "07:30",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "CPI y/y",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "3.8%",
-      "previous": "3.8%"
+      "previous": "3.8%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "07:30",
-      "country": "🇦🇺",
+      "country": "🇦🇺 AUD",
       "event": "Trimmed Mean CPI m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "0.3%",
-      "previous": "0.3%"
+      "previous": "0.3%",
+      "actual": ""
     },
     {
       "date": "25/03",
       "day": "Thứ 4",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "CPI y/y",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "3.0%",
-      "previous": "3.0%"
+      "previous": "3.0%",
+      "actual": ""
     },
     {
       "date": "26/03",
       "day": "Thứ 5",
       "time": "19:30",
-      "country": "🇺🇸",
+      "country": "🇺🇸 USD",
       "event": "Unemployment Claims",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "211K",
-      "previous": "205K"
+      "previous": "205K",
+      "actual": ""
     },
     {
       "date": "27/03",
       "day": "Thứ 6",
       "time": "14:00",
-      "country": "🇬🇧",
+      "country": "🇬🇧 GBP",
       "event": "Retail Sales m/m",
+      "impact": "High",
       "stars": 3,
-      "actual": "",
       "forecast": "-0.6%",
-      "previous": "1.8%"
-    },
-    {
-      "date": "31/03",
-      "day": "Thứ 3",
-      "time": "07:30",
-      "country": "🇯🇵",
-      "event": "Tankan Manufacturing Index (Q1)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "13",
-      "previous": "14"
-    },
-    {
-      "date": "01/04",
-      "day": "Thứ 4",
-      "time": "21:00",
-      "country": "🇺🇸",
-      "event": "ISM Manufacturing PMI (Mar)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "49.8",
-      "previous": "50.3"
-    },
-    {
-      "date": "02/04",
-      "day": "Thứ 5",
-      "time": "19:15",
-      "country": "🇺🇸",
-      "event": "ADP Employment Change (Mar)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "105K",
-      "previous": "77K"
-    },
-    {
-      "date": "03/04",
-      "day": "Thứ 6",
-      "time": "19:30",
-      "country": "🇺🇸",
-      "event": "Non-Farm Payrolls (Mar)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "140K",
-      "previous": "151K"
-    },
-    {
-      "date": "03/04",
-      "day": "Thứ 6",
-      "time": "19:30",
-      "country": "🇺🇸",
-      "event": "Unemployment Rate (Mar)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "4.1%",
-      "previous": "4.1%"
-    },
-    {
-      "date": "03/04",
-      "day": "Thứ 6",
-      "time": "19:30",
-      "country": "🇨🇦",
-      "event": "Employment Change (Mar)",
-      "stars": 3,
-      "actual": "",
-      "forecast": "5.0K",
-      "previous": "-3.2K"
+      "previous": "1.8%",
+      "actual": ""
     }
   ]
 }

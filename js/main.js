@@ -1321,7 +1321,8 @@ window.setInterval(loadRanking, 300000);
 function renderEconTable(bodyId, weekData) {
   const body = document.getElementById(bodyId);
   if (!body || !weekData) return;
-  const events = weekData.events || [];
+  // Support both flat array and {events:[]} format
+  const events = Array.isArray(weekData) ? weekData : (weekData.events || []);
   if (events.length === 0) {
     body.innerHTML = '<tr><td colspan="7" class="econ-empty">Chưa có sự kiện. Sẽ cập nhật vào thứ 2.</td></tr>';
     return;
