@@ -1337,8 +1337,9 @@ function renderEconTable(bodyId, weekData) {
     const actualClass = ev.actual ?
       (parseFloat(ev.actual) > parseFloat(ev.forecast || ev.previous || '0') ? 'econ-actual-positive' :
        parseFloat(ev.actual) < parseFloat(ev.forecast || ev.previous || '0') ? 'econ-actual-negative' : '') : '';
+    const dateStr = ev.date ? '<div style="font-size:0.8em;color:#888;">' + ev.date + (ev.day ? ' ' + ev.day : '') + '</div>' : '';
     return '<tr>' +
-      '<td>' + (ev.time || '-') + '</td>' +
+      '<td>' + dateStr + '<span style="font-weight:bold;color:#00aaff;">' + (ev.time || '-') + '</span></td>' +
       '<td><span class="econ-country">' + (ev.country || '-') + '</span></td>' +
       '<td><span class="econ-event-name">' + (ev.event || '-') + '</span></td>' +
       '<td><span class="econ-stars">' + stars + '</span></td>' +
