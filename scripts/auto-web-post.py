@@ -24,8 +24,8 @@ POSTS_FILE = REPO_DIR / "data" / "posts.json"
 IMAGES_DIR = REPO_DIR / "images"
 DEPLOY_SCRIPT = REPO_DIR / "scripts" / "deploy.sh"
 DEDUP_FILE = Path("/tmp/openclaw/web-post-last-date.txt")
-MAX_ARTICLES = 8   # Tối đa 8 bài/ngày
-MIN_ARTICLES = 4   # Tối thiểu 4 bài/ngày
+MAX_ARTICLES = 5   # Tối đa 5 bài/ngày (giảm từ 8 để tránh timeout)
+MIN_ARTICLES = 3   # Tối thiểu 3 bài/ngày
 # Bắt buộc mỗi ngày phải có ít nhất 1 bài mỗi category:
 REQUIRED_CATEGORIES = ["tin-tuc", "phan-tich", "altcoin", "hang-hoa"]
 MIN_TITLE_LEN = 15
@@ -851,7 +851,7 @@ def main():
         
         if i < len(new_articles) - 1:
             import time
-            time.sleep(5)  # Rate limit Gemini
+            time.sleep(2)  # Rate limit Gemini (giảm từ 5s xuống 2s)
         
         # Categorize based on content
         category = categorize_article(rewritten["title"], rewritten["content"])
