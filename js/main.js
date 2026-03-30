@@ -1308,10 +1308,14 @@ window.setInterval(loadRanking, 300000);
       if (updatedEl && data.updated) {
         updatedEl.textContent = 'Cập nhật: ' + data.updated;
       }
-      // Filter chỉ hiển thị sự kiện >= 3 sao
+      // Filter chỉ hiển thị sự kiện >= 3 sao và chỉ của Mỹ (US/USD)
+      const isUSEvent = (ev) => {
+        const c = (ev.country || ev.currency || '').toUpperCase();
+        return c.includes('US') || c.includes('USD') || c === '🇺🇸' || c.includes('UNITED STATES');
+      };
       const filterHigh = (arr) => {
         const list = Array.isArray(arr) ? arr : (arr && arr.events ? arr.events : []);
-        return list.filter(ev => (ev.stars || 0) >= 3);
+        return list.filter(ev => (ev.stars || 0) >= 3 && isUSEvent(ev));
       };
       renderEconTable('econ-body-this', filterHigh(data.this_week));
       renderEconTable('econ-body-next', filterHigh(data.next_week));
