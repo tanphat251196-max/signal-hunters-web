@@ -208,13 +208,68 @@ def crawl_source(source: dict) -> list:
     return articles
 
 
+def parse_article_date(soup: "BeautifulSoup") -> "datetime | None":
+    """Extract publish date from article page (JSON-LD, meta tags, or <time> tags).
+    Returns a timezone-aware datetime or None if not found.
+    """
+    import json as _json
+    from datetime import timezone as _tz
+
+    # 1. JSON-LD structured data (most reliable)
+    for script in soup.find_all("script", type="application/ld+json"):
+        try:
+            data = _json.loads(script.string or "")
+            # Handle array of JSON-LD objects
+            if isinstance(data, list):
+                data = data[0] if data else {}
+            # Look for datePublished
+            date_str = data.get("datePublished") or data.get("dateCreated")
+            if date_str:
+                return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+        except Exception:
+            # Try regex fallback on raw text
+            text = script.string or ""
+            m = re.search(r'"datePublished"\s*:\s*"([^"]+)"', text)
+            if m:
+                try:
+                    return datetime.fromisoformat(m.group(1).replace("Z", "+00:00"))
+                except Exception:
+                    pass
+
+    # 2. Open Graph / meta article:published_time
+    for meta in soup.find_all("meta"):
+        prop = meta.get("property", "") or meta.get("name", "")
+        if prop in ("article:published_time", "article:modified_time", "og:published_time"):
+            val = meta.get("content", "")
+            if val:
+                try:
+                    return datetime.fromisoformat(val.replace("Z", "+00:00"))
+                except Exception:
+                    pass
+
+    # 3. <time datetime="..."> tag
+    time_tag = soup.find("time", attrs={"datetime": True})
+    if time_tag:
+        val = time_tag.get("datetime", "")
+        if val:
+            try:
+                return datetime.fromisoformat(val.replace("Z", "+00:00"))
+            except Exception:
+                pass
+
+    return None
+
+
 def fetch_article_content(url: str) -> dict:
-    """Fetch full article content from URL."""
+    """Fetch full article content from URL. Also extracts publish_date."""
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15)
         resp.raise_for_status()
         soup = BeautifulSoup(resp.text, "html.parser")
-        
+
+        # ── Extract publish date ──
+        publish_date = parse_article_date(soup)
+
         # Try to find main content
         content_selectors = [
             "article .entry-content", "article .post-content", ".article-content",
@@ -232,7 +287,7 @@ def fetch_article_content(url: str) -> dict:
             content_elem = soup.find("article") or soup.find("main")
         
         if not content_elem:
-            return {"text": "", "image": ""}
+            return {"text": "", "image": "", "publish_date": publish_date}
         
         # Extract text paragraphs
         paragraphs = []
@@ -259,11 +314,12 @@ def fetch_article_content(url: str) -> dict:
         
         return {
             "text": "\n\n".join(paragraphs),
-            "image": image
+            "image": image,
+            "publish_date": publish_date,
         }
     except Exception as e:
         print(f"    Error fetching {url}: {e}")
-        return {"text": "", "image": ""}
+        return {"text": "", "image": "", "publish_date": None}
 
 
 BINGX_CTA_HTML = """<div class="cta-box" style="background:#1a1a2e;border:1px solid #16213e;border-radius:12px;padding:20px;margin-top:30px;">
@@ -829,15 +885,41 @@ def main():
     
     # Process each article
     published = 0
+    skipped_old = 0
     # IDs are string slugs — generate timestamp-based ID for new posts
     ts_id = datetime.now().strftime("%Y%m%d%H%M%S")
     next_id_counter = [0]  # mutable counter for multiple posts in same run
-    
+
+    # 24h cutoff (UTC-aware)
+    from datetime import timezone as _tz
+    now_utc = datetime.now(_tz.utc)
+    cutoff_24h = now_utc - timedelta(hours=24)
+
     for i, art in enumerate(new_articles):
         print(f"\n📝 [{i+1}/{len(new_articles)}] {art['title'][:60]}...")
-        
-        # Fetch full content
+
+        # Fetch full content (includes publish_date)
         content_data = fetch_article_content(art["url"])
+
+        # ── 24H FRESHNESS FILTER ──
+        pub_date = content_data.get("publish_date")
+        if pub_date is not None:
+            # Ensure timezone-aware for comparison
+            if pub_date.tzinfo is None:
+                pub_date = pub_date.replace(tzinfo=_tz.utc)
+            if pub_date < cutoff_24h:
+                age_hours = (now_utc - pub_date).total_seconds() / 3600
+                print(f"  ⏩ SKIP (bài cũ): published {pub_date.strftime('%Y-%m-%d %H:%M')} UTC — {age_hours:.1f}h trước (>24h)")
+                skipped_old += 1
+                continue
+            else:
+                age_hours = (now_utc - pub_date).total_seconds() / 3600
+                print(f"  ✅ Bài mới: published {pub_date.strftime('%Y-%m-%d %H:%M')} UTC — {age_hours:.1f}h trước")
+        else:
+            # Không tìm được ngày → cảnh báo nhưng KHÔNG dùng bài (an toàn hơn là dùng bài cũ)
+            print(f"  ⚠️ Không xác định được ngày đăng của bài — SKIP để an toàn")
+            skipped_old += 1
+            continue
         
         # Rewrite
         rewritten = rewrite_article(art["title"], content_data["text"], art["source"], art["url"])
@@ -883,6 +965,8 @@ def main():
     # Save
     save_posts(posts)
     print(f"\n💾 Saved {published} new posts (total: {len(posts)})")
+    if skipped_old:
+        print(f"ℹ️  Skipped {skipped_old} bài cũ (>24h hoặc không xác định được ngày)")
     
     # Mark done for today
     DEDUP_FILE.write_text(today)
