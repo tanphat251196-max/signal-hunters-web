@@ -11,7 +11,9 @@ import subprocess
 import sys
 import hashlib
 import unicodedata
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+
+VN_TZ = timezone(timedelta(hours=7))  # Asia/Saigon UTC+7
 from pathlib import Path
 from difflib import SequenceMatcher
 
@@ -794,7 +796,7 @@ def deploy():
 def git_push(count: int):
     """Git commit and push."""
     try:
-        today = datetime.now().strftime("%Y-%m-%d")
+        today = datetime.now(VN_TZ).strftime("%Y-%m-%d")
         subprocess.run(["git", "add", "."], cwd=str(REPO_DIR), capture_output=True)
         subprocess.run(
             ["git", "commit", "-m", f"Auto: thêm {count} bài mới [{today}]"],
@@ -807,7 +809,7 @@ def git_push(count: int):
 
 
 def main():
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = datetime.now(VN_TZ).strftime("%Y-%m-%d")
     
     # Daily dedup — chỉ chạy 1 lần/ngày
     DEDUP_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -887,7 +889,7 @@ def main():
     published = 0
     skipped_old = 0
     # IDs are string slugs — generate timestamp-based ID for new posts
-    ts_id = datetime.now().strftime("%Y%m%d%H%M%S")
+    ts_id = datetime.now(VN_TZ).strftime("%Y%m%d%H%M%S")
     next_id_counter = [0]  # mutable counter for multiple posts in same run
 
     # 24h cutoff (UTC-aware)
