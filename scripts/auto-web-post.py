@@ -27,6 +27,7 @@ IMAGES_DIR = REPO_DIR / "images"
 DEPLOY_SCRIPT = REPO_DIR / "scripts" / "deploy.sh"
 DEDUP_FILE = Path("/tmp/openclaw/web-post-last-date.txt")
 MAX_ARTICLES = 5   # Tối đa 5 bài/ngày (giảm từ 8 để tránh timeout)
+ARCHIVE_DAYS = 90  # Archive bài cũ hơn 90 ngày
 MIN_ARTICLES = 3   # Tối thiểu 3 bài/ngày
 # Bắt buộc mỗi ngày phải có ít nhất 1 bài mỗi category:
 REQUIRED_CATEGORIES = ["tin-tuc", "phan-tich", "altcoin", "hang-hoa"]
@@ -808,7 +809,40 @@ def git_push(count: int):
         print(f"⚠️ Git push error: {e}")
 
 
+def archive_old_posts():
+    """Archive bài > ARCHIVE_DAYS ngày vào posts-archive.json."""
+    from datetime import date, timedelta
+    cutoff = str(date.today() - timedelta(days=ARCHIVE_DAYS))
+    archive_file = REPO_DIR / "data" / "posts-archive.json"
+    
+    if not POSTS_FILE.exists():
+        return
+    with open(POSTS_FILE) as f:
+        posts = json.load(f)
+    
+    active = [p for p in posts if p.get("date", "") >= cutoff]
+    archived = [p for p in posts if p.get("date", "") < cutoff]
+    
+    if not archived:
+        return
+    
+    existing = []
+    if archive_file.exists():
+        with open(archive_file) as f:
+            existing = json.load(f)
+    existing_ids = {p["id"] for p in existing}
+    merged = existing + [p for p in archived if p["id"] not in existing_ids]
+    
+    with open(POSTS_FILE, "w") as f:
+        json.dump(active, f, ensure_ascii=False, indent=2)
+    with open(archive_file, "w") as f:
+        json.dump(merged, f, ensure_ascii=False, indent=2)
+    
+    print(f"📦 Archive: {len(archived)} bài cũ → posts-archive.json | Active: {len(active)} bài")
+
+
 def main():
+    archive_old_posts()
     today = datetime.now(VN_TZ).strftime("%Y-%m-%d")
     
     # Daily dedup — chỉ chạy 1 lần/ngày

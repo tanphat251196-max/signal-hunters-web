@@ -331,9 +331,11 @@ function renderPopularPosts(posts) {
   });
 }
 
+const MAX_DISPLAY_POSTS = 100;
+
 function getHomeNewsSource() {
   if (!Array.isArray(state.posts)) return [];
-  return state.posts.slice(1);
+  return state.posts.slice(1, MAX_DISPLAY_POSTS + 1);
 }
 
 function normalizeText(value) {
@@ -512,7 +514,7 @@ function renderHomePage(posts) {
   });
 
   analysisList.innerHTML = '';
-  const analysisPosts = posts.filter((post) => normalizeCategory(post.category) === 'analysis');
+  const analysisPosts = posts.filter((post) => normalizeCategory(post.category) === 'analysis').slice(0, MAX_DISPLAY_POSTS);
   const ANALYSIS_PER_PAGE = 3;
   const totalAnalysisPages = Math.max(1, Math.ceil(analysisPosts.length / ANALYSIS_PER_PAGE));
   
