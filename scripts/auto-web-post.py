@@ -448,7 +448,7 @@ TRẢ VỀ JSON (chỉ JSON, không markdown):
   "content": "nội dung HTML đầy đủ (dùng <h2>, <h3>, <p>, <strong>, <ul><li>)"
 }}"""
 
-        for model in ["gemini-2.5-flash", "gemini-2.0-flash-exp", "gemini-1.5-flash"]:
+        for model in ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-exp"]:
             try:
                 api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
                 payload = {
