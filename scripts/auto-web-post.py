@@ -506,12 +506,9 @@ TRẢ VỀ JSON (chỉ JSON, không markdown):
                                 # Clean trailing JSON artifacts
                                 new_content = re.sub(r'"\s*\}\s*$', '', new_content).strip()
 
-                    # Validate title — no trailing "..."
+                    # Validate title — chỉ bỏ dấu ba chấm ở cuối, KHÔNG cắt ngắn tiêu đề
                     if new_title.endswith("...") or new_title.endswith("…"):
                         new_title = new_title.rstrip(".…").strip()
-                    if len(new_title) > 80:
-                        # Truncate at last space before 80 chars (must be full sentence)
-                        new_title = new_title[:80].rsplit(' ', 1)[0].rstrip('.,;:')
 
                     # Append BingX CTA
                     new_content = new_content + "\n" + BINGX_CTA_HTML
