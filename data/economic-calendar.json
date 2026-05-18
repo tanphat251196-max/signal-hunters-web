@@ -1,102 +1,18 @@
 {
-  "updated": "2026-05-11 07:00",
+  "updated": "2026-05-18 07:00",
   "this_week": {
     "label": "Tuần này",
     "events": [
       {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "19:30",
+        "date": "21/05",
+        "day": "Thứ 5",
+        "time": "01:00",
         "country": "🇺🇸",
-        "event": "CPI lõi tháng trên tháng",
+        "event": "Biên bản họp FOMC",
         "stars": 3,
         "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.2%",
-        "impact": "high"
-      },
-      {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "CPI tháng trên tháng",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.6%",
-        "previous": "0.9%",
-        "impact": "high"
-      },
-      {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "CPI năm trên năm",
-        "stars": 3,
-        "actual": "",
-        "forecast": "3.7%",
-        "previous": "3.3%",
-        "impact": "high"
-      },
-      {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "23:00",
-        "country": "🇺🇸",
-        "event": "Fed Chair Nomination Vote",
-        "stars": 3,
-        "actual": "",
-        "forecast": "Pass",
+        "forecast": "",
         "previous": "",
-        "impact": "high"
-      },
-      {
-        "date": "13/05",
-        "day": "Thứ 4",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "PPI lõi tháng trên tháng",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.1%",
-        "impact": "high"
-      },
-      {
-        "date": "13/05",
-        "day": "Thứ 4",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "PPI tháng trên tháng",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.5%",
-        "previous": "0.5%",
-        "impact": "high"
-      },
-      {
-        "date": "14/05",
-        "day": "Thứ 5",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "Doanh số bán lẻ lõi (m/m)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.6%",
-        "previous": "1.9%",
-        "impact": "high"
-      },
-      {
-        "date": "14/05",
-        "day": "Thứ 5",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "Doanh số bán lẻ (m/m)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.6%",
-        "previous": "1.7%",
         "impact": "high"
       }
     ]
@@ -109,99 +25,15 @@
     "label": "Sự kiện quan trọng",
     "events": [
       {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "19:30",
+        "date": "21/05",
+        "day": "Thứ 5",
+        "time": "01:00",
         "country": "🇺🇸",
-        "event": "CPI lõi tháng trên tháng",
+        "event": "Biên bản họp FOMC",
         "stars": 3,
         "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.2%",
-        "impact": "high"
-      },
-      {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "CPI tháng trên tháng",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.6%",
-        "previous": "0.9%",
-        "impact": "high"
-      },
-      {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "CPI năm trên năm",
-        "stars": 3,
-        "actual": "",
-        "forecast": "3.7%",
-        "previous": "3.3%",
-        "impact": "high"
-      },
-      {
-        "date": "12/05",
-        "day": "Thứ 3",
-        "time": "23:00",
-        "country": "🇺🇸",
-        "event": "Fed Chair Nomination Vote",
-        "stars": 3,
-        "actual": "",
-        "forecast": "Pass",
+        "forecast": "",
         "previous": "",
-        "impact": "high"
-      },
-      {
-        "date": "13/05",
-        "day": "Thứ 4",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "PPI lõi tháng trên tháng",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.3%",
-        "previous": "0.1%",
-        "impact": "high"
-      },
-      {
-        "date": "13/05",
-        "day": "Thứ 4",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "PPI tháng trên tháng",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.5%",
-        "previous": "0.5%",
-        "impact": "high"
-      },
-      {
-        "date": "14/05",
-        "day": "Thứ 5",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "Doanh số bán lẻ lõi (m/m)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.6%",
-        "previous": "1.9%",
-        "impact": "high"
-      },
-      {
-        "date": "14/05",
-        "day": "Thứ 5",
-        "time": "19:30",
-        "country": "🇺🇸",
-        "event": "Doanh số bán lẻ (m/m)",
-        "stars": 3,
-        "actual": "",
-        "forecast": "0.6%",
-        "previous": "1.7%",
         "impact": "high"
       }
     ]
