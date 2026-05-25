@@ -1,18 +1,30 @@
 {
-  "updated": "2026-05-18 07:00",
+  "updated": "2026-05-25 07:00",
   "this_week": {
     "label": "Tuần này",
     "events": [
       {
-        "date": "21/05",
+        "date": "28/05",
         "day": "Thứ 5",
-        "time": "01:00",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "Biên bản họp FOMC",
+        "event": "PCE lõi tháng trên tháng",
         "stars": 3,
         "actual": "",
-        "forecast": "",
-        "previous": "",
+        "forecast": "0.3%",
+        "previous": "0.3%",
+        "impact": "high"
+      },
+      {
+        "date": "28/05",
+        "day": "Thứ 5",
+        "time": "19:30",
+        "country": "🇺🇸",
+        "event": "GDP sơ bộ quý trên quý",
+        "stars": 3,
+        "actual": "",
+        "forecast": "2.1%",
+        "previous": "0.7%",
         "impact": "high"
       }
     ]
@@ -25,15 +37,27 @@
     "label": "Sự kiện quan trọng",
     "events": [
       {
-        "date": "21/05",
+        "date": "28/05",
         "day": "Thứ 5",
-        "time": "01:00",
+        "time": "19:30",
         "country": "🇺🇸",
-        "event": "Biên bản họp FOMC",
+        "event": "PCE lõi tháng trên tháng",
         "stars": 3,
         "actual": "",
-        "forecast": "",
-        "previous": "",
+        "forecast": "0.3%",
+        "previous": "0.3%",
+        "impact": "high"
+      },
+      {
+        "date": "28/05",
+        "day": "Thứ 5",
+        "time": "19:30",
+        "country": "🇺🇸",
+        "event": "GDP sơ bộ quý trên quý",
+        "stars": 3,
+        "actual": "",
+        "forecast": "2.1%",
+        "previous": "0.7%",
         "impact": "high"
       }
     ]
